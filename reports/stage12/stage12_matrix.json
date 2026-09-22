@@ -1,0 +1,146 @@
+{
+  "alphas": [
+    1.0,
+    0.5,
+    0.1
+  ],
+  "centralized_controls": [
+    {
+      "checkpoint": "artifacts/checkpoints/stage8/experiment_a_transformer_supervised_best.pt",
+      "description": "Transformer + supervised Install (centralized)",
+      "id": "A",
+      "result": "artifacts/checkpoints/stage8/experiment_a_transformer_supervised_result.json"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/centralized_transformer_mmoe_best.pt",
+      "description": "Transformer + MMoE supervised Click+Install (centralized)",
+      "id": "B",
+      "result": "reports/centralized_training_report.md"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/stage8/experiment_c_transformer_ssl_best.pt",
+      "description": "Transformer + SSL Install (centralized)",
+      "id": "C",
+      "result": "artifacts/checkpoints/stage8/experiment_c_transformer_ssl_result.json"
+    },
+    {
+      "checkpoint": "artifacts/checkpoints/stage8/experiment_d_transformer_mmoe_ssl_best.pt",
+      "description": "Transformer + MMoE + SSL Click+Install (centralized)",
+      "id": "D",
+      "result": "artifacts/checkpoints/stage8/experiment_d_transformer_mmoe_ssl_result.json"
+    }
+  ],
+  "existing": [
+    "stage12_fed_nossl_alpha_0_5_seed42",
+    "stage12_fed_ssl_alpha_0_5_seed42"
+  ],
+  "experiments": [
+    {
+      "alpha": 0.5,
+      "experiment_id": "stage12_fed_nossl_alpha_0_5_seed42",
+      "model": "Transformer + MMoE (supervised click+install, no SSL)",
+      "output_dir": "artifacts/federated/stage10",
+      "partition_manifest": "artifacts/federated/partitions/stage12_partition_alpha_0_5_seed42.json",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_5_seed42.npz",
+      "provenance": "Stage 10B (completed)",
+      "runner": "scripts/run_stage10b.py",
+      "status": "existing",
+      "use_ssl": false
+    },
+    {
+      "alpha": 0.5,
+      "experiment_id": "stage12_fed_ssl_alpha_0_5_seed42",
+      "model": "Transformer + MMoE + SSL (joint 0.6*sup + 0.4*NT-Xent)",
+      "output_dir": "artifacts/federated/stage11",
+      "partition_manifest": "artifacts/federated/partitions/stage12_partition_alpha_0_5_seed42.json",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_5_seed42.npz",
+      "provenance": "Stage 11 (completed)",
+      "runner": "scripts/run_stage11.py",
+      "status": "existing",
+      "use_ssl": true
+    },
+    {
+      "alpha": 1.0,
+      "experiment_id": "stage12_fed_nossl_alpha_1_0_seed42",
+      "model": "Transformer + MMoE (supervised click+install, no SSL)",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42",
+      "partition_manifest": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.json",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+      "provenance": "Stage 12 (prepared)",
+      "runner": "scripts/run_stage12_federated.py",
+      "status": "new",
+      "use_ssl": false
+    },
+    {
+      "alpha": 1.0,
+      "experiment_id": "stage12_fed_ssl_alpha_1_0_seed42",
+      "model": "Transformer + MMoE + SSL (joint 0.6*sup + 0.4*NT-Xent)",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42",
+      "partition_manifest": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.json",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+      "provenance": "Stage 12 (prepared)",
+      "runner": "scripts/run_stage12_federated.py",
+      "status": "new",
+      "use_ssl": true
+    },
+    {
+      "alpha": 0.1,
+      "experiment_id": "stage12_fed_nossl_alpha_0_1_seed42",
+      "model": "Transformer + MMoE (supervised click+install, no SSL)",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42",
+      "partition_manifest": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.json",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+      "provenance": "Stage 12 (prepared)",
+      "runner": "scripts/run_stage12_federated.py",
+      "status": "new",
+      "use_ssl": false
+    },
+    {
+      "alpha": 0.1,
+      "experiment_id": "stage12_fed_ssl_alpha_0_1_seed42",
+      "model": "Transformer + MMoE + SSL (joint 0.6*sup + 0.4*NT-Xent)",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42",
+      "partition_manifest": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.json",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+      "provenance": "Stage 12 (prepared)",
+      "runner": "scripts/run_stage12_federated.py",
+      "status": "new",
+      "use_ssl": true
+    }
+  ],
+  "new": [
+    "stage12_fed_nossl_alpha_1_0_seed42",
+    "stage12_fed_ssl_alpha_1_0_seed42",
+    "stage12_fed_nossl_alpha_0_1_seed42",
+    "stage12_fed_ssl_alpha_0_1_seed42"
+  ],
+  "partition_seed": 42,
+  "protocol": {
+    "aggregation": "sample_weighted_fedavg",
+    "alpha": 0.5,
+    "lambda_click": 1.0,
+    "lambda_install": 1.0,
+    "learning_rate": 0.0003,
+    "local_batch_size": 1024,
+    "local_epochs": 1,
+    "local_optimizer_state_persistence": false,
+    "local_sampler_epoch_mode": "round_minus_one",
+    "num_clients": 10,
+    "optimizer": "adamw",
+    "participation": "all_clients_every_round",
+    "partition_seed": 42,
+    "rounds": 10,
+    "seed": 42,
+    "selection_metric": "global_validation_install_logloss",
+    "use_ssl": false,
+    "weight_decay": 0.01
+  },
+  "protocol_id": "stage12-evaluation-matrix",
+  "purpose": "final federated evaluation matrix: 2 federated variants x 3 Non-IID severity levels, compared against the frozen Stage 8 centralized controls (descriptive comparisons only)",
+  "rules": {
+    "checkpoint_selection": "global validation Install LogLoss (frozen 348,586-row split)",
+    "official_test": "never loaded, never evaluated, by any Stage 12 cell",
+    "report_language": "descriptive comparisons only; no 'winner'/'best'/'superior' claims"
+  },
+  "stage": 12
+}

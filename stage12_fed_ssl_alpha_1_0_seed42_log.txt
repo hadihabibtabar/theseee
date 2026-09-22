@@ -1,0 +1,13 @@
+=== STAGE 12: stage12_fed_ssl_alpha_1_0_seed42 ===
+start: 2026-09-22T07:01:59+00:00
+cell: SSL | alpha 1.0 | partition artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz | output artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42
+protocol: 10 clients, seed 42, 10 rounds, 1 local epoch, batch 1024, AdamW lr 0.0003 wd 0.01, sample_weighted_fedavg, cold seed-42 init
+
+=== pre-run integrity verification ===
+  Stage 2 / split / Stage 6 / raw bytes: all frozen values OK
+  fingerprint recorded over 14 guarded files (Stage 1-9, Stage 10B, Stage 11, Stage 9 alpha=0.5 partition, this cell's partition)
+  device: cuda (NVIDIA GeForce RTX 4060 Ti)
+  [OK] partition hash c382d47f5824f64a | alpha 1.0 | 10 clients | rows 3,137,266 | validation overlap 0
+  official test data: NOT loaded (never constructed in this script)
+
+STAGE 12 FAILED: resume state says all rounds are already complete

@@ -1,0 +1,10 @@
+{
+  "format_version": 1,
+  "seed": 42,
+  "total_rows": 3485852,
+  "train_index_hash": "dd37605169615442",
+  "train_rows": 3137266,
+  "validation_index_hash": "3cd8370ebdecb305",
+  "validation_ratio": 0.1,
+  "validation_rows": 348586
+}

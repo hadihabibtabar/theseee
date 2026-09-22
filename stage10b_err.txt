@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "C:\Users\Hadi\OneDrive\Desktop\theseee\scripts\run_stage10b.py", line 896, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\Hadi\OneDrive\Desktop\theseee\scripts\run_stage10b.py", line 661, in main
+    record, state = train_one_client(
+                    ~~~~~~~~~~~~~~~~^
+        cid,
+        ^^^^
+    ...<7 lines>...
+        args.log_every,
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Hadi\OneDrive\Desktop\theseee\scripts\run_stage10b.py", line 310, in train_one_client
+    losses["total"].backward()
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Hadi\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\_tensor.py", line 648, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Hadi\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\autograd\__init__.py", line 353, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Hadi\AppData\Local\Programs\Python\Python313\Lib\site-packages\torch\autograd\graph.py", line 824, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+RuntimeError: CUDA error: unknown error
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

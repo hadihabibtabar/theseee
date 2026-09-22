@@ -1,0 +1,47 @@
+{
+  "artifact_hash": "4a1491eef0c6496e",
+  "config": {
+    "chunksize": 50000,
+    "data_dir": ".",
+    "delimiter": "\t",
+    "encoding": "utf-8",
+    "id_columns": [
+      "f_0"
+    ],
+    "max_categorical_cardinality": 1000000,
+    "seed": 42,
+    "shard_glob": "*.csv",
+    "stage1_report_path": "reports/dataset_report.json",
+    "target_columns": [
+      "is_clicked",
+      "is_installed"
+    ],
+    "test_subdir": "test",
+    "train_subdir": "train"
+  },
+  "conventions": {
+    "binary": "values restricted to {0,1}; missing imputed with the rounded training mean; no vocabulary created",
+    "categorical_ids": "0=UNK (unseen), 1=MISSING, 2+=known categories ordered by descending train frequency then ascending value",
+    "leakage": "all fitted state originates from training shards only; transform never updates state",
+    "missing_indicators": "one 0/1 float column <feature>_missing per feature with training missingness: ['f_30', 'f_31', 'f_43', 'f_51', 'f_58', 'f_59', 'f_64', 'f_65', 'f_66', 'f_67', 'f_68', 'f_69', 'f_70']",
+    "numerical": "(x - train_mean) / train_std; missing imputed with train_mean (normalized to 0.0); zero-variance columns map to 0.0"
+  },
+  "missing_indicator_columns": [
+    "f_30",
+    "f_31",
+    "f_43",
+    "f_51",
+    "f_58",
+    "f_59",
+    "f_64",
+    "f_65",
+    "f_66",
+    "f_67",
+    "f_68",
+    "f_69",
+    "f_70"
+  ],
+  "source_row_counts": {
+    "train_rows": 116474
+  }
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\Hadi\OneDrive\Desktop\theseee\scripts\run_stage10_smoke.py", line 739, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\Hadi\OneDrive\Desktop\theseee\scripts\run_stage10_smoke.py", line 663, in main
+    exact = all(torch.equal(fresh_state[k], current_state[k]) for k in current_state)
+  File "C:\Users\Hadi\OneDrive\Desktop\theseee\scripts\run_stage10_smoke.py", line 663, in <genexpr>
+    exact = all(torch.equal(fresh_state[k], current_state[k]) for k in current_state)
+                            ^^^^^^^^^^^
+NameError: name 'fresh_state' is not defined

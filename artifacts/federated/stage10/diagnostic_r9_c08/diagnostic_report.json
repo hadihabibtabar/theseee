@@ -1,0 +1,133 @@
+{
+  "diagnostic": "stage10b_r9_c08_cuda_unknown_error",
+  "mode": "run",
+  "timestamp_utc": "2026-09-19T18:46:54+00:00",
+  "protected_stage10b_before": {
+    "artifacts/federated/stage10/stage10b_best.pt": {
+      "sha256": "e4c145f4377bf550301f2236523028e37eef91e07ad9ff585d36b4b22ae49bb8",
+      "size": 10067435,
+      "mtime": 1789834217.2697275
+    },
+    "artifacts/federated/stage10/stage10b_latest.pt": {
+      "sha256": "3b6211c688bd068d371d5915b480d0ee0a0b852fb7562d9d390b16b1c1c1334c",
+      "size": 10067435,
+      "mtime": 1789834217.3255825
+    },
+    "artifacts/federated/stage10/stage10b_result.json": {
+      "sha256": "25f3326f901adc20d94a6ad5427a9f1afa467470a131ce56659b0d559aaf0801",
+      "size": 44334,
+      "mtime": 1789834217.3514025
+    }
+  },
+  "checkpoint_round_loaded": 8,
+  "client_id": "client_08",
+  "round": 9,
+  "sampler_epoch": 8,
+  "expected_samples": 511603,
+  "batch_size": 1024,
+  "device": "cuda",
+  "cuda_device_name": "NVIDIA GeForce RTX 4060 Ti",
+  "cuda_launch_blocking": false,
+  "log_every_batches": 50,
+  "sampler_kind": "PartShuffledBatchSampler",
+  "loader_sampler_kind": "SequentialSampler",
+  "outcome": "completed",
+  "batches_completed": 500,
+  "rows_seen": 511603,
+  "elapsed_seconds": 372.9419410999981,
+  "peak_rss_mib": 1924.9921875,
+  "progress_log": [
+    {
+      "batch": 50,
+      "rows_seen": 51200,
+      "running_total_loss": 0.45040967881679533,
+      "elapsed_seconds": 29.48828869999852,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 100,
+      "rows_seen": 102400,
+      "running_total_loss": 0.44802207112312314,
+      "elapsed_seconds": 67.30109570000059,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 150,
+      "rows_seen": 153600,
+      "running_total_loss": 0.44796741763750714,
+      "elapsed_seconds": 106.08153160000074,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 200,
+      "rows_seen": 204800,
+      "running_total_loss": 0.4467405788600445,
+      "elapsed_seconds": 143.23508109999966,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 250,
+      "rows_seen": 255603,
+      "running_total_loss": 0.44683811165601134,
+      "elapsed_seconds": 181.58625339999708,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 300,
+      "rows_seen": 306803,
+      "running_total_loss": 0.44677522351714494,
+      "elapsed_seconds": 219.6995356999978,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 350,
+      "rows_seen": 358003,
+      "running_total_loss": 0.4471678189098738,
+      "elapsed_seconds": 258.0390131999957,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 400,
+      "rows_seen": 409203,
+      "running_total_loss": 0.44582784807150116,
+      "elapsed_seconds": 296.3023758999989,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 450,
+      "rows_seen": 460403,
+      "running_total_loss": 0.44572387292164534,
+      "elapsed_seconds": 334.5805216000008,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    },
+    {
+      "batch": 500,
+      "rows_seen": 511603,
+      "running_total_loss": 0.44499647978216367,
+      "elapsed_seconds": 372.93645029999607,
+      "gpu_allocated_mib": 54.94287109375,
+      "gpu_reserved_mib": 3902.0
+    }
+  ],
+  "exception": null,
+  "peak_gpu_allocated_mib": 3593.98681640625,
+  "peak_gpu_reserved_mib": 3902.0,
+  "local_losses": {
+    "total": 0.44499647978216367,
+    "click": 0.22260045314303473,
+    "install": 0.22239602704512204
+  },
+  "params_changed": 138,
+  "params_total": 138,
+  "protected_stage10b_artifacts_unchanged": true,
+  "finished_at_utc": "2026-09-19T18:53:07+00:00"
+}

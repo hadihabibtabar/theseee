@@ -1,0 +1,344 @@
+{
+  "f_42": {
+    "feature": "f_42",
+    "imputation_value": 18.852007813950536,
+    "mean": 18.852007813950536,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 70.77922931285416,
+    "total_count": 116474
+  },
+  "f_43": {
+    "feature": "f_43",
+    "imputation_value": 1.0928159022551363,
+    "mean": 1.0928159022551363,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 0.9190536036404234,
+    "total_count": 116474
+  },
+  "f_44": {
+    "feature": "f_44",
+    "imputation_value": 0.0076199217536072235,
+    "mean": 0.0076199217536072235,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.08831762237874989,
+    "total_count": 116474
+  },
+  "f_45": {
+    "feature": "f_45",
+    "imputation_value": 0.009600905272563026,
+    "mean": 0.009600905272563026,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.09879174758865285,
+    "total_count": 116474
+  },
+  "f_46": {
+    "feature": "f_46",
+    "imputation_value": 0.003388266365342723,
+    "mean": 0.003388266365342723,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.05414604046968378,
+    "total_count": 116474
+  },
+  "f_47": {
+    "feature": "f_47",
+    "imputation_value": 0.01286658602410898,
+    "mean": 0.01286658602410898,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.11748659826893058,
+    "total_count": 116474
+  },
+  "f_48": {
+    "feature": "f_48",
+    "imputation_value": 0.02144267556533101,
+    "mean": 0.02144267556533101,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.14164998188461222,
+    "total_count": 116474
+  },
+  "f_49": {
+    "feature": "f_49",
+    "imputation_value": 0.012101651794017133,
+    "mean": 0.012101651794017133,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.10334453909582411,
+    "total_count": 116474
+  },
+  "f_50": {
+    "feature": "f_50",
+    "imputation_value": 0.03342664517010325,
+    "mean": 0.03342664517010325,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.1852629681227755,
+    "total_count": 116474
+  },
+  "f_51": {
+    "feature": "f_51",
+    "imputation_value": 9.594832872887817,
+    "mean": 9.594832872887817,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 8.586623551310177,
+    "total_count": 116474
+  },
+  "f_52": {
+    "feature": "f_52",
+    "imputation_value": 0.06423426773664552,
+    "mean": 0.06423426773664552,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.17052694338572338,
+    "total_count": 116474
+  },
+  "f_53": {
+    "feature": "f_53",
+    "imputation_value": 0.02902188347819864,
+    "mean": 0.02902188347819864,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.09232050434988887,
+    "total_count": 116474
+  },
+  "f_54": {
+    "feature": "f_54",
+    "imputation_value": 0.1105671713140312,
+    "mean": 0.1105671713140312,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.25616058251584806,
+    "total_count": 116474
+  },
+  "f_55": {
+    "feature": "f_55",
+    "imputation_value": 0.3474507544948061,
+    "mean": 0.3474507544948061,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.6084513024203465,
+    "total_count": 116474
+  },
+  "f_56": {
+    "feature": "f_56",
+    "imputation_value": 0.1596643948900419,
+    "mean": 0.1596643948900419,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.31152183983957754,
+    "total_count": 116474
+  },
+  "f_57": {
+    "feature": "f_57",
+    "imputation_value": 0.6187746062031868,
+    "mean": 0.6187746062031868,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.9402582986326796,
+    "total_count": 116474
+  },
+  "f_58": {
+    "feature": "f_58",
+    "imputation_value": 1.4975848988767722,
+    "mean": 1.4975848988767722,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 0.667610335221606,
+    "total_count": 116474
+  },
+  "f_59": {
+    "feature": "f_59",
+    "imputation_value": 71.6185507347119,
+    "mean": 71.6185507347119,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 425.59921368479473,
+    "total_count": 116474
+  },
+  "f_60": {
+    "feature": "f_60",
+    "imputation_value": 0.921264088300948,
+    "mean": 0.921264088300948,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 44.989319418357624,
+    "total_count": 116474
+  },
+  "f_61": {
+    "feature": "f_61",
+    "imputation_value": 1.11830442462461,
+    "mean": 1.11830442462461,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 4.869693462770806,
+    "total_count": 116474
+  },
+  "f_62": {
+    "feature": "f_62",
+    "imputation_value": 1.173676220008488,
+    "mean": 1.173676220008488,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 6.071709020337458,
+    "total_count": 116474
+  },
+  "f_63": {
+    "feature": "f_63",
+    "imputation_value": 1.1811160799988252,
+    "mean": 1.1811160799988252,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 5.821813283765688,
+    "total_count": 116474
+  },
+  "f_64": {
+    "feature": "f_64",
+    "imputation_value": 1618367164.6084592,
+    "mean": 1618367164.6084592,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 23028922290.01251,
+    "total_count": 116474
+  },
+  "f_65": {
+    "feature": "f_65",
+    "imputation_value": 1452.30408442189,
+    "mean": 1452.30408442189,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 3326.70534024567,
+    "total_count": 116474
+  },
+  "f_66": {
+    "feature": "f_66",
+    "imputation_value": 1.073026996407393,
+    "mean": 1.073026996407393,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 0.8785091591205979,
+    "total_count": 116474
+  },
+  "f_67": {
+    "feature": "f_67",
+    "imputation_value": 8.037945597739373,
+    "mean": 8.037945597739373,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 0.9857692728881753,
+    "total_count": 116474
+  },
+  "f_68": {
+    "feature": "f_68",
+    "imputation_value": 3.4976547029724148,
+    "mean": 3.4976547029724148,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 10.212593875845464,
+    "total_count": 116474
+  },
+  "f_69": {
+    "feature": "f_69",
+    "imputation_value": 5.391442704326743,
+    "mean": 5.391442704326743,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 9.381060762946834,
+    "total_count": 116474
+  },
+  "f_70": {
+    "feature": "f_70",
+    "imputation_value": 1.0472780804479007,
+    "mean": 1.0472780804479007,
+    "missing_count": 6064,
+    "missing_indicator": true,
+    "std": 1.087044987934505,
+    "total_count": 116474
+  },
+  "f_71": {
+    "feature": "f_71",
+    "imputation_value": 0.042752958667761506,
+    "mean": 0.042752958667761506,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.18347288793971087,
+    "total_count": 116474
+  },
+  "f_72": {
+    "feature": "f_72",
+    "imputation_value": 0.8540000336520259,
+    "mean": 0.8540000336520259,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 1.2873338038102278,
+    "total_count": 116474
+  },
+  "f_73": {
+    "feature": "f_73",
+    "imputation_value": 0.24758861589761233,
+    "mean": 0.24758861589761233,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.5573323775913834,
+    "total_count": 116474
+  },
+  "f_74": {
+    "feature": "f_74",
+    "imputation_value": 0.06492890701765108,
+    "mean": 0.06492890701765108,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.05486084458044505,
+    "total_count": 116474
+  },
+  "f_75": {
+    "feature": "f_75",
+    "imputation_value": 1.002404876195628,
+    "mean": 1.002404876195628,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.3557493047839661,
+    "total_count": 116474
+  },
+  "f_76": {
+    "feature": "f_76",
+    "imputation_value": 0.22472739576317788,
+    "mean": 0.22472739576317788,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 0.09446332129991585,
+    "total_count": 116474
+  },
+  "f_77": {
+    "feature": "f_77",
+    "imputation_value": 0.07157614791901823,
+    "mean": 0.07157614791901823,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 1.6705429455999004,
+    "total_count": 116474
+  },
+  "f_78": {
+    "feature": "f_78",
+    "imputation_value": 1.0758890036975297,
+    "mean": 1.0758890036975297,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 7.177700846235865,
+    "total_count": 116474
+  },
+  "f_79": {
+    "feature": "f_79",
+    "imputation_value": 0.3598065552341679,
+    "mean": 0.3598065552341679,
+    "missing_count": 0,
+    "missing_indicator": false,
+    "std": 3.832711132662757,
+    "total_count": 116474
+  }
+}

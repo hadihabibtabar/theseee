@@ -1,0 +1,162 @@
+2026-09-13 15:49:23,570 | INFO    | inspect_dataset | RecSys 2023 federated-install research project - stage 1: dataset inspection
+2026-09-13 15:49:23,570 | INFO    | inspect_dataset | config file: configs/base.yaml | seed: 42 | framework: pytorch | num_clients: 10
+2026-09-13 15:49:23,570 | INFO    | inspect_dataset | log file: reports\logs\inspect_20260913_154923.log
+2026-09-13 15:49:23,573 | INFO    | recsys23_fedrec.discovery | discovered 30 train shard(s) and 1 test shard(s) under C:\Users\Hadi\OneDrive\Desktop\theseee
+2026-09-13 15:49:23,573 | INFO    | recsys23_fedrec.pipeline | 
+2026-09-13 15:49:23,573 | INFO    | recsys23_fedrec.pipeline | === Stage 1a: format sniffing and schema alignment ===
+2026-09-13 15:49:23,576 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000000.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,576 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000000.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,579 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000001.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,579 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000001.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,582 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000002.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,582 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000002.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,585 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000003.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,585 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000003.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,588 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000004.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,588 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000004.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,591 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000005.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,591 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000005.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,595 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000006.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,595 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000006.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,599 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000007.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,599 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000007.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,602 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000008.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,602 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000008.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,606 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000009.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,606 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000009.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,609 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000010.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,609 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000010.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,613 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000011.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,613 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000011.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,617 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000012.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,617 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000012.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,620 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000013.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,620 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000013.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,624 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000014.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,624 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000014.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,628 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000015.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,628 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000015.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,631 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000016.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,631 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000016.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,635 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000017.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,635 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000017.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,638 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000018.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,638 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000018.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,642 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000019.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,642 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000019.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,646 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000020.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,646 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000020.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,649 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000021.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,650 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000021.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,653 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000022.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,653 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000022.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,657 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000023.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,657 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000023.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,660 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000024.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,661 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000024.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,664 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000025.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,664 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000025.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,668 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000026.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,668 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000026.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,671 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000027.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,671 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000027.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,675 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000028.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,675 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000028.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,678 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000029.csv: delimiter='\t' encoding=utf-8 header=True n_fields=82
+2026-09-13 15:49:23,679 | DEBUG   | recsys23_fedrec.pipeline | sniff train/000000000029.csv: delim='\t' enc=utf-8 header=True fields=82
+2026-09-13 15:49:23,682 | DEBUG   | recsys23_fedrec.discovery | sniff 000000000000.csv: delimiter='\t' encoding=utf-8 header=True n_fields=80
+2026-09-13 15:49:23,682 | DEBUG   | recsys23_fedrec.pipeline | sniff test/000000000000.csv: delim='\t' enc=utf-8 header=True fields=80
+2026-09-13 15:49:23,682 | INFO    | recsys23_fedrec.pipeline | aligned schemas: train 82 cols (delim='\t', enc=utf-8), test 80 cols (delim='\t', enc=utf-8)
+2026-09-13 15:49:23,682 | INFO    | recsys23_fedrec.pipeline | 
+2026-09-13 15:49:23,682 | INFO    | recsys23_fedrec.pipeline | === Stage 1b: streaming profile - test split ===
+2026-09-13 15:49:29,885 | DEBUG   | recsys23_fedrec.profiling | profiled test/000000000000.csv: rows=160973 ragged=0 dup_rows=0
+2026-09-13 15:49:29,889 | INFO    | recsys23_fedrec.pipeline | [test 1/1] 000000000000.csv: rows=160973 cols=80 ragged=0 dup_rows=0
+2026-09-13 15:49:29,903 | INFO    | recsys23_fedrec.pipeline | 
+2026-09-13 15:49:29,904 | INFO    | recsys23_fedrec.pipeline | === Stage 1c: streaming profile - train split ===
+2026-09-13 15:49:35,760 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000000.csv: rows=116474 ragged=0 dup_rows=0
+2026-09-13 15:49:35,767 | INFO    | recsys23_fedrec.pipeline | [train 1/30] 000000000000.csv: rows=116474 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:49:41,614 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000001.csv: rows=116598 ragged=0 dup_rows=0
+2026-09-13 15:49:41,621 | INFO    | recsys23_fedrec.pipeline | [train 2/30] 000000000001.csv: rows=116598 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:49:47,493 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000002.csv: rows=116238 ragged=0 dup_rows=0
+2026-09-13 15:49:47,500 | INFO    | recsys23_fedrec.pipeline | [train 3/30] 000000000002.csv: rows=116238 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:49:53,353 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000003.csv: rows=116492 ragged=0 dup_rows=0
+2026-09-13 15:49:53,360 | INFO    | recsys23_fedrec.pipeline | [train 4/30] 000000000003.csv: rows=116492 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:49:59,169 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000004.csv: rows=116338 ragged=0 dup_rows=0
+2026-09-13 15:49:59,176 | INFO    | recsys23_fedrec.pipeline | [train 5/30] 000000000004.csv: rows=116338 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:05,015 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000005.csv: rows=116394 ragged=0 dup_rows=0
+2026-09-13 15:50:05,022 | INFO    | recsys23_fedrec.pipeline | [train 6/30] 000000000005.csv: rows=116394 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:10,857 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000006.csv: rows=116315 ragged=0 dup_rows=0
+2026-09-13 15:50:10,865 | INFO    | recsys23_fedrec.pipeline | [train 7/30] 000000000006.csv: rows=116315 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:16,689 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000007.csv: rows=116499 ragged=0 dup_rows=0
+2026-09-13 15:50:16,697 | INFO    | recsys23_fedrec.pipeline | [train 8/30] 000000000007.csv: rows=116499 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:23,953 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000008.csv: rows=116399 ragged=0 dup_rows=0
+2026-09-13 15:50:23,961 | INFO    | recsys23_fedrec.pipeline | [train 9/30] 000000000008.csv: rows=116399 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:29,777 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000009.csv: rows=116223 ragged=0 dup_rows=0
+2026-09-13 15:50:29,785 | INFO    | recsys23_fedrec.pipeline | [train 10/30] 000000000009.csv: rows=116223 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:35,618 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000010.csv: rows=115741 ragged=0 dup_rows=0
+2026-09-13 15:50:35,626 | INFO    | recsys23_fedrec.pipeline | [train 11/30] 000000000010.csv: rows=115741 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:41,415 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000011.csv: rows=116190 ragged=0 dup_rows=0
+2026-09-13 15:50:41,423 | INFO    | recsys23_fedrec.pipeline | [train 12/30] 000000000011.csv: rows=116190 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:47,202 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000012.csv: rows=115824 ragged=0 dup_rows=0
+2026-09-13 15:50:47,209 | INFO    | recsys23_fedrec.pipeline | [train 13/30] 000000000012.csv: rows=115824 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:53,004 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000013.csv: rows=116315 ragged=0 dup_rows=0
+2026-09-13 15:50:53,012 | INFO    | recsys23_fedrec.pipeline | [train 14/30] 000000000013.csv: rows=116315 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:50:58,877 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000014.csv: rows=116734 ragged=0 dup_rows=0
+2026-09-13 15:50:58,885 | INFO    | recsys23_fedrec.pipeline | [train 15/30] 000000000014.csv: rows=116734 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:04,637 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000015.csv: rows=115715 ragged=0 dup_rows=0
+2026-09-13 15:51:04,644 | INFO    | recsys23_fedrec.pipeline | [train 16/30] 000000000015.csv: rows=115715 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:10,448 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000016.csv: rows=116016 ragged=0 dup_rows=0
+2026-09-13 15:51:10,456 | INFO    | recsys23_fedrec.pipeline | [train 17/30] 000000000016.csv: rows=116016 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:16,207 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000017.csv: rows=115721 ragged=0 dup_rows=0
+2026-09-13 15:51:16,215 | INFO    | recsys23_fedrec.pipeline | [train 18/30] 000000000017.csv: rows=115721 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:22,001 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000018.csv: rows=115788 ragged=0 dup_rows=0
+2026-09-13 15:51:22,010 | INFO    | recsys23_fedrec.pipeline | [train 19/30] 000000000018.csv: rows=115788 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:27,823 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000019.csv: rows=116631 ragged=0 dup_rows=0
+2026-09-13 15:51:27,832 | INFO    | recsys23_fedrec.pipeline | [train 20/30] 000000000019.csv: rows=116631 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:33,572 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000020.csv: rows=116554 ragged=0 dup_rows=0
+2026-09-13 15:51:33,580 | INFO    | recsys23_fedrec.pipeline | [train 21/30] 000000000020.csv: rows=116554 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:39,460 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000021.csv: rows=116097 ragged=0 dup_rows=0
+2026-09-13 15:51:39,468 | INFO    | recsys23_fedrec.pipeline | [train 22/30] 000000000021.csv: rows=116097 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:45,293 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000022.csv: rows=116028 ragged=0 dup_rows=0
+2026-09-13 15:51:45,300 | INFO    | recsys23_fedrec.pipeline | [train 23/30] 000000000022.csv: rows=116028 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:51,158 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000023.csv: rows=116475 ragged=0 dup_rows=0
+2026-09-13 15:51:51,167 | INFO    | recsys23_fedrec.pipeline | [train 24/30] 000000000023.csv: rows=116475 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:51:56,915 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000024.csv: rows=115828 ragged=0 dup_rows=0
+2026-09-13 15:51:56,921 | INFO    | recsys23_fedrec.pipeline | [train 25/30] 000000000024.csv: rows=115828 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:52:02,776 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000025.csv: rows=116630 ragged=0 dup_rows=0
+2026-09-13 15:52:02,786 | INFO    | recsys23_fedrec.pipeline | [train 26/30] 000000000025.csv: rows=116630 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:52:08,600 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000026.csv: rows=116275 ragged=0 dup_rows=0
+2026-09-13 15:52:08,609 | INFO    | recsys23_fedrec.pipeline | [train 27/30] 000000000026.csv: rows=116275 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:52:14,391 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000027.csv: rows=115602 ragged=0 dup_rows=0
+2026-09-13 15:52:14,399 | INFO    | recsys23_fedrec.pipeline | [train 28/30] 000000000027.csv: rows=115602 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:52:20,161 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000028.csv: rows=115798 ragged=0 dup_rows=0
+2026-09-13 15:52:20,171 | INFO    | recsys23_fedrec.pipeline | [train 29/30] 000000000028.csv: rows=115798 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:52:25,976 | DEBUG   | recsys23_fedrec.profiling | profiled train/000000000029.csv: rows=115920 ragged=0 dup_rows=0
+2026-09-13 15:52:25,985 | INFO    | recsys23_fedrec.pipeline | [train 30/30] 000000000029.csv: rows=115920 cols=82 ragged=0 dup_rows=0
+2026-09-13 15:52:26,140 | INFO    | recsys23_fedrec.pipeline | 
+2026-09-13 15:52:26,140 | INFO    | recsys23_fedrec.pipeline | === Stage 1d: target and ID inference ===
+2026-09-13 15:52:26,140 | INFO    | recsys23_fedrec.pipeline | inferred main target: is_installed | auxiliary: is_clicked | id-like: ['f_0']
+2026-09-13 15:52:26,140 | INFO    | recsys23_fedrec.pipeline | 
+2026-09-13 15:52:26,140 | INFO    | recsys23_fedrec.pipeline | === Stage 1e: exact ID duplicate analysis ===
+2026-09-13 15:52:48,435 | INFO    | recsys23_fedrec.pipeline | 
+2026-09-13 15:52:48,435 | INFO    | recsys23_fedrec.pipeline | === Stage 1f: building reports ===
+2026-09-13 15:52:50,452 | INFO    | recsys23_fedrec.reporting | wrote JSON report: reports\dataset_report.json
+2026-09-13 15:52:50,453 | INFO    | recsys23_fedrec.reporting | wrote Markdown report: reports\dataset_report.md
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | ------------- inspection summary -------------
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | dataset root: .
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | train: 30 shards, 3,485,852 rows, 82 cols | test: 1 shards, 160,973 rows, 80 cols
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | schema consistent within split: train=True test=True
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | test columns == train minus targets: True
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | columns only in train: ['is_clicked', 'is_installed']
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | main target: is_installed | auxiliary target: is_clicked
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | candidate rationale: candidate scoring: trailing-position(10) + name-evidence(install=4, click=3, label/target=2) + binary(+1) + present-in-test(+1); top score 15; top group: ['is_installed', 'is_clicked']; exactly one install-like and one click-like candidate in the top group; install is the main task and click the auxiliary task per the research goal
+2026-09-13 15:52:50,453 | INFO    | inspect_dataset | targets present in test: ['f_79', 'f_78', 'f_41', 'f_40', 'f_39', 'f_38', 'f_37', 'f_36', 'f_35', 'f_34', 'f_33', 'f_31', 'f_30', 'f_29', 'f_28', 'f_27', 'f_26', 'f_77', 'f_76', 'f_74', 'f_73', 'f_71', 'f_46', 'f_32', 'f_25', 'f_24', 'f_23', 'f_16', 'f_10', 'f_9', 'f_8', 'f_5', 'f_3']
+2026-09-13 15:52:50,454 | INFO    | inspect_dataset | label is_installed: n=0 2,879,250 | n=1 606,602 | positive 17.4018% | imbalance 4.7:1
+2026-09-13 15:52:50,454 | INFO    | inspect_dataset | label is_clicked: n=0 2,719,538 | n=1 766,314 | positive 21.9835% | imbalance 3.5:1
+2026-09-13 15:52:50,454 | INFO    | inspect_dataset | missing cells (train): 5,329,633 | (test): 195,171
+2026-09-13 15:52:50,454 | INFO    | inspect_dataset | duplicate rows within train shards: 0 | cross-shard duplicates: 0
+2026-09-13 15:52:50,454 | INFO    | inspect_dataset | id-like columns: ['f_0']
+2026-09-13 15:52:50,454 | INFO    | inspect_dataset | id f_0: within-shard dupes 0 | cross-shard repeated values 0
+2026-09-13 15:52:50,454 | INFO    | inspect_dataset | features: 80 (15 binary, 1 high-cardinality >= 100,000 distinct)
+2026-09-13 15:52:50,455 | INFO    | inspect_dataset | reports: reports\dataset_report.json, reports\dataset_report.md
+2026-09-13 15:52:50,455 | INFO    | inspect_dataset | inspection completed successfully

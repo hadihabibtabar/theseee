@@ -1,0 +1,305 @@
+{
+  "alpha": 0.5,
+  "client_ids": [
+    "client_00",
+    "client_01",
+    "client_02",
+    "client_03",
+    "client_04",
+    "client_05",
+    "client_06",
+    "client_07",
+    "client_08",
+    "client_09"
+  ],
+  "client_index_hashes": {
+    "client_00": "84212f15d39e08f1",
+    "client_01": "b94313449934cc3a",
+    "client_02": "9479f6fd8db00bae",
+    "client_03": "2cfdeaf2520a852c",
+    "client_04": "2d46c346990738a3",
+    "client_05": "7f4240297466eb31",
+    "client_06": "ce0604c2f0bcf04c",
+    "client_07": "08f4da995d7db0b9",
+    "client_08": "1b3b9c08c3a821e2",
+    "client_09": "b8c1b76305acacd1"
+  },
+  "clients": {
+    "client_00": {
+      "click_count": 128917,
+      "click_rate": 0.207328,
+      "install_count": 206548,
+      "install_rate": 0.332177,
+      "joint_counts": {
+        "click=0,install=0": 306646,
+        "click=0,install=1": 186238,
+        "click=1,install=0": 108607,
+        "click=1,install=1": 20310
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.493158,
+        "click=0,install=1": 0.299514,
+        "click=1,install=0": 0.174665,
+        "click=1,install=1": 0.032663
+      },
+      "row_percentage": 19.8198,
+      "rows": 621801
+    },
+    "client_01": {
+      "click_count": 14962,
+      "click_rate": 0.027475,
+      "install_count": 41672,
+      "install_rate": 0.076522,
+      "joint_counts": {
+        "click=0,install=0": 488001,
+        "click=0,install=1": 41611,
+        "click=1,install=0": 14901,
+        "click=1,install=1": 61
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.896115,
+        "click=0,install=1": 0.07641,
+        "click=1,install=0": 0.027363,
+        "click=1,install=1": 0.000112
+      },
+      "row_percentage": 17.3582,
+      "rows": 544574
+    },
+    "client_02": {
+      "click_count": 55413,
+      "click_rate": 0.923565,
+      "install_count": 4155,
+      "install_rate": 0.069251,
+      "joint_counts": {
+        "click=0,install=0": 3381,
+        "click=0,install=1": 1205,
+        "click=1,install=0": 52463,
+        "click=1,install=1": 2950
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.056351,
+        "click=0,install=1": 0.020084,
+        "click=1,install=0": 0.874398,
+        "click=1,install=1": 0.049167
+      },
+      "row_percentage": 1.9125,
+      "rows": 59999
+    },
+    "client_03": {
+      "click_count": 164626,
+      "click_rate": 0.337286,
+      "install_count": 114819,
+      "install_rate": 0.235241,
+      "joint_counts": {
+        "click=0,install=0": 288082,
+        "click=0,install=1": 35382,
+        "click=1,install=0": 85189,
+        "click=1,install=1": 79437
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.590223,
+        "click=0,install=1": 0.072491,
+        "click=1,install=0": 0.174535,
+        "click=1,install=1": 0.162751
+      },
+      "row_percentage": 15.5578,
+      "rows": 488090
+    },
+    "client_04": {
+      "click_count": 58162,
+      "click_rate": 0.833386,
+      "install_count": 5590,
+      "install_rate": 0.080097,
+      "joint_counts": {
+        "click=0,install=0": 6256,
+        "click=0,install=1": 5372,
+        "click=1,install=0": 57944,
+        "click=1,install=1": 218
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.08964,
+        "click=0,install=1": 0.076974,
+        "click=1,install=0": 0.830262,
+        "click=1,install=1": 0.003124
+      },
+      "row_percentage": 2.2245,
+      "rows": 69790
+    },
+    "client_05": {
+      "click_count": 26425,
+      "click_rate": 0.29365,
+      "install_count": 16679,
+      "install_rate": 0.185347,
+      "joint_counts": {
+        "click=0,install=0": 52407,
+        "click=0,install=1": 11156,
+        "click=1,install=0": 20902,
+        "click=1,install=1": 5523
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.582378,
+        "click=0,install=1": 0.123972,
+        "click=1,install=0": 0.232275,
+        "click=1,install=1": 0.061375
+      },
+      "row_percentage": 2.8684,
+      "rows": 89988
+    },
+    "client_06": {
+      "click_count": 22073,
+      "click_rate": 0.113865,
+      "install_count": 20987,
+      "install_rate": 0.108263,
+      "joint_counts": {
+        "click=0,install=0": 170925,
+        "click=0,install=1": 854,
+        "click=1,install=0": 1940,
+        "click=1,install=1": 20133
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.881729,
+        "click=0,install=1": 0.004405,
+        "click=1,install=0": 0.010008,
+        "click=1,install=1": 0.103858
+      },
+      "row_percentage": 6.179,
+      "rows": 193852
+    },
+    "client_07": {
+      "click_count": 80701,
+      "click_rate": 0.399704,
+      "install_count": 33930,
+      "install_rate": 0.168052,
+      "joint_counts": {
+        "click=0,install=0": 118596,
+        "click=0,install=1": 2605,
+        "click=1,install=0": 49376,
+        "click=1,install=1": 31325
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.587394,
+        "click=0,install=1": 0.012902,
+        "click=1,install=0": 0.244554,
+        "click=1,install=1": 0.15515
+      },
+      "row_percentage": 6.4356,
+      "rows": 201902
+    },
+    "client_08": {
+      "click_count": 95602,
+      "click_rate": 0.186868,
+      "install_count": 73038,
+      "install_rate": 0.142763,
+      "joint_counts": {
+        "click=0,install=0": 406331,
+        "click=0,install=1": 9670,
+        "click=1,install=0": 32234,
+        "click=1,install=1": 63368
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.794231,
+        "click=0,install=1": 0.018901,
+        "click=1,install=0": 0.063006,
+        "click=1,install=1": 0.123862
+      },
+      "row_percentage": 16.3073,
+      "rows": 511603
+    },
+    "client_09": {
+      "click_count": 42868,
+      "click_rate": 0.120528,
+      "install_count": 28942,
+      "install_rate": 0.081374,
+      "joint_counts": {
+        "click=0,install=0": 283890,
+        "click=0,install=1": 28909,
+        "click=1,install=0": 42835,
+        "click=1,install=1": 33
+      },
+      "joint_proportions": {
+        "click=0,install=0": 0.79819,
+        "click=0,install=1": 0.081281,
+        "click=1,install=0": 0.120436,
+        "click=1,install=1": 9.3e-05
+      },
+      "row_percentage": 11.3368,
+      "rows": 355667
+    }
+  },
+  "description": "10 simulated federated clients with controlled Non-IID data distributions (horizontal FL: same feature schema, same task, different local samples)",
+  "determinism_note": "identical seed + alpha + labels reproduce byte-identical client assignments; no post-hoc rebalancing is applied",
+  "format_version": 1,
+  "global_label_distribution": {
+    "click_rate": 0.219857,
+    "install_rate": 0.174152,
+    "joint_counts": {
+      "click=0,install=0": 2124515,
+      "click=0,install=1": 323002,
+      "click=1,install=0": 466391,
+      "click=1,install=1": 223358
+    },
+    "joint_proportions": {
+      "click=0,install=0": 0.677187,
+      "click=0,install=1": 0.102957,
+      "click=1,install=0": 0.148662,
+      "click=1,install=1": 0.071195
+    }
+  },
+  "heterogeneity": {
+    "definition": "per-client absolute deviation of joint-state proportions and row share from the global values (sum over the 4 joint states of |client - global|)",
+    "max_absolute_joint_proportion_deviation": 0.725736,
+    "mean_absolute_joint_proportion_deviation": 0.138933,
+    "min_max_client_size": [
+      59999,
+      621801
+    ],
+    "per_client_joint_abs_deviation_sum": {
+      "client_00": 0.445121,
+      "client_01": 0.437857,
+      "client_02": 1.451473,
+      "client_03": 0.234859,
+      "client_04": 1.363201,
+      "client_05": 0.209257,
+      "client_06": 0.474411,
+      "client_07": 0.359695,
+      "client_08": 0.339423,
+      "client_09": 0.242007
+    }
+  },
+  "labels_hash": "800e2aa9d0bf7b79",
+  "labels_source": "artifacts/processed/train (is_clicked, is_installed columns)",
+  "number_of_clients": 10,
+  "partition_hash": "9603ddc9facc973d",
+  "partition_mechanism": "for each joint label state (is_clicked, is_installed) in fixed order (0,0),(0,1),(1,0),(1,1): rows are split across clients proportionally to one Dirichlet(num_clients, alpha) draw per state (largest-remainder integer correction, counts sum exactly to the state row count); chunks are cut contiguously in ascending dataset order with clients in id order",
+  "partition_method": "dirichlet_joint_label_proportional_v1",
+  "rng": "numpy.random.default_rng (PCG64)",
+  "row_percentages": [
+    19.8198,
+    17.3582,
+    1.9125,
+    15.5578,
+    2.2245,
+    2.8684,
+    6.179,
+    6.4356,
+    16.3073,
+    11.3368
+  ],
+  "rows_per_client": [
+    621801,
+    544574,
+    59999,
+    488090,
+    69790,
+    89988,
+    193852,
+    201902,
+    511603,
+    355667
+  ],
+  "seed": 42,
+  "source_split_path": "artifacts/splits/centralized_split.json",
+  "source_split_train_index_hash": "dd37605169615442",
+  "stage": "9-partition",
+  "total_training_rows": 3137266
+}

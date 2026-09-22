@@ -1,0 +1,70 @@
+=== Stage 10 ONE-ROUND FEDERATED SMOKE TEST (real data) ===
+start: 2026-09-19T09:21:59+00:00
+scope: exactly ONE FedAvg round; NOT the 10-round Stage 10B experiment
+protocol: 10 clients, alpha 0.5, seed 42, batch 1024, 1 local epoch, AdamW lr 0.0003 wd 0.01, lambdas (1.0, 1.0), sample_weighted_fedavg
+=== pre-run integrity verification ===
+  Stage 2 artifact hash:     c3a62caf13326617 OK
+  split train hash:          dd37605169615442 OK
+  split validation hash:     3cd8370ebdecb305 OK
+  Stage 6 checkpoint sha256: 25f3267eba572bf9... OK
+  extra guarded files sha256+mtime recorded: 8
+  device: cuda (NVIDIA GeForce RTX 4060 Ti)
+  dataset opens: 3,485,852 rows (train split only)
+  official test data: NOT loaded (never constructed in this script)
+  split verified: 3,137,266 train / 348,586 val
+  [OK] partition hash 9603ddc9facc973d (stored == manifest == recomputed == expected)
+  client sizes match the audited Stage 9 partition; total 3,137,266
+  client/composed-row vs validation overlap: 0 rows (all 10 clients)
+
+=== 1. cold seed-42 global initialization ===
+  parameter count: 2,502,930; state entries: 138
+  determinism: two seed-42 creations identical: True
+  cold init (vs Stage 6 checkpoint): 138/138 entries differ (Stage 6 weights NOT loaded)
+
+=== 2. client-local training: exactly ONE local epoch per client ===
+  client_00: 621,801 rows, 608 batches
+    client_00 batch 200 | running loss 0.9143
+    client_00 batch 400 | running loss 0.7999
+    client_00 batch 600 | running loss 0.7474
+  client_00 done: loss 0.7460 (click 0.3705, install 0.3755), params changed 138/138, 473.5s
+  client_01: 544,574 rows, 532 batches
+    client_01 batch 200 | running loss 0.4489
+    client_01 batch 400 | running loss 0.3403
+  client_01 done: loss 0.3066 (click 0.1305, install 0.1761), params changed 138/138, 392.3s
+  client_02: 59,999 rows, 59 batches
+  client_02 done: loss 0.8409 (click 0.4280, install 0.4129), params changed 138/138, 39.8s
+  client_03: 488,090 rows, 477 batches
+    client_03 batch 200 | running loss 1.0362
+    client_03 batch 400 | running loss 0.9065
+  client_03 done: loss 0.8779 (click 0.4593, install 0.4186), params changed 138/138, 482.7s
+  client_04: 69,790 rows, 69 batches
+  client_04 done: loss 0.9150 (click 0.5164, install 0.3986), params changed 138/138, 45.8s
+  client_05: 89,988 rows, 88 batches
+  client_05 done: loss 1.1339 (click 0.6231, install 0.5108), params changed 138/138, 60.4s
+  client_06: 193,852 rows, 190 batches
+  client_06 done: loss 0.6607 (click 0.3369, install 0.3238), params changed 138/138, 129.3s
+  client_07: 201,902 rows, 198 batches
+  client_07 done: loss 0.9874 (click 0.5833, install 0.4041), params changed 138/138, 157.7s
+  client_08: 511,603 rows, 500 batches
+    client_08 batch 200 | running loss 0.8074
+    client_08 batch 400 | running loss 0.6976
+  client_08 done: loss 0.6628 (click 0.3510, install 0.3118), params changed 138/138, 400.1s
+  client_09: 355,667 rows, 348 batches
+    client_09 batch 200 | running loss 0.6564
+  client_09 done: loss 0.5430 (click 0.3262, install 0.2168), params changed 138/138, 186.3s
+
+=== 3. sample-weighted FedAvg (tested utility, client order) ===
+  weights sum: 1.0 (tolerance 1e-9)
+  aggregated vs initial: 138/138 entries changed, max abs diff 1.236813e-01
+  global model state changed vs initial: True (max abs diff 1.236813e-01)
+
+=== 4. global validation (frozen 348,586-row split only) ===
+  rows evaluated: 348,586
+  Install LogLoss 0.542303 | Install AUC 0.8327
+  Click   LogLoss 0.636163 | Click   AUC 0.7661
+
+  one-round wall time: 2400.9s | peak RSS 2510 MiB | peak GPU alloc/res 3604/3928 MiB
+
+=== 5. smoke checkpoint (temporary path only) + reload verification ===
+  checkpoint written: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\federated\smoke\stage10_smoke_round1.pt
+  sha256: 6e250706dc19c05504b3f00e6014358fb34fa02cf541be4caad64a776fdea36f
