@@ -93,3 +93,6 @@ protocol: 10 clients, seed 42, 10 rounds, 1 local epoch, batch 1024, AdamW lr 0.
     r4 client_00 batch 200 | running loss 0.2396
   r4 client_00 done: 342,065 rows | loss 0.2408 | 181.7s
     r4 client_01 batch 200 | running loss 0.3113
+    r4 client_01 batch 400 | running loss 0.3099
+    r4 client_01 batch 600 | running loss 0.3076
+    r4 client_01 batch 800 | running loss 0.3056
