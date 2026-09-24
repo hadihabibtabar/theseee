@@ -1,0 +1,290 @@
+=== STAGE 12: stage12_fed_nossl_alpha_0_1_seed42 ===
+start: 2026-09-22T13:08:47+00:00
+cell: no-SSL | alpha 0.1 | partition artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz | output artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42
+protocol: 10 clients, seed 42, 10 rounds, 1 local epoch, batch 1024, AdamW lr 0.0003 wd 0.01, sample_weighted_fedavg, cold seed-42 init
+
+=== pre-run integrity verification ===
+  Stage 2 / split / Stage 6 / raw bytes: all frozen values OK
+  fingerprint recorded over 14 guarded files (Stage 1-9, Stage 10B, Stage 11, Stage 9 alpha=0.5 partition, this cell's partition)
+  device: cuda (NVIDIA GeForce RTX 4060 Ti)
+  [OK] partition hash 23146aebf184345b | alpha 0.1 | 10 clients | rows 3,137,266 | validation overlap 0
+  official test data: NOT loaded (never constructed in this script)
+
+=== 1. cold seed-42 global initialization (supervised) ===
+  parameter count 2,502,930; state entries 138
+  cold init: no checkpoint loaded (Stage 6/8/10B/11 outputs untouched)
+
+=== ROUND 1/10 | sampler epoch 0 per client ===
+    r1 client_00 batch 200 | running loss 0.5292
+  r1 client_00 done: 342,065 rows | loss 0.4548 | 146.4s
+    r1 client_01 batch 200 | running loss 0.6027
+    r1 client_01 batch 400 | running loss 0.4859
+    r1 client_01 batch 600 | running loss 0.4371
+    r1 client_01 batch 800 | running loss 0.4100
+    r1 client_01 batch 1000 | running loss 0.3926
+  r1 client_01 done: 1,200,830 rows | loss 0.3816 | 1595.4s
+    r1 client_02 batch 200 | running loss 0.5536
+  r1 client_02 done: 251,984 rows | loss 0.5217 | 264.1s
+    r1 client_03 batch 200 | running loss 0.2691
+  r1 client_03 done: 266,440 rows | loss 0.2285 | 150.1s
+  r1 client_04 done: 30,811 rows | loss 1.0462 | 13.7s
+  r1 client_05 done: 11,892 rows | loss 1.3416 | 5.0s
+    r1 client_06 batch 200 | running loss 0.9394
+  r1 client_06 done: 366,104 rows | loss 0.8721 | 519.9s
+  r1 client_07 done: 44,021 rows | loss 0.8395 | 21.4s
+  r1 client_08 done: 11,698 rows | loss 1.3377 | 4.5s
+    r1 client_09 batch 200 | running loss 0.2224
+    r1 client_09 batch 400 | running loss 0.1352
+  r1 client_09 done: 611,421 rows | loss 0.1062 | 442.4s
+  >> round 1 SUMMARY: 3196.6s | val Install LogLoss 0.454852 (AUC 0.8171) | Click LogLoss 0.656160 (AUC 0.7248) | NEW BEST -> checkpoint saved | peak RSS 2966 MiB | peak GPU alloc/res 3604/3928 MiB
+  >> rounds completed: 1/10 | elapsed 0.89 h
+
+=== ROUND 2/10 | sampler epoch 1 per client ===
+    r2 client_00 batch 200 | running loss 0.2884
+  r2 client_00 done: 342,065 rows | loss 0.2742 | 180.9s
+    r2 client_01 batch 200 | running loss 0.3586
+    r2 client_01 batch 400 | running loss 0.3391
+    r2 client_01 batch 600 | running loss 0.3332
+    r2 client_01 batch 800 | running loss 0.3287
+    r2 client_01 batch 1000 | running loss 0.3256
+  r2 client_01 done: 1,200,830 rows | loss 0.3239 | 1749.2s
+    r2 client_02 batch 200 | running loss 0.4921
+  r2 client_02 done: 251,984 rows | loss 0.4705 | 263.2s
+    r2 client_03 batch 200 | running loss 0.0800
+  r2 client_03 done: 266,440 rows | loss 0.0786 | 147.5s
+  r2 client_04 done: 30,811 rows | loss 0.7700 | 13.5s
+  r2 client_05 done: 11,892 rows | loss 0.7228 | 4.9s
+    r2 client_06 batch 200 | running loss 0.9149
+  r2 client_06 done: 366,104 rows | loss 0.8406 | 518.9s
+  r2 client_07 done: 44,021 rows | loss 0.6068 | 21.7s
+  r2 client_08 done: 11,698 rows | loss 0.1976 | 4.5s
+    r2 client_09 batch 200 | running loss 0.0493
+    r2 client_09 batch 400 | running loss 0.0435
+  r2 client_09 done: 611,421 rows | loss 0.0397 | 441.4s
+  >> round 2 SUMMARY: 3379.9s | val Install LogLoss 0.307176 (AUC 0.8752) | Click LogLoss 0.337302 (AUC 0.8650) | NEW BEST -> checkpoint saved | peak RSS 3029 MiB | peak GPU alloc/res 3604/3928 MiB
+  >> rounds completed: 2/10 | elapsed 1.83 h
+
+=== ROUND 3/10 | sampler epoch 2 per client ===
+    r3 client_00 batch 200 | running loss 0.2508
+  r3 client_00 done: 342,065 rows | loss 0.2481 | 181.3s
+    r3 client_01 batch 200 | running loss 0.3209
+    r3 client_01 batch 400 | running loss 0.3174
+    r3 client_01 batch 600 | running loss 0.3160
+    r3 client_01 batch 800 | running loss 0.3139
+    r3 client_01 batch 1000 | running loss 0.3121
+  r3 client_01 done: 1,200,830 rows | loss 0.3115 | 1716.2s
+    r3 client_02 batch 200 | running loss 0.3889
+  r3 client_02 done: 251,984 rows | loss 0.3850 | 261.6s
+    r3 client_03 batch 200 | running loss 0.0640
+  r3 client_03 done: 266,440 rows | loss 0.0629 | 148.8s
+  r3 client_04 done: 30,811 rows | loss 0.1284 | 13.9s
+  r3 client_05 done: 11,892 rows | loss 0.2706 | 5.2s
+    r3 client_06 batch 200 | running loss 0.7615
+  r3 client_06 done: 366,104 rows | loss 0.7393 | 519.7s
+  r3 client_07 done: 44,021 rows | loss 0.2233 | 21.8s
+  r3 client_08 done: 11,698 rows | loss 0.1229 | 4.7s
+    r3 client_09 batch 200 | running loss 0.0314
+    r3 client_09 batch 400 | running loss 0.0310
+  r3 client_09 done: 611,421 rows | loss 0.0304 | 440.3s
+  >> round 3 SUMMARY: 3346.9s | val Install LogLoss 0.306714 (AUC 0.8812) | Click LogLoss 0.337894 (AUC 0.8854) | NEW BEST -> checkpoint saved | peak RSS 2980 MiB | peak GPU alloc/res 3604/3928 MiB
+  >> rounds completed: 3/10 | elapsed 2.76 h
+
+=== ROUND 4/10 | sampler epoch 3 per client ===
+    r4 client_00 batch 200 | running loss 0.2396
+  r4 client_00 done: 342,065 rows | loss 0.2408 | 181.7s
+    r4 client_01 batch 200 | running loss 0.3113
+    r4 client_01 batch 400 | running loss 0.3099
+    r4 client_01 batch 600 | running loss 0.3076
+    r4 client_01 batch 800 | running loss 0.3056
+    r4 client_01 batch 1000 | running loss 0.3051
+  r4 client_01 done: 1,200,830 rows | loss 0.3041 | 1780.5s
+    r4 client_02 batch 200 | running loss 0.3855
+  r4 client_02 done: 251,984 rows | loss 0.3808 | 270.4s
+    r4 client_03 batch 200 | running loss 0.0617
+  r4 client_03 done: 266,440 rows | loss 0.0604 | 151.0s
+  r4 client_04 done: 30,811 rows | loss 0.1224 | 13.9s
+  r4 client_05 done: 11,892 rows | loss 0.2385 | 5.2s
+    r4 client_06 batch 200 | running loss 0.7443
+  r4 client_06 done: 366,104 rows | loss 0.7249 | 506.9s
+  r4 client_07 done: 44,021 rows | loss 0.2303 | 21.5s
+  r4 client_08 done: 11,698 rows | loss 0.1114 | 4.5s
+    r4 client_09 batch 200 | running loss 0.0309
+    r4 client_09 batch 400 | running loss 0.0298
+  r4 client_09 done: 611,421 rows | loss 0.0293 | 442.8s
+  >> round 4 SUMMARY: 3411.7s | val Install LogLoss 0.308393 (AUC 0.8853) | Click LogLoss 0.336519 (AUC 0.8908) | best remains round 3 | peak RSS 2520 MiB | peak GPU alloc/res 3604/4632 MiB
+  >> rounds completed: 4/10 | elapsed 3.70 h
+
+=== ROUND 5/10 | sampler epoch 4 per client ===
+    r5 client_00 batch 200 | running loss 0.2388
+  r5 client_00 done: 342,065 rows | loss 0.2355 | 180.6s
+    r5 client_01 batch 200 | running loss 0.3021
+    r5 client_01 batch 400 | running loss 0.3015
+    r5 client_01 batch 600 | running loss 0.3012
+    r5 client_01 batch 800 | running loss 0.3003
+    r5 client_01 batch 1000 | running loss 0.2999
+  r5 client_01 done: 1,200,830 rows | loss 0.2993 | 1733.4s
+    r5 client_02 batch 200 | running loss 0.3834
+  r5 client_02 done: 251,984 rows | loss 0.3784 | 261.5s
+    r5 client_03 batch 200 | running loss 0.0595
+  r5 client_03 done: 266,440 rows | loss 0.0586 | 146.7s
+  r5 client_04 done: 30,811 rows | loss 0.0929 | 13.4s
+  r5 client_05 done: 11,892 rows | loss 0.2861 | 4.9s
+    r5 client_06 batch 200 | running loss 0.7302
+  r5 client_06 done: 366,104 rows | loss 0.7142 | 517.0s
+  r5 client_07 done: 44,021 rows | loss 0.2279 | 21.2s
+  r5 client_08 done: 11,698 rows | loss 0.1082 | 4.4s
+    r5 client_09 batch 200 | running loss 0.0298
+    r5 client_09 batch 400 | running loss 0.0290
+  r5 client_09 done: 611,421 rows | loss 0.0289 | 438.7s
+  >> round 5 SUMMARY: 3354.8s | val Install LogLoss 0.295678 (AUC 0.8920) | Click LogLoss 0.329031 (AUC 0.8954) | NEW BEST -> checkpoint saved | peak RSS 2505 MiB | peak GPU alloc/res 3604/4050 MiB
+  >> rounds completed: 5/10 | elapsed 4.64 h
+
+=== ROUND 6/10 | sampler epoch 5 per client ===
+    r6 client_00 batch 200 | running loss 0.2312
+  r6 client_00 done: 342,065 rows | loss 0.2301 | 178.1s
+    r6 client_01 batch 200 | running loss 0.2987
+    r6 client_01 batch 400 | running loss 0.2966
+    r6 client_01 batch 600 | running loss 0.2962
+    r6 client_01 batch 800 | running loss 0.2957
+    r6 client_01 batch 1000 | running loss 0.2956
+  r6 client_01 done: 1,200,830 rows | loss 0.2952 | 1741.5s
+    r6 client_02 batch 200 | running loss 0.3774
+  r6 client_02 done: 251,984 rows | loss 0.3747 | 261.1s
+    r6 client_03 batch 200 | running loss 0.0577
+  r6 client_03 done: 266,440 rows | loss 0.0579 | 146.4s
+  r6 client_04 done: 30,811 rows | loss 0.0937 | 13.3s
+  r6 client_05 done: 11,892 rows | loss 0.2965 | 4.9s
+    r6 client_06 batch 200 | running loss 0.7230
+  r6 client_06 done: 366,104 rows | loss 0.7063 | 515.6s
+  r6 client_07 done: 44,021 rows | loss 0.2209 | 21.3s
+  r6 client_08 done: 11,698 rows | loss 0.1068 | 4.4s
+    r6 client_09 batch 200 | running loss 0.0276
+    r6 client_09 batch 400 | running loss 0.0283
+  r6 client_09 done: 611,421 rows | loss 0.0283 | 440.5s
+  >> round 6 SUMMARY: 3360.1s | val Install LogLoss 0.296795 (AUC 0.8954) | Click LogLoss 0.335349 (AUC 0.8982) | best remains round 5 | peak RSS 2495 MiB | peak GPU alloc/res 3604/3928 MiB
+  >> rounds completed: 6/10 | elapsed 5.57 h
+
+=== ROUND 7/10 | sampler epoch 6 per client ===
+    r7 client_00 batch 200 | running loss 0.2271
+  r7 client_00 done: 342,065 rows | loss 0.2259 | 179.4s
+    r7 client_01 batch 200 | running loss 0.2938
+    r7 client_01 batch 400 | running loss 0.2930
+    r7 client_01 batch 600 | running loss 0.2927
+    r7 client_01 batch 800 | running loss 0.2930
+    r7 client_01 batch 1000 | running loss 0.2927
+  r7 client_01 done: 1,200,830 rows | loss 0.2925 | 1736.7s
+    r7 client_02 batch 200 | running loss 0.3804
+  r7 client_02 done: 251,984 rows | loss 0.3754 | 262.3s
+    r7 client_03 batch 200 | running loss 0.0577
+  r7 client_03 done: 266,440 rows | loss 0.0562 | 148.6s
+  r7 client_04 done: 30,811 rows | loss 0.1544 | 13.4s
+  r7 client_05 done: 11,892 rows | loss 0.2845 | 5.0s
+    r7 client_06 batch 200 | running loss 0.7148
+  r7 client_06 done: 366,104 rows | loss 0.7023 | 521.9s
+  r7 client_07 done: 44,021 rows | loss 0.2307 | 21.5s
+  r7 client_08 done: 11,698 rows | loss 0.1075 | 4.5s
+    r7 client_09 batch 200 | running loss 0.0284
+    r7 client_09 batch 400 | running loss 0.0272
+  r7 client_09 done: 611,421 rows | loss 0.0275 | 440.3s
+  >> round 7 SUMMARY: 3367.2s | val Install LogLoss 0.287310 (AUC 0.8987) | Click LogLoss 0.305709 (AUC 0.9010) | NEW BEST -> checkpoint saved | peak RSS 2477 MiB | peak GPU alloc/res 3604/3928 MiB
+  >> rounds completed: 7/10 | elapsed 6.50 h
+
+=== ROUND 8/10 | sampler epoch 7 per client ===
+    r8 client_00 batch 200 | running loss 0.2235
+  r8 client_00 done: 342,065 rows | loss 0.2235 | 180.7s
+    r8 client_01 batch 200 | running loss 0.2917
+    r8 client_01 batch 400 | running loss 0.2903
+    r8 client_01 batch 600 | running loss 0.2893
+    r8 client_01 batch 800 | running loss 0.2898
+    r8 client_01 batch 1000 | running loss 0.2907
+  r8 client_01 done: 1,200,830 rows | loss 0.2905 | 1755.2s
+    r8 client_02 batch 200 | running loss 0.3752
+  r8 client_02 done: 251,984 rows | loss 0.3720 | 262.2s
+    r8 client_03 batch 200 | running loss 0.0550
+  r8 client_03 done: 266,440 rows | loss 0.0551 | 149.5s
+  r8 client_04 done: 30,811 rows | loss 0.1250 | 13.7s
+  r8 client_05 done: 11,892 rows | loss 0.2357 | 5.0s
+    r8 client_06 batch 200 | running loss 0.7087
+  r8 client_06 done: 366,104 rows | loss 0.6956 | 520.6s
+  r8 client_07 done: 44,021 rows | loss 0.2061 | 21.3s
+  r8 client_08 done: 11,698 rows | loss 0.1070 | 4.4s
+    r8 client_09 batch 200 | running loss 0.0258
+    r8 client_09 batch 400 | running loss 0.0261
+  r8 client_09 done: 611,421 rows | loss 0.0266 | 438.4s
+  >> round 8 SUMMARY: 3383.8s | val Install LogLoss 0.291686 (AUC 0.8994) | Click LogLoss 0.313380 (AUC 0.9032) | best remains round 7 | peak RSS 2522 MiB | peak GPU alloc/res 3604/5358 MiB
+  >> rounds completed: 8/10 | elapsed 7.44 h
+
+=== ROUND 9/10 | sampler epoch 8 per client ===
+    r9 client_00 batch 200 | running loss 0.2233
+  r9 client_00 done: 342,065 rows | loss 0.2217 | 179.9s
+    r9 client_01 batch 200 | running loss 0.2915
+    r9 client_01 batch 400 | running loss 0.2907
+    r9 client_01 batch 600 | running loss 0.2896
+    r9 client_01 batch 800 | running loss 0.2891
+    r9 client_01 batch 1000 | running loss 0.2889
+  r9 client_01 done: 1,200,830 rows | loss 0.2886 | 1762.9s
+    r9 client_02 batch 200 | running loss 0.3787
+  r9 client_02 done: 251,984 rows | loss 0.3746 | 263.3s
+    r9 client_03 batch 200 | running loss 0.0546
+  r9 client_03 done: 266,440 rows | loss 0.0541 | 148.5s
+  r9 client_04 done: 30,811 rows | loss 0.1531 | 13.6s
+  r9 client_05 done: 11,892 rows | loss 0.2783 | 5.1s
+    r9 client_06 batch 200 | running loss 0.7055
+  r9 client_06 done: 366,104 rows | loss 0.6934 | 524.0s
+  r9 client_07 done: 44,021 rows | loss 0.2240 | 21.4s
+  r9 client_08 done: 11,698 rows | loss 0.1075 | 4.6s
+    r9 client_09 batch 200 | running loss 0.0272
+    r9 client_09 batch 400 | running loss 0.0267
+  r9 client_09 done: 611,421 rows | loss 0.0264 | 442.6s
+  >> round 9 SUMMARY: 3399.4s | val Install LogLoss 0.290523 (AUC 0.8998) | Click LogLoss 0.305705 (AUC 0.9038) | best remains round 7 | peak RSS 2498 MiB | peak GPU alloc/res 3604/3928 MiB
+  >> rounds completed: 9/10 | elapsed 8.39 h
+
+=== ROUND 10/10 | sampler epoch 9 per client ===
+    r10 client_00 batch 200 | running loss 0.2203
+  r10 client_00 done: 342,065 rows | loss 0.2207 | 177.4s
+    r10 client_01 batch 200 | running loss 0.2874
+    r10 client_01 batch 400 | running loss 0.2883
+    r10 client_01 batch 600 | running loss 0.2870
+    r10 client_01 batch 800 | running loss 0.2874
+    r10 client_01 batch 1000 | running loss 0.2879
+  r10 client_01 done: 1,200,830 rows | loss 0.2875 | 1738.3s
+    r10 client_02 batch 200 | running loss 0.3782
+  r10 client_02 done: 251,984 rows | loss 0.3736 | 261.0s
+    r10 client_03 batch 200 | running loss 0.0537
+  r10 client_03 done: 266,440 rows | loss 0.0544 | 147.0s
+  r10 client_04 done: 30,811 rows | loss 0.1513 | 13.5s
+  r10 client_05 done: 11,892 rows | loss 0.2891 | 4.9s
+    r10 client_06 batch 200 | running loss 0.7007
+  r10 client_06 done: 366,104 rows | loss 0.6902 | 519.0s
+  r10 client_07 done: 44,021 rows | loss 0.2307 | 21.2s
+  r10 client_08 done: 11,698 rows | loss 0.1048 | 4.4s
+    r10 client_09 batch 200 | running loss 0.0266
+    r10 client_09 batch 400 | running loss 0.0261
+  r10 client_09 done: 611,421 rows | loss 0.0264 | 439.1s
+  >> round 10 SUMMARY: 3359.0s | val Install LogLoss 0.290748 (AUC 0.9003) | Click LogLoss 0.314111 (AUC 0.9041) | best remains round 7 | peak RSS 2501 MiB | peak GPU alloc/res 3604/3928 MiB
+  >> rounds completed: 10/10 | elapsed 9.32 h
+
+=== post-run verification ===
+  best checkpoint (round 7): reload bit-identical: True
+  reloaded-best val_install_logloss: 0.287310072 (|d|=0.00e+00)
+  reloaded-best val_install_auc: 0.898739874 (|d|=0.00e+00)
+  reloaded-best val_click_logloss: 0.305709367 (|d|=0.00e+00)
+  reloaded-best val_click_auc: 0.900956631 (|d|=0.00e+00)
+  protected artifacts unchanged: all 14 guarded files byte-identical (sha256+size+mtime)
+
+=== STAGE 12 CELL COMPLETE: stage12_fed_nossl_alpha_0_1_seed42 ===
+round |  seconds | install LL | install AUC |  click LL | click AUC | best
+    1 |   3196.6 |   0.454852 |      0.8171 |  0.656160 |    0.7248 |
+    2 |   3379.9 |   0.307176 |      0.8752 |  0.337302 |    0.8650 |
+    3 |   3346.9 |   0.306714 |      0.8812 |  0.337894 |    0.8854 |
+    4 |   3411.7 |   0.308393 |      0.8853 |  0.336519 |    0.8908 |
+    5 |   3354.8 |   0.295678 |      0.8920 |  0.329031 |    0.8954 |
+    6 |   3360.1 |   0.296795 |      0.8954 |  0.335349 |    0.8982 |
+    7 |   3367.2 |   0.287310 |      0.8987 |  0.305709 |    0.9010 |  <== best
+    8 |   3383.8 |   0.291686 |      0.8994 |  0.313380 |    0.9032 |
+    9 |   3399.4 |   0.290523 |      0.8998 |  0.305705 |    0.9038 |
+   10 |   3359.0 |   0.290748 |      0.9003 |  0.314111 |    0.9041 |
+best round: 7 | best validation Install LogLoss: 0.287310
+total runtime: 33592.8s (9.33 h) | peak RSS 2501 MiB
+outputs: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\federated\stage12\stage12_fed_nossl_alpha_0_1_seed42
+official test set: NOT loaded, NOT evaluated (entire run)

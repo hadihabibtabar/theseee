@@ -1,6 +1,6 @@
-=== STAGE 12: stage12_fed_nossl_alpha_0_1_seed42 ===
-start: 2026-09-22T22:30:13+00:00
-cell: no-SSL | alpha 0.1 | partition artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz | output artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42
+=== STAGE 12: stage12_fed_ssl_alpha_0_1_seed42 ===
+start: 2026-09-23T20:57:13+00:00
+cell: SSL | alpha 0.1 | partition artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz | output artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42
 protocol: 10 clients, seed 42, 10 rounds, 1 local epoch, batch 1024, AdamW lr 0.0003 wd 0.01, sample_weighted_fedavg, cold seed-42 init
 
 === pre-run integrity verification ===

@@ -1,0 +1,1070 @@
+{
+  "generated": "2026-09-24",
+  "generated_by": "reports/stage12/generate_final_matrix_reports.py (read-only extraction)",
+  "protocol": {
+    "num_clients": 10,
+    "participation": "all_clients_every_round",
+    "rounds": 10,
+    "local_epochs": 1,
+    "local_batch_size": 1024,
+    "optimizer": "adamw",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "lambda_click": 1.0,
+    "lambda_install": 1.0,
+    "aggregation": "sample_weighted_fedavg",
+    "selection_metric": "global_validation_install_logloss",
+    "local_optimizer_state_persistence": false,
+    "local_sampler_epoch_mode": "round_minus_one",
+    "seed": 42,
+    "partition_seed": 42,
+    "initialization": "cold seed-42 (deterministic, no checkpoint load)",
+    "validation_rows": 348586,
+    "federated_train_rows": 3137266,
+    "official_test": "never loaded, never evaluated, by any federated stage"
+  },
+  "partitions": {
+    "1.0": {
+      "npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+      "hash": "c382d47f5824f64a"
+    },
+    "0.5": {
+      "npz": "artifacts/federated/partition_alpha_0_5_seed42.npz",
+      "hash": "9603ddc9facc973d"
+    },
+    "0.1": {
+      "npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+      "hash": "23146aebf184345b"
+    }
+  },
+  "ssl_identity": {
+    "model": "SSLTransformerMMoE",
+    "parameter_count": 2527698,
+    "state_entries": 142,
+    "supervised_weight": 0.6,
+    "contrastive_weight": 0.4,
+    "corruption_rate": 0.15,
+    "temperature": 0.2,
+    "projection_dim": 64,
+    "augmentation": "FeatureCorruptionAugmentation (Stage 7, two-view, CPU generators)",
+    "contrastive_loss": "symmetric NT-Xent (nt_xent_loss)",
+    "joint_loss": "ssl_joint_loss (Stage 7)",
+    "evaluation_path": "supervised_forward (Stage 6 behavior, no augmentation)"
+  },
+  "nossl_identity": {
+    "model": "Transformer + MMoE (supervised click+install)",
+    "parameter_count": 2502930,
+    "state_entries": 138,
+    "evaluation_path": "supervised_forward (Stage 6 behavior)"
+  },
+  "experiments": [
+    {
+      "key": "nossl_a10",
+      "alpha": 1.0,
+      "ssl": false,
+      "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+      "stage": "Stage 12",
+      "model_family": "Transformer + MMoE (supervised click+install, no SSL)",
+      "effective_use_ssl": false,
+      "effective_alpha": 1.0,
+      "recorded_ssl_config": null,
+      "model_identity": {
+        "model": "Transformer + MMoE (supervised click+install)",
+        "parameter_count": 2502930,
+        "state_entries": 138,
+        "evaluation_path": "supervised_forward (Stage 6 behavior)"
+      },
+      "status": "complete",
+      "rounds_completed": 10,
+      "protocol_rounds": 10,
+      "complete": true,
+      "seed": 42,
+      "partition_hash": "c382d47f5824f64a",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+      "expected_partition_hash": "c382d47f5824f64a",
+      "partition_hash_matches_expected": true,
+      "split_train_index_hash": "dd37605169615442",
+      "split_validation_index_hash": "3cd8370ebdecb305",
+      "preprocessing_hash": "c3a62caf13326617",
+      "best": {
+        "best_round": 10,
+        "install_logloss": 0.2620268215836922,
+        "install_auc": 0.9082087874412537,
+        "click_logloss": 0.2693122841266592,
+        "click_auc": 0.9076045155525208
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "install_logloss": 0.45068423570840166,
+          "install_auc": 0.8372268676757812,
+          "click_logloss": 0.617073096962766,
+          "click_auc": 0.7294928431510925,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2054.1757507
+        },
+        {
+          "round": 2,
+          "install_logloss": 0.289534287270409,
+          "install_auc": 0.8808194398880005,
+          "click_logloss": 0.29833631421889445,
+          "click_auc": 0.8835058212280273,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2035.3355810999929
+        },
+        {
+          "round": 3,
+          "install_logloss": 0.28119652406116713,
+          "install_auc": 0.8909234404563904,
+          "click_logloss": 0.29230560329312344,
+          "click_auc": 0.889859676361084,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2036.3492025000014
+        },
+        {
+          "round": 4,
+          "install_logloss": 0.27595525366415985,
+          "install_auc": 0.8951399922370911,
+          "click_logloss": 0.28736237740531434,
+          "click_auc": 0.8927131295204163,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2036.8550095999963
+        },
+        {
+          "round": 5,
+          "install_logloss": 0.2733214121641764,
+          "install_auc": 0.8976982235908508,
+          "click_logloss": 0.2844695663419729,
+          "click_auc": 0.8956278562545776,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2058.0194916000037
+        },
+        {
+          "round": 6,
+          "install_logloss": 0.27007074991029145,
+          "install_auc": 0.9013163447380066,
+          "click_logloss": 0.2820081970153925,
+          "click_auc": 0.8986018300056458,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2043.2658948999888
+        },
+        {
+          "round": 7,
+          "install_logloss": 0.2683289269575722,
+          "install_auc": 0.903318464756012,
+          "click_logloss": 0.27799652766410027,
+          "click_auc": 0.9020892381668091,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2042.3655169999984
+        },
+        {
+          "round": 8,
+          "install_logloss": 0.26589024882751505,
+          "install_auc": 0.9049825072288513,
+          "click_logloss": 0.2751427329637892,
+          "click_auc": 0.9041666984558105,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2047.1129952000047
+        },
+        {
+          "round": 9,
+          "install_logloss": 0.2630389975212407,
+          "install_auc": 0.9070092439651489,
+          "click_logloss": 0.27149451099686717,
+          "click_auc": 0.9063180088996887,
+          "validation_rows": 348586,
+          "round_wall_seconds": 1994.4684304999973
+        },
+        {
+          "round": 10,
+          "install_logloss": 0.2620268215836922,
+          "install_auc": 0.9082087874412537,
+          "click_logloss": 0.2693122841266592,
+          "click_auc": 0.9076045155525208,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2045.9347263999953
+        }
+      ],
+      "runtime_seconds_total": 20397.4935025,
+      "peak_rss_mib_overall": 1536.5390625,
+      "started_at": "2026-09-21T15:49:59.636575+00:00",
+      "completed_at": "2026-09-21T15:50:32.084469+00:00",
+      "reload_verified": true,
+      "reloaded_metrics_match": true,
+      "device": "cuda",
+      "source_result_json": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_result.json",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42",
+      "protocol_recorded": {
+        "num_clients": 10,
+        "alpha": 0.5,
+        "partition_seed": 42,
+        "seed": 42,
+        "participation": "all_clients_every_round",
+        "local_epochs": 1,
+        "rounds": 10,
+        "local_batch_size": 1024,
+        "optimizer": "adamw",
+        "learning_rate": 0.0003,
+        "weight_decay": 0.01,
+        "lambda_click": 1.0,
+        "lambda_install": 1.0,
+        "aggregation": "sample_weighted_fedavg",
+        "selection_metric": "global_validation_install_logloss",
+        "use_ssl": false,
+        "local_optimizer_state_persistence": false,
+        "local_sampler_epoch_mode": "round_minus_one"
+      }
+    },
+    {
+      "key": "ssl_a10",
+      "alpha": 1.0,
+      "ssl": true,
+      "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+      "stage": "Stage 12",
+      "model_family": "Transformer + MMoE + SSL (joint 0.6*sup + 0.4*NT-Xent)",
+      "effective_use_ssl": true,
+      "effective_alpha": 1.0,
+      "recorded_ssl_config": {
+        "alpha": 0.6,
+        "temperature": 0.2,
+        "projection_dim": 64,
+        "corruption_rate": 0.15
+      },
+      "model_identity": {
+        "model": "SSLTransformerMMoE",
+        "parameter_count": 2527698,
+        "state_entries": 142,
+        "supervised_weight": 0.6,
+        "contrastive_weight": 0.4,
+        "corruption_rate": 0.15,
+        "temperature": 0.2,
+        "projection_dim": 64,
+        "augmentation": "FeatureCorruptionAugmentation (Stage 7, two-view, CPU generators)",
+        "contrastive_loss": "symmetric NT-Xent (nt_xent_loss)",
+        "joint_loss": "ssl_joint_loss (Stage 7)",
+        "evaluation_path": "supervised_forward (Stage 6 behavior, no augmentation)"
+      },
+      "status": "complete",
+      "rounds_completed": 10,
+      "protocol_rounds": 10,
+      "complete": true,
+      "seed": 42,
+      "partition_hash": "c382d47f5824f64a",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+      "expected_partition_hash": "c382d47f5824f64a",
+      "partition_hash_matches_expected": true,
+      "split_train_index_hash": "dd37605169615442",
+      "split_validation_index_hash": "3cd8370ebdecb305",
+      "preprocessing_hash": "c3a62caf13326617",
+      "best": {
+        "best_round": 10,
+        "install_logloss": 0.27439303566673534,
+        "install_auc": 0.8970500826835632,
+        "click_logloss": 0.28571512554052625,
+        "click_auc": 0.8933445811271667
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "install_logloss": 0.3403653021025459,
+          "install_auc": 0.8339340686798096,
+          "click_logloss": 0.42711182677059056,
+          "click_auc": 0.805413544178009,
+          "validation_rows": 348586,
+          "round_wall_seconds": 6531.8179767
+        },
+        {
+          "round": 2,
+          "install_logloss": 0.3025545016040819,
+          "install_auc": 0.8680973052978516,
+          "click_logloss": 0.3275967734567558,
+          "click_auc": 0.8676827549934387,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3826.439979499999
+        },
+        {
+          "round": 3,
+          "install_logloss": 0.28939681043709303,
+          "install_auc": 0.8810822367668152,
+          "click_logloss": 0.3019303730599032,
+          "click_auc": 0.8819810748100281,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3572.2719588
+        },
+        {
+          "round": 4,
+          "install_logloss": 0.2839442185124519,
+          "install_auc": 0.8866345286369324,
+          "click_logloss": 0.29528579936840865,
+          "click_auc": 0.8862892389297485,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3574.738531500001
+        },
+        {
+          "round": 5,
+          "install_logloss": 0.28197691886137194,
+          "install_auc": 0.8893831968307495,
+          "click_logloss": 0.29233524083470835,
+          "click_auc": 0.8885485529899597,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3686.030051200003
+        },
+        {
+          "round": 6,
+          "install_logloss": 0.27852705694249397,
+          "install_auc": 0.8928098678588867,
+          "click_logloss": 0.2902452326348324,
+          "click_auc": 0.8898402452468872,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3683.3488039000003
+        },
+        {
+          "round": 7,
+          "install_logloss": 0.2777015643188194,
+          "install_auc": 0.8938984870910645,
+          "click_logloss": 0.28858805788253233,
+          "click_auc": 0.8910948634147644,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3685.6796178000004
+        },
+        {
+          "round": 8,
+          "install_logloss": 0.27686037537793656,
+          "install_auc": 0.8951202630996704,
+          "click_logloss": 0.28799919087311343,
+          "click_auc": 0.8918055891990662,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3689.361026999999
+        },
+        {
+          "round": 9,
+          "install_logloss": 0.27510407642909496,
+          "install_auc": 0.8960363864898682,
+          "click_logloss": 0.2862598656909368,
+          "click_auc": 0.8925409317016602,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4383.319161600004
+        },
+        {
+          "round": 10,
+          "install_logloss": 0.27439303566673534,
+          "install_auc": 0.8970500826835632,
+          "click_logloss": 0.28571512554052625,
+          "click_auc": 0.8933445811271667,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4826.259025299994
+        }
+      ],
+      "runtime_seconds_total": 41460.686460000004,
+      "peak_rss_mib_overall": 2210.671875,
+      "started_at": "2026-09-22T06:59:48.495637+00:00",
+      "completed_at": "2026-09-22T07:00:21.071079+00:00",
+      "reload_verified": true,
+      "reloaded_metrics_match": true,
+      "device": "cuda",
+      "source_result_json": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_result.json",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42",
+      "protocol_recorded": {
+        "num_clients": 10,
+        "alpha": 0.5,
+        "partition_seed": 42,
+        "seed": 42,
+        "participation": "all_clients_every_round",
+        "local_epochs": 1,
+        "rounds": 10,
+        "local_batch_size": 1024,
+        "optimizer": "adamw",
+        "learning_rate": 0.0003,
+        "weight_decay": 0.01,
+        "lambda_click": 1.0,
+        "lambda_install": 1.0,
+        "aggregation": "sample_weighted_fedavg",
+        "selection_metric": "global_validation_install_logloss",
+        "use_ssl": false,
+        "local_optimizer_state_persistence": false,
+        "local_sampler_epoch_mode": "round_minus_one"
+      }
+    },
+    {
+      "key": "nossl_a05",
+      "alpha": 0.5,
+      "ssl": false,
+      "experiment": "stage12_fed_nossl_alpha_0_5_seed42",
+      "stage": "Stage 10B",
+      "model_family": "Transformer + MMoE (supervised click+install, no SSL)",
+      "effective_use_ssl": false,
+      "effective_alpha": 0.5,
+      "recorded_ssl_config": null,
+      "model_identity": {
+        "model": "Transformer + MMoE (supervised click+install)",
+        "parameter_count": 2502930,
+        "state_entries": 138,
+        "evaluation_path": "supervised_forward (Stage 6 behavior)"
+      },
+      "status": "complete",
+      "rounds_completed": 10,
+      "protocol_rounds": 10,
+      "complete": true,
+      "seed": 42,
+      "partition_hash": "9603ddc9facc973d",
+      "partition_npz": "artifacts/federated/partition_alpha_0_5_seed42.npz",
+      "expected_partition_hash": "9603ddc9facc973d",
+      "partition_hash_matches_expected": true,
+      "split_train_index_hash": "dd37605169615442",
+      "split_validation_index_hash": "3cd8370ebdecb305",
+      "preprocessing_hash": "c3a62caf13326617",
+      "best": {
+        "best_round": 10,
+        "install_logloss": 0.26553604847797624,
+        "install_auc": 0.9088817834854126,
+        "click_logloss": 0.27119421469311195,
+        "click_auc": 0.9076564908027649
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "install_logloss": 0.5423033578075764,
+          "install_auc": 0.8326510190963745,
+          "click_logloss": 0.6361632836370261,
+          "click_auc": 0.7660733461380005,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2596.6489132000006
+        },
+        {
+          "round": 2,
+          "install_logloss": 0.2897341979343487,
+          "install_auc": 0.8859612345695496,
+          "click_logloss": 0.2989584456116318,
+          "click_auc": 0.886354923248291,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2629.0313618
+        },
+        {
+          "round": 3,
+          "install_logloss": 0.2805022224792874,
+          "install_auc": 0.8936946392059326,
+          "click_logloss": 0.29128565674075224,
+          "click_auc": 0.8915613293647766,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2629.1666492000004
+        },
+        {
+          "round": 4,
+          "install_logloss": 0.27977198869950737,
+          "install_auc": 0.8971990346908569,
+          "click_logloss": 0.29216950866769414,
+          "click_auc": 0.893086850643158,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2638.9743688000017
+        },
+        {
+          "round": 5,
+          "install_logloss": 0.2743961314323253,
+          "install_auc": 0.8999456763267517,
+          "click_logloss": 0.2860918493136353,
+          "click_auc": 0.8965034484863281,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2573.0406559000003
+        },
+        {
+          "round": 6,
+          "install_logloss": 0.2755873987294815,
+          "install_auc": 0.9020417928695679,
+          "click_logloss": 0.28511504739339805,
+          "click_auc": 0.8985102772712708,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2303.7000731000007
+        },
+        {
+          "round": 7,
+          "install_logloss": 0.2712636781213293,
+          "install_auc": 0.9051476120948792,
+          "click_logloss": 0.27805910835374564,
+          "click_auc": 0.9025135040283203,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2627.560880099998
+        },
+        {
+          "round": 8,
+          "install_logloss": 0.26746814379841566,
+          "install_auc": 0.906978964805603,
+          "click_logloss": 0.2756187487019471,
+          "click_auc": 0.9052262306213379,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2269.447101099995
+        },
+        {
+          "round": 9,
+          "install_logloss": 0.26927270377776547,
+          "install_auc": 0.9078153371810913,
+          "click_logloss": 0.27430350284544874,
+          "click_auc": 0.9067431092262268,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2577.9562716
+        },
+        {
+          "round": 10,
+          "install_logloss": 0.26553604847797624,
+          "install_auc": 0.9088817834854126,
+          "click_logloss": 0.27119421469311195,
+          "click_auc": 0.9076564908027649,
+          "validation_rows": 348586,
+          "round_wall_seconds": 2648.476440600003
+        }
+      ],
+      "runtime_seconds_total": 5226.764126500006,
+      "peak_rss_mib_overall": 2035.72265625,
+      "started_at": "2026-09-19T20:45:26.671247+00:00",
+      "completed_at": "2026-09-19T20:46:00.831316+00:00",
+      "reload_verified": true,
+      "reloaded_metrics_match": true,
+      "device": "cuda",
+      "source_result_json": "artifacts/federated/stage10/stage10b_result.json",
+      "output_dir": "artifacts/federated/stage10",
+      "protocol_recorded": {
+        "num_clients": 10,
+        "alpha": 0.5,
+        "partition_seed": 42,
+        "seed": 42,
+        "participation": "all_clients_every_round",
+        "local_epochs": 1,
+        "rounds": 10,
+        "local_batch_size": 1024,
+        "optimizer": "adamw",
+        "learning_rate": 0.0003,
+        "weight_decay": 0.01,
+        "lambda_click": 1.0,
+        "lambda_install": 1.0,
+        "aggregation": "sample_weighted_fedavg",
+        "selection_metric": "global_validation_install_logloss",
+        "use_ssl": false,
+        "local_optimizer_state_persistence": false,
+        "local_sampler_epoch_mode": "round_minus_one"
+      }
+    },
+    {
+      "key": "ssl_a05",
+      "alpha": 0.5,
+      "ssl": true,
+      "experiment": "stage12_fed_ssl_alpha_0_5_seed42",
+      "stage": "Stage 11",
+      "model_family": "Transformer + MMoE + SSL (joint 0.6*sup + 0.4*NT-Xent)",
+      "effective_use_ssl": true,
+      "effective_alpha": 0.5,
+      "recorded_ssl_config": {
+        "alpha": 0.6,
+        "temperature": 0.2,
+        "projection_dim": 64,
+        "corruption_rate": 0.15
+      },
+      "model_identity": {
+        "model": "SSLTransformerMMoE",
+        "parameter_count": 2527698,
+        "state_entries": 142,
+        "supervised_weight": 0.6,
+        "contrastive_weight": 0.4,
+        "corruption_rate": 0.15,
+        "temperature": 0.2,
+        "projection_dim": 64,
+        "augmentation": "FeatureCorruptionAugmentation (Stage 7, two-view, CPU generators)",
+        "contrastive_loss": "symmetric NT-Xent (nt_xent_loss)",
+        "joint_loss": "ssl_joint_loss (Stage 7)",
+        "evaluation_path": "supervised_forward (Stage 6 behavior, no augmentation)"
+      },
+      "status": "complete",
+      "rounds_completed": 10,
+      "protocol_rounds": 10,
+      "complete": true,
+      "seed": 42,
+      "partition_hash": "9603ddc9facc973d",
+      "partition_npz": "artifacts/federated/partition_alpha_0_5_seed42.npz",
+      "expected_partition_hash": "9603ddc9facc973d",
+      "partition_hash_matches_expected": true,
+      "split_train_index_hash": "dd37605169615442",
+      "split_validation_index_hash": "3cd8370ebdecb305",
+      "preprocessing_hash": "c3a62caf13326617",
+      "best": {
+        "best_round": 10,
+        "install_logloss": 0.27390378597608317,
+        "install_auc": 0.899003267288208,
+        "click_logloss": 0.28633809680909117,
+        "click_auc": 0.8942021727561951
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "install_logloss": 0.33966941586600524,
+          "install_auc": 0.8349900245666504,
+          "click_logloss": 0.4257842053940918,
+          "click_auc": 0.8113903999328613,
+          "validation_rows": 348586,
+          "round_wall_seconds": 12013.837427200004
+        },
+        {
+          "round": 2,
+          "install_logloss": 0.29933057347174485,
+          "install_auc": 0.8719696402549744,
+          "click_logloss": 0.32567708672471507,
+          "click_auc": 0.8709589838981628,
+          "validation_rows": 348586,
+          "round_wall_seconds": 10609.136557700003
+        },
+        {
+          "round": 3,
+          "install_logloss": 0.2854564251089323,
+          "install_auc": 0.8856303691864014,
+          "click_logloss": 0.30036518049752536,
+          "click_auc": 0.8838387727737427,
+          "validation_rows": 348586,
+          "round_wall_seconds": 7103.3612675999975
+        },
+        {
+          "round": 4,
+          "install_logloss": 0.2826309308931979,
+          "install_auc": 0.889992892742157,
+          "click_logloss": 0.2962414398559852,
+          "click_auc": 0.8873009085655212,
+          "validation_rows": 348586,
+          "round_wall_seconds": 6338.359720100001
+        },
+        {
+          "round": 5,
+          "install_logloss": 0.27932154455687125,
+          "install_auc": 0.892598032951355,
+          "click_logloss": 0.29212252447603804,
+          "click_auc": 0.8895174264907837,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4305.421191200003
+        },
+        {
+          "round": 6,
+          "install_logloss": 0.2790066674547903,
+          "install_auc": 0.8944588899612427,
+          "click_logloss": 0.2917248719487204,
+          "click_auc": 0.89065021276474,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4298.719060700008
+        },
+        {
+          "round": 7,
+          "install_logloss": 0.27687496029386727,
+          "install_auc": 0.896441638469696,
+          "click_logloss": 0.28880137098084296,
+          "click_auc": 0.8920960426330566,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4416.10443349999
+        },
+        {
+          "round": 8,
+          "install_logloss": 0.27516456925260196,
+          "install_auc": 0.8973539471626282,
+          "click_logloss": 0.28769141937785964,
+          "click_auc": 0.8930537104606628,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4286.561397099998
+        },
+        {
+          "round": 9,
+          "install_logloss": 0.27612325984380165,
+          "install_auc": 0.8981664180755615,
+          "click_logloss": 0.28829462275639234,
+          "click_auc": 0.8935515880584717,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4034.8215801999904
+        },
+        {
+          "round": 10,
+          "install_logloss": 0.27390378597608317,
+          "install_auc": 0.899003267288208,
+          "click_logloss": 0.28633809680909117,
+          "click_auc": 0.8942021727561951,
+          "validation_rows": 348586,
+          "round_wall_seconds": 6116.2566506
+        }
+      ],
+      "runtime_seconds_total": 63523.833771800004,
+      "peak_rss_mib_overall": 2779.55859375,
+      "started_at": "2026-09-21T07:28:08.731442+00:00",
+      "completed_at": "2026-09-21T07:28:42.290083+00:00",
+      "reload_verified": true,
+      "reloaded_metrics_match": true,
+      "device": "cuda",
+      "source_result_json": "artifacts/federated/stage11/stage11_result.json",
+      "output_dir": "artifacts/federated/stage11",
+      "protocol_recorded": {
+        "num_clients": 10,
+        "alpha": 0.5,
+        "partition_seed": 42,
+        "seed": 42,
+        "participation": "all_clients_every_round",
+        "local_epochs": 1,
+        "rounds": 10,
+        "local_batch_size": 1024,
+        "optimizer": "adamw",
+        "learning_rate": 0.0003,
+        "weight_decay": 0.01,
+        "lambda_click": 1.0,
+        "lambda_install": 1.0,
+        "aggregation": "sample_weighted_fedavg",
+        "selection_metric": "global_validation_install_logloss",
+        "use_ssl": false,
+        "local_optimizer_state_persistence": false,
+        "local_sampler_epoch_mode": "round_minus_one"
+      }
+    },
+    {
+      "key": "nossl_a01",
+      "alpha": 0.1,
+      "ssl": false,
+      "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+      "stage": "Stage 12",
+      "model_family": "Transformer + MMoE (supervised click+install, no SSL)",
+      "effective_use_ssl": false,
+      "effective_alpha": 0.1,
+      "recorded_ssl_config": null,
+      "model_identity": {
+        "model": "Transformer + MMoE (supervised click+install)",
+        "parameter_count": 2502930,
+        "state_entries": 138,
+        "evaluation_path": "supervised_forward (Stage 6 behavior)"
+      },
+      "status": "complete",
+      "rounds_completed": 10,
+      "protocol_rounds": 10,
+      "complete": true,
+      "seed": 42,
+      "partition_hash": "23146aebf184345b",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+      "expected_partition_hash": "23146aebf184345b",
+      "partition_hash_matches_expected": true,
+      "split_train_index_hash": "dd37605169615442",
+      "split_validation_index_hash": "3cd8370ebdecb305",
+      "preprocessing_hash": "c3a62caf13326617",
+      "best": {
+        "best_round": 7,
+        "install_logloss": 0.287310071567868,
+        "install_auc": 0.8987398743629456,
+        "click_logloss": 0.30570936704173984,
+        "click_auc": 0.9009566307067871
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "install_logloss": 0.45485246883469493,
+          "install_auc": 0.8171190619468689,
+          "click_logloss": 0.6561603311937871,
+          "click_auc": 0.7247951030731201,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3196.600525400001
+        },
+        {
+          "round": 2,
+          "install_logloss": 0.3071755204158312,
+          "install_auc": 0.8751615881919861,
+          "click_logloss": 0.33730220444182873,
+          "click_auc": 0.8650222420692444,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3379.858065300001
+        },
+        {
+          "round": 3,
+          "install_logloss": 0.3067141254506746,
+          "install_auc": 0.881205141544342,
+          "click_logloss": 0.3378940157836684,
+          "click_auc": 0.8854241967201233,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3346.865484400001
+        },
+        {
+          "round": 4,
+          "install_logloss": 0.3083927163589453,
+          "install_auc": 0.8853007555007935,
+          "click_logloss": 0.33651937848459734,
+          "click_auc": 0.8908189535140991,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3411.6616934000012
+        },
+        {
+          "round": 5,
+          "install_logloss": 0.29567772770595796,
+          "install_auc": 0.8920027613639832,
+          "click_logloss": 0.32903079888324954,
+          "click_auc": 0.89542156457901,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3354.7758276000022
+        },
+        {
+          "round": 6,
+          "install_logloss": 0.296794966237268,
+          "install_auc": 0.8954371809959412,
+          "click_logloss": 0.3353491233246469,
+          "click_auc": 0.8982303738594055,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3360.1337944999977
+        },
+        {
+          "round": 7,
+          "install_logloss": 0.287310071567868,
+          "install_auc": 0.8987398743629456,
+          "click_logloss": 0.30570936704173984,
+          "click_auc": 0.9009566307067871,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3367.154583399999
+        },
+        {
+          "round": 8,
+          "install_logloss": 0.2916861691869381,
+          "install_auc": 0.8994027376174927,
+          "click_logloss": 0.3133799272700791,
+          "click_auc": 0.9032361507415771,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3383.8256973000025
+        },
+        {
+          "round": 9,
+          "install_logloss": 0.29052332297584693,
+          "install_auc": 0.8998451828956604,
+          "click_logloss": 0.30570487644083877,
+          "click_auc": 0.9038118720054626,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3399.3772583000027
+        },
+        {
+          "round": 10,
+          "install_logloss": 0.2907483709109982,
+          "install_auc": 0.9002980589866638,
+          "click_logloss": 0.3141113476404744,
+          "click_auc": 0.9040754437446594,
+          "validation_rows": 348586,
+          "round_wall_seconds": 3359.049545700007
+        }
+      ],
+      "runtime_seconds_total": 33560.5047659,
+      "peak_rss_mib_overall": 2501.3359375,
+      "started_at": "2026-09-22T22:28:08.495091+00:00",
+      "completed_at": "2026-09-22T22:28:40.817050+00:00",
+      "reload_verified": true,
+      "reloaded_metrics_match": true,
+      "device": "cuda",
+      "source_result_json": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_result.json",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42",
+      "protocol_recorded": {
+        "num_clients": 10,
+        "alpha": 0.5,
+        "partition_seed": 42,
+        "seed": 42,
+        "participation": "all_clients_every_round",
+        "local_epochs": 1,
+        "rounds": 10,
+        "local_batch_size": 1024,
+        "optimizer": "adamw",
+        "learning_rate": 0.0003,
+        "weight_decay": 0.01,
+        "lambda_click": 1.0,
+        "lambda_install": 1.0,
+        "aggregation": "sample_weighted_fedavg",
+        "selection_metric": "global_validation_install_logloss",
+        "use_ssl": false,
+        "local_optimizer_state_persistence": false,
+        "local_sampler_epoch_mode": "round_minus_one"
+      }
+    },
+    {
+      "key": "ssl_a01",
+      "alpha": 0.1,
+      "ssl": true,
+      "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+      "stage": "Stage 12",
+      "model_family": "Transformer + MMoE + SSL (joint 0.6*sup + 0.4*NT-Xent)",
+      "effective_use_ssl": true,
+      "effective_alpha": 0.1,
+      "recorded_ssl_config": {
+        "alpha": 0.6,
+        "temperature": 0.2,
+        "projection_dim": 64,
+        "corruption_rate": 0.15
+      },
+      "model_identity": {
+        "model": "SSLTransformerMMoE",
+        "parameter_count": 2527698,
+        "state_entries": 142,
+        "supervised_weight": 0.6,
+        "contrastive_weight": 0.4,
+        "corruption_rate": 0.15,
+        "temperature": 0.2,
+        "projection_dim": 64,
+        "augmentation": "FeatureCorruptionAugmentation (Stage 7, two-view, CPU generators)",
+        "contrastive_loss": "symmetric NT-Xent (nt_xent_loss)",
+        "joint_loss": "ssl_joint_loss (Stage 7)",
+        "evaluation_path": "supervised_forward (Stage 6 behavior, no augmentation)"
+      },
+      "status": "complete",
+      "rounds_completed": 10,
+      "protocol_rounds": 10,
+      "complete": true,
+      "seed": 42,
+      "partition_hash": "23146aebf184345b",
+      "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+      "expected_partition_hash": "23146aebf184345b",
+      "partition_hash_matches_expected": true,
+      "split_train_index_hash": "dd37605169615442",
+      "split_validation_index_hash": "3cd8370ebdecb305",
+      "preprocessing_hash": "c3a62caf13326617",
+      "best": {
+        "best_round": 9,
+        "install_logloss": 0.30396452078086456,
+        "install_auc": 0.8891589641571045,
+        "click_logloss": 0.34724628407156044,
+        "click_auc": 0.8902211785316467
+      },
+      "per_round": [
+        {
+          "round": 1,
+          "install_logloss": 0.3896299370618227,
+          "install_auc": 0.813164234161377,
+          "click_logloss": 0.5399008383688292,
+          "click_auc": 0.7287682294845581,
+          "validation_rows": 348586,
+          "round_wall_seconds": 6508.587442999999
+        },
+        {
+          "round": 2,
+          "install_logloss": 0.30623138395333865,
+          "install_auc": 0.8670082092285156,
+          "click_logloss": 0.3832664180155411,
+          "click_auc": 0.8556698560714722,
+          "validation_rows": 348586,
+          "round_wall_seconds": 5716.679244400001
+        },
+        {
+          "round": 3,
+          "install_logloss": 0.31788352253571195,
+          "install_auc": 0.8757956624031067,
+          "click_logloss": 0.35754469452886023,
+          "click_auc": 0.8761104345321655,
+          "validation_rows": 348586,
+          "round_wall_seconds": 6501.871447700001
+        },
+        {
+          "round": 4,
+          "install_logloss": 0.3200172457251774,
+          "install_auc": 0.8783866167068481,
+          "click_logloss": 0.36082681837528974,
+          "click_auc": 0.8816577792167664,
+          "validation_rows": 348586,
+          "round_wall_seconds": 7010.368806999999
+        },
+        {
+          "round": 5,
+          "install_logloss": 0.3125234839610746,
+          "install_auc": 0.8828960061073303,
+          "click_logloss": 0.3564606406143055,
+          "click_auc": 0.8848495483398438,
+          "validation_rows": 348586,
+          "round_wall_seconds": 5101.247731299998
+        },
+        {
+          "round": 6,
+          "install_logloss": 0.31336881536047717,
+          "install_auc": 0.8833458423614502,
+          "click_logloss": 0.35862814590807596,
+          "click_auc": 0.8863003253936768,
+          "validation_rows": 348586,
+          "round_wall_seconds": 4486.643029800001
+        },
+        {
+          "round": 7,
+          "install_logloss": 0.30853686614090264,
+          "install_auc": 0.8858286738395691,
+          "click_logloss": 0.35438875372944145,
+          "click_auc": 0.8873353004455566,
+          "validation_rows": 348586,
+          "round_wall_seconds": 8800.685686600002
+        },
+        {
+          "round": 8,
+          "install_logloss": 0.30564232096534694,
+          "install_auc": 0.8874363899230957,
+          "click_logloss": 0.3509968395710024,
+          "click_auc": 0.8893418908119202,
+          "validation_rows": 348586,
+          "round_wall_seconds": 8261.116565800003
+        },
+        {
+          "round": 9,
+          "install_logloss": 0.30396452078086456,
+          "install_auc": 0.8891589641571045,
+          "click_logloss": 0.34724628407156044,
+          "click_auc": 0.8902211785316467,
+          "validation_rows": 348586,
+          "round_wall_seconds": 6587.190180500002
+        },
+        {
+          "round": 10,
+          "install_logloss": 0.3074881901105931,
+          "install_auc": 0.8892875909805298,
+          "click_logloss": 0.35131737688292036,
+          "click_auc": 0.8902915716171265,
+          "validation_rows": 348586,
+          "round_wall_seconds": 5533.910440399995
+        }
+      ],
+      "runtime_seconds_total": 64510.007314200004,
+      "peak_rss_mib_overall": 3085.0546875,
+      "started_at": "2026-09-23T20:55:02.819266+00:00",
+      "completed_at": "2026-09-23T20:55:35.097726+00:00",
+      "reload_verified": true,
+      "reloaded_metrics_match": true,
+      "device": "cuda",
+      "source_result_json": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_result.json",
+      "output_dir": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42",
+      "protocol_recorded": {
+        "num_clients": 10,
+        "alpha": 0.5,
+        "partition_seed": 42,
+        "seed": 42,
+        "participation": "all_clients_every_round",
+        "local_epochs": 1,
+        "rounds": 10,
+        "local_batch_size": 1024,
+        "optimizer": "adamw",
+        "learning_rate": 0.0003,
+        "weight_decay": 0.01,
+        "lambda_click": 1.0,
+        "lambda_install": 1.0,
+        "aggregation": "sample_weighted_fedavg",
+        "selection_metric": "global_validation_install_logloss",
+        "use_ssl": false,
+        "local_optimizer_state_persistence": false,
+        "local_sampler_epoch_mode": "round_minus_one"
+      }
+    }
+  ],
+  "integrity": {
+    "all_six_cells_complete": true,
+    "all_partition_hashes_match_expected": true,
+    "all_reload_verified": true,
+    "protocol_consistent_across_cells": true,
+    "stage12_cells": {
+      "stage12_fed_nossl_alpha_1_0_seed42": true,
+      "stage12_fed_ssl_alpha_1_0_seed42": true,
+      "stage12_fed_nossl_alpha_0_1_seed42": true,
+      "stage12_fed_ssl_alpha_0_1_seed42": true
+    },
+    "stage11_alpha_0_5_ssl_intact": true,
+    "stage10b_alpha_0_5_nossl_intact": true,
+    "checkpoint_identity_checks": {
+      "ssl_cells_2527698_params_142_entries": true,
+      "nossl_cells_2502930_params_138_entries": true,
+      "note": "verified directly against the best.pt payloads on 2026-09-24 (state-entry count and parameter sum); result JSONs and audit script assert the same constants"
+    }
+  },
+  "notes_unavailable_fields": [
+    "Recorded-protocol metadata quirk (documented, not corrected): every result JSON's protocol.use_ssl / protocol.alpha fields hold the runner's default values (False / 0.5) rather than the effective cell settings - including Stage 11. The effective identity is recorded elsewhere in each artifact: Stage 12 cells carry stage12.use_ssl / stage12.alpha plus the ssl config dict; Stage 11 carries the ssl config dict. These effective values were cross-verified against each cell's partition hash, experiment identifier, and (earlier in this audit) the checkpoint payloads. The training-relevant protocol fields (clients, rounds, epochs, batch, optimizer, lr, weight decay, aggregation, participation, selection metric, seed) are recorded correctly and are identical across all six cells.",
+    "Stage 10B runtime metadata anomaly: total_elapsed_seconds (5,226.76 s) is inconsistent with the sum of its per-round wall times (~25,494 s); it matches the sum of rounds 1-2 only (5,225.6 s), suggesting the elapsed-time accumulator stopped updating after round 2. Its started_at/completed_at span (34 s) is also inconsistent with the training log (log header start 2026-09-19T10:32:28+00:00). The per-round metrics are internally consistent and reload-verified; the anomaly affects runtime metadata only and was not corrected (read-only audit).",
+    "The four Stage 12 runtime values equal the sums of their per-round wall times within rounding (internally consistent).",
+    "alpha=0.5 partition artifacts live at artifacts/federated/partition_alpha_0_5_seed42.npz (Stage 9 convention); alpha=1.0 / 0.1 partitions live at artifacts/federated/partitions/.",
+    "All six result JSONs record reload_verified=true and reloaded_metrics_match=true.",
+    "No official-test metrics exist in any artifact by design; every metric reported here is on the frozen 348,586-row validation split."
+  ]
+}
