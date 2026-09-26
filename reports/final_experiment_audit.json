@@ -1,0 +1,4040 @@
+{
+ "audit_metadata": {
+  "generated_by": "read-only audit (temporary builder script, deleted after use)",
+  "training_launched": false,
+  "artifacts_modified": false,
+  "authoritative_matrix_source": "reports/stage12/final_federated_matrix.json",
+  "date": "2026-09-25"
+ },
+ "final_matrix_definition": {
+  "cell_lettering": {
+   "A": "No-SSL alpha_D=1.0",
+   "B": "SSL alpha_D=1.0",
+   "C": "No-SSL alpha_D=0.5",
+   "D": "SSL alpha_D=0.5",
+   "E": "No-SSL alpha_D=0.1",
+   "F": "SSL alpha_D=0.1"
+  },
+  "cell_lettering_source": "reports/stage12/stage12_matrix_protocol_report.md (Cells A-F defined); C=Stage 10B, D=Stage 11 reused as alpha_D=0.5 cells (no separate Stage 12 alpha_0_5 runs exist)",
+  "n_final_cells": 6
+ },
+ "protocol_frozen": {
+  "clients": 10,
+  "rounds": 10,
+  "local_epochs": 1,
+  "batch_size": 1024,
+  "optimizer": "adamw",
+  "learning_rate": 0.0003,
+  "weight_decay": 0.01,
+  "aggregation": "sample_weighted_fedavg",
+  "participation": "all_clients_every_round",
+  "seed": 42,
+  "init": "cold",
+  "selection_metric": "global_validation_install_logloss",
+  "lambda_click": 1.0,
+  "lambda_install": 1.0,
+  "ssl_supervised_weight": 0.6,
+  "ssl_contrastive_weight": 0.4,
+  "ssl_temperature": 0.2,
+  "ssl_corruption_rate": 0.15,
+  "ssl_projection_dim": 64,
+  "source": "protocol dict in every result JSON + reports/stage12/stage12_matrix_protocol_report.md"
+ },
+ "stages": [
+  {
+   "stage": "Stage 1-3 (preprocessing/dataset/loader)",
+   "role": "infrastructure",
+   "final_matrix": false,
+   "key_artifacts": [
+    "artifacts/processed (hash c3a62caf13326617)",
+    "artifacts/splits/centralized_split.npz (dd37605169615442 / 3cd8370ebdecb305)"
+   ],
+   "reports": [
+    "reports/preprocessing_report.md",
+    "reports/dataloader_report.md",
+    "reports/dataset_report.md"
+   ],
+   "status": "frozen infrastructure"
+  },
+  {
+   "stage": "Stage 4 (Transformer baseline)",
+   "role": "architecture",
+   "final_matrix": false,
+   "reports": [
+    "reports/transformer_report.md"
+   ],
+   "params": 2352129,
+   "status": "component of final architecture"
+  },
+  {
+   "stage": "Stage 5 (Transformer + MMoE)",
+   "role": "architecture",
+   "final_matrix": false,
+   "reports": [
+    "reports/mmoe_report.md"
+   ],
+   "params": 2502930,
+   "status": "component of final architecture"
+  },
+  {
+   "stage": "Stage 6 (canonical supervised training, historical sampler)",
+   "role": "canonical Experiment B / Cell C-family baseline",
+   "final_matrix": false,
+   "checkpoint": "artifacts/checkpoints/centralized_transformer_mmoe_best.pt",
+   "reports": [
+    "reports/centralized_training_report.md"
+   ],
+   "best_val_install_logloss_torch_reloaded": 0.2562108886731335,
+   "note": "trained without per-epoch batch reshuffle (silent no-op set_epoch); retained as canonical B by documented decision"
+  },
+  {
+   "stage": "Stage 7 (SSL mechanism)",
+   "role": "SSL component + integration smoke",
+   "final_matrix": false,
+   "reports": [
+    "reports/ssl_report.md"
+   ],
+   "status": "frozen SSL implementation used by all SSL cells"
+  },
+  {
+   "stage": "Stage 8 (centralized A/B/C/D)",
+   "role": "pre-final controlled centralized comparison",
+   "final_matrix": false,
+   "artifacts": [
+    "artifacts/checkpoints/stage8/"
+   ],
+   "reports": [
+    "reports/stage8_experiments_report.md"
+   ]
+  },
+  {
+   "stage": "Stage 9 (Dirichlet partitioning alpha=0.5 + client loaders)",
+   "role": "data partitioning",
+   "final_matrix": false,
+   "artifacts": [
+    "artifacts/federated/partition_alpha_0_5_seed42.json",
+    "artifacts/federated/partition_alpha_0_5_seed42.npz"
+   ],
+   "reports": [
+    "reports/stage9_partition_report.md"
+   ]
+  },
+  {
+   "stage": "Stage 10A (FL protocol design + aggregation utility)",
+   "role": "protocol design, no training",
+   "final_matrix": false,
+   "reports": [
+    "reports/stage10_federated_protocol_report.md"
+   ]
+  },
+  {
+   "stage": "Stage 10B (federated no-SSL baseline, alpha_D=0.5)",
+   "role": "FINAL MATRIX CELL C",
+   "final_matrix": true,
+   "result_json": "artifacts/federated/stage10/stage10b_result.json",
+   "checkpoints": {
+    "best": "artifacts/federated/stage10/stage10b_best.pt",
+    "final": "artifacts/federated/stage10/stage10b_final_round10.pt",
+    "latest": "artifacts/federated/stage10/stage10b_latest.pt"
+   }
+  },
+  {
+   "stage": "Stage 11 (federated SSL, alpha_D=0.5)",
+   "role": "SSL integration validation AND FINAL MATRIX CELL D",
+   "final_matrix": true,
+   "result_json": "artifacts/federated/stage11/stage11_result.json",
+   "checkpoints": {
+    "best": "artifacts/federated/stage11/stage11_best.pt",
+    "final": "artifacts/federated/stage11/stage11_final_round10.pt",
+    "latest": "artifacts/federated/stage11/stage11_latest.pt"
+   }
+  },
+  {
+   "stage": "Stage 12 (final matrix cells A/B/E/F + protocol freeze + audit)",
+   "role": "final experiments",
+   "final_matrix": true,
+   "result_jsons": [
+    "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_result.json",
+    "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_result.json",
+    "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_result.json",
+    "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_result.json"
+   ],
+   "reports": [
+    "reports/stage12/stage12_matrix_protocol_report.md",
+    "reports/stage12/stage12_matrix_report.md",
+    "reports/stage12/final_federated_results_report.md"
+   ]
+  }
+ ],
+ "experiments": {
+  "centralized_stage6_B": {
+   "purpose": "canonical supervised Transformer+MMoE training (Experiment B)",
+   "ssl": false,
+   "rounds_or_epochs": 3,
+   "best_epoch": 3,
+   "best_val_install_logloss": 0.2562108886731335,
+   "best_val_install_logloss_report": 0.2562108886731335,
+   "epoch_table_source": "reports/centralized_training_report.md section 9",
+   "epochs_doc_sourced": [
+    {
+     "epoch": 1,
+     "val_install_logloss": 0.2643,
+     "val_install_auc": 0.9059,
+     "val_click_logloss": 0.2736,
+     "val_click_auc": 0.9041
+    },
+    {
+     "epoch": 2,
+     "val_install_logloss": 0.2586,
+     "val_install_auc": 0.9112,
+     "val_click_logloss": 0.2664,
+     "val_click_auc": 0.9098
+    },
+    {
+     "epoch": 3,
+     "val_install_logloss": 0.2562,
+     "val_install_auc": 0.9132,
+     "val_click_logloss": 0.264,
+     "val_click_auc": 0.9114
+    }
+   ],
+   "final_matrix": false,
+   "role": "pre-final centralized baseline (FINAL only as centralized reference point)",
+   "caveat": "batch-mean logloss aggregation used for all 3 epochs (fix landed after process start); difference <1e-5 per report"
+  },
+  "stage8_A": {
+   "experiment": "experiment_a_transformer_supervised",
+   "architecture": "TransformerBaseline (install-only)",
+   "ssl": false,
+   "sampler": "stage8-corrected-per-epoch-reshuffle",
+   "epochs": [
+    {
+     "epoch": 1,
+     "train_total_loss": 0.28897365713224554,
+     "train_supervised_loss": 0.28897365713224554,
+     "train_contrastive_loss": null,
+     "train_click_loss": null,
+     "train_install_loss": 0.28897365713224554,
+     "val_install_logloss": 0.26798583503064066,
+     "val_install_auc": 0.9028929471969604,
+     "val_click_logloss": null,
+     "val_click_auc": null,
+     "duration_seconds": 4244.39095109998,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    },
+    {
+     "epoch": 2,
+     "train_total_loss": 0.2650866337392878,
+     "train_supervised_loss": 0.2650866337392878,
+     "train_contrastive_loss": null,
+     "train_click_loss": null,
+     "train_install_loss": 0.2650866337392878,
+     "val_install_logloss": 0.26038144870648744,
+     "val_install_auc": 0.9097418785095215,
+     "val_click_logloss": null,
+     "val_click_auc": null,
+     "duration_seconds": 3180.968160599994,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    },
+    {
+     "epoch": 3,
+     "train_total_loss": 0.25889492788724117,
+     "train_supervised_loss": 0.25889492788724117,
+     "train_contrastive_loss": null,
+     "train_click_loss": null,
+     "train_install_loss": 0.25889492788724117,
+     "val_install_logloss": 0.2589328218594451,
+     "val_install_auc": 0.9120110869407654,
+     "val_click_logloss": null,
+     "val_click_auc": null,
+     "duration_seconds": 3803.253574400005,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    }
+   ],
+   "best_epoch": 3,
+   "best_val_install_logloss": 0.2589328218594451,
+   "best_val_install_auc": 0.9120110869407654,
+   "click_metrics": null,
+   "checkpoint": "artifacts/checkpoints/stage8/experiment_a_transformer_supervised_best.pt",
+   "params": 2352129,
+   "final_matrix": false,
+   "role": "pre-final centralized controlled experiment",
+   "runtime_doc": "total 11,229 s; peak RSS 3,167 MiB; GPU 3,639/4,160 MiB (report 13.1)"
+  },
+  "stage8_C": {
+   "experiment": "experiment_c_transformer_ssl",
+   "architecture": "SSLTransformerBaseline (install-only)",
+   "ssl": true,
+   "sampler": "stage8-corrected-per-epoch-reshuffle",
+   "epochs": [
+    {
+     "epoch": 1,
+     "train_total_loss": 1.5348988353583581,
+     "train_supervised_loss": 0.30906210586856614,
+     "train_contrastive_loss": 3.3736538539200476,
+     "train_click_loss": null,
+     "train_install_loss": 0.30906210586856614,
+     "val_install_logloss": 0.27770027989007273,
+     "val_install_auc": 0.8930025696754456,
+     "val_click_logloss": null,
+     "val_click_auc": null,
+     "duration_seconds": 18779.303262400004,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    },
+    {
+     "epoch": 2,
+     "train_total_loss": 1.4114594240101448,
+     "train_supervised_loss": 0.281519420021858,
+     "train_contrastive_loss": 3.1063693560290275,
+     "train_click_loss": null,
+     "train_install_loss": 0.281519420021858,
+     "val_install_logloss": 0.27240917450159735,
+     "val_install_auc": 0.8984794020652771,
+     "val_click_logloss": null,
+     "val_click_auc": null,
+     "duration_seconds": 16818.160967100004,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    },
+    {
+     "epoch": 3,
+     "train_total_loss": 1.3902794258868414,
+     "train_supervised_loss": 0.27685450025233527,
+     "train_contrastive_loss": 3.060416736506295,
+     "train_click_loss": null,
+     "train_install_loss": 0.27685450025233527,
+     "val_install_logloss": 0.2697706961950431,
+     "val_install_auc": 0.9016668796539307,
+     "val_click_logloss": null,
+     "val_click_auc": null,
+     "duration_seconds": 53098.11465560002,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    }
+   ],
+   "best_epoch": 3,
+   "best_val_install_logloss": 0.2697706961950431,
+   "best_val_install_auc": 0.9016668796539307,
+   "click_metrics": null,
+   "checkpoint": "artifacts/checkpoints/stage8/experiment_c_transformer_ssl_best.pt",
+   "params": 2376897,
+   "final_matrix": false,
+   "role": "pre-final centralized controlled experiment",
+   "runtime_doc": "total 88,700.9 s incl. ~10 h OS standby during epoch 3; peak RSS 8,645 MiB; GPU 7,175/7,698 MiB (report 13.2)"
+  },
+  "stage8_D": {
+   "experiment": "experiment_d_transformer_mmoe_ssl",
+   "architecture": "SSLTransformerMMoE (click+install)",
+   "ssl": true,
+   "sampler": "stage8-corrected-per-epoch-reshuffle",
+   "epochs": [
+    {
+     "epoch": 1,
+     "train_total_loss": 1.7348702444497972,
+     "train_supervised_loss": 0.6400291933568666,
+     "train_contrastive_loss": 3.3771317270499295,
+     "train_click_loss": 0.3354011496271228,
+     "train_install_loss": 0.30462804372974384,
+     "val_install_logloss": 0.27563998817947477,
+     "val_install_auc": 0.8954717516899109,
+     "val_click_logloss": 0.28857928209469014,
+     "val_click_auc": 0.8903639316558838,
+     "duration_seconds": 15614.42264960002,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    },
+    {
+     "epoch": 2,
+     "train_total_loss": 1.5942975946412696,
+     "train_supervised_loss": 0.5773000287052545,
+     "train_contrastive_loss": 3.1197938529224993,
+     "train_click_loss": 0.29822454342798527,
+     "train_install_loss": 0.2790754852772693,
+     "val_install_logloss": 0.26893702151083976,
+     "val_install_auc": 0.9015995860099792,
+     "val_click_logloss": 0.2820315709946412,
+     "val_click_auc": 0.896442174911499,
+     "duration_seconds": 16359.88093470002,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    },
+    {
+     "epoch": 3,
+     "train_total_loss": 1.5670360554758624,
+     "train_supervised_loss": 0.5634316943352434,
+     "train_contrastive_loss": 3.0724425073858965,
+     "train_click_loss": 0.29028643190607856,
+     "train_install_loss": 0.27314526242916487,
+     "val_install_logloss": 0.2632836117438265,
+     "val_install_auc": 0.9072108864784241,
+     "val_click_logloss": 0.2718169281140416,
+     "val_click_auc": 0.9048312306404114,
+     "duration_seconds": 15444.670521499997,
+     "learning_rate": 0.0003,
+     "n_train_batches": 3064,
+     "n_val_batches": 341
+    }
+   ],
+   "best_epoch": 3,
+   "best_val_install_logloss": 0.2632836117438265,
+   "best_val_install_auc": 0.9072108864784241,
+   "best_val_click_logloss": 0.2718169281140416,
+   "best_val_click_auc": 0.9048312306404114,
+   "checkpoint": "artifacts/checkpoints/stage8/experiment_d_transformer_mmoe_ssl_best.pt",
+   "total_seconds": 47419.351365600014,
+   "reload_verified": true,
+   "source": "stage8_fresh_run",
+   "params": 2527698,
+   "final_matrix": false,
+   "role": "pre-final centralized controlled experiment"
+  },
+  "stage8_B": {
+   "experiment": "experiment_b (canonical Stage 6, NOT retrained)",
+   "final_matrix": false,
+   "role": "canonical baseline reused by decision (sampler-nuance documented)",
+   "best_val_install_logloss": 0.2562108886731335,
+   "source": "artifacts/checkpoints/centralized_transformer_mmoe_best.pt (torch reloaded in this audit)"
+  }
+ },
+ "smoke_tests": [
+  {
+   "name": "stage10_smoke_round1",
+   "date_source": "stage10_smoke_log.txt (2026-09-19 13:32 file mtime)",
+   "purpose": "one-round integration smoke: partition loaders + local train + sample-weighted FedAvg + global validation + checkpoint write/reload",
+   "config": {
+    "num_clients": 10,
+    "alpha": 0.5,
+    "partition_seed": 42,
+    "seed": 42,
+    "participation": "all_clients_every_round",
+    "local_epochs": 1,
+    "rounds": 10,
+    "local_batch_size": 1024,
+    "optimizer": "adamw",
+    "learning_rate": 0.0003,
+    "weight_decay": 0.01,
+    "lambda_click": 1.0,
+    "lambda_install": 1.0,
+    "aggregation": "sample_weighted_fedavg",
+    "selection_metric": "global_validation_install_logloss",
+    "use_ssl": false,
+    "local_optimizer_state_persistence": false,
+    "local_sampler_epoch_mode": "round_minus_one"
+   },
+   "rounds_executed": 1,
+   "validation_metrics": {
+    "rows": 348586,
+    "val_install_logloss": 0.5423033578075764,
+    "val_install_auc": 0.8326510190963745,
+    "val_click_logloss": 0.6361632836370261,
+    "val_click_auc": 0.7660733461380005
+   },
+   "validation_metrics_recomputed_match": true,
+   "reload_verified": true,
+   "round_wall_seconds": 2400.8876906999994,
+   "peak_rss_mib": 2510.31640625,
+   "peak_gpu_mib": [
+    3603.91162109375,
+    3928.0
+   ],
+   "artifact": "artifacts/federated/smoke/stage10_smoke_round1_result.json",
+   "log": "stage10_smoke_log.txt / stage10_smoke_err.txt",
+   "result": "PASS (integration validated; explicitly NOT a performance experiment; round-1 metrics later reproduced identically by Stage 10B round 1)"
+  },
+  {
+   "name": "stage7 SSL real-data smoke (run_ssl_smoke.py)",
+   "date": "NOT_VERIFIED",
+   "purpose": "SSL path integration on real Stage 2 Parquet through Stage 3 loader: contrastive loss CPU/CUDA parity (rel tol 1e-5), 142/142 trainable params updated",
+   "result": "PASS (report-sourced)",
+   "artifact": "NOT_VERIFIED",
+   "source": "reports/ssl_report.md sections on run_ssl_smoke",
+   "metrics": "none recorded (integration smoke only)"
+  },
+  {
+   "name": "Stage 12 in-log preflights (4 cells)",
+   "result": "PASS (log-sourced)",
+   "source": {
+    "stage12_fed_nossl_alpha_1_0_seed42": "[OK] partition hash c382d47f5824f64a | alpha 1.0 | 10 clients | rows 3,137,266 | validation overlap 0 | ",
+    "stage12_fed_ssl_alpha_1_0_seed42": "[OK] partition hash c382d47f5824f64a | alpha 1.0 | 10 clients | rows 3,137,266 | validation overlap 0 | ",
+    "stage12_fed_nossl_alpha_0_1_seed42": "[OK] partition hash 23146aebf184345b | alpha 0.1 | 10 clients | rows 3,137,266 | validation overlap 0 | ",
+    "stage12_fed_ssl_alpha_0_1_seed42": "[OK] partition hash 23146aebf184345b | alpha 0.1 | 10 clients | rows 3,137,266 | validation overlap 0 | "
+   },
+   "purpose": "per-cell preflight before training: partition hash/rows/overlap, model identity, protocol, no-test guarantee"
+  },
+  {
+   "name": "unit/regression suite",
+   "result": "281 tests passing at Stage 9 close (244 prior + 24 partition + 13 client-loader, per reports/stage9_partition_report.md); exact final count NOT_VERIFIED",
+   "source": "reports/stage9_partition_report.md"
+  }
+ ],
+ "diagnostics": [
+  {
+   "name": "Stage 8 sampler protocol investigation (run_sampler_diagnostic.py)",
+   "trigger": "silent set_epoch no-op discovered in Stage 6 Trainer.fit",
+   "finding": "Protocol H (historical): identical batch-index digest bf973a7e6cf076ed... across epochs 1-3; Protocol C (corrected): distinct per epoch; C(epoch1)==H(epoch1) by construction",
+   "outcome": "Experiment B NOT retrained (documented decision); A/C/D and all Stage 10-12 runs use corrected sampler",
+   "source": "reports/stage8_experiments_report.md section 4",
+   "result": "diagnostic complete; decision recorded"
+  },
+  {
+   "name": "Stage 10B round-9 client_08 diagnostic (diag_stage10b_r9_c08.py)",
+   "artifact": "artifacts/federated/stage10/diagnostic_r9_c08/diagnostic_report.json",
+   "result": "re-run completed cleanly; protected artifacts unchanged (verified in earlier audit run of scripts/audit_stage12_matrix.py)"
+  },
+  {
+   "name": "Stage 11 round-1 client_00 CUDA diagnostic (diagnose_stage11_cuda.py)",
+   "artifact": "artifacts/federated/stage11/diagnostic_r1_c00/diagnostic_report.json",
+   "result": "CUDA error diagnosed; run completed via 10 launcher attempts (stage11_attempt1-10 logs); final result reload-verified"
+  },
+  {
+   "name": "Stage 10B runtime anomaly re-check (this audit)",
+   "finding": "total_elapsed_seconds=5,226.8 vs sum(round_wall_seconds)=25,494.0; log prints 'total runtime: 5260.9 s (1.46 h)'",
+   "status": "reported, not corrected (artifact immutable)"
+  }
+ ],
+ "final_cells": [
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "stage": "Stage 12",
+   "result_json": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_result.json",
+   "output_dir": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42",
+   "partition_hash": "c382d47f5824f64a",
+   "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+   "total_elapsed_seconds": 20397.4935025,
+   "peak_rss_mib_overall": 1536.5390625,
+   "started_at": "2026-09-21T15:49:59.636575+00:00",
+   "completed_at": "2026-09-21T15:50:32.084469+00:00",
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "checkpoint_paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_latest.pt"
+   },
+   "rounds": [
+    {
+     "round": 1,
+     "install_logloss": 0.45068423570840166,
+     "install_auc": 0.8372268676757812,
+     "click_logloss": 0.617073096962766,
+     "click_auc": 0.7294928431510925,
+     "round_wall_seconds": 2054.1757507,
+     "peak_rss_mib": 1963.31640625,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 2,
+     "install_logloss": 0.289534287270409,
+     "install_auc": 0.8808194398880005,
+     "click_logloss": 0.29833631421889445,
+     "click_auc": 0.8835058212280273,
+     "round_wall_seconds": 2035.3355810999929,
+     "peak_rss_mib": 2034.91796875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 4344.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 3,
+     "install_logloss": 0.28119652406116713,
+     "install_auc": 0.8909234404563904,
+     "click_logloss": 0.29230560329312344,
+     "click_auc": 0.889859676361084,
+     "round_wall_seconds": 2036.3492025000014,
+     "peak_rss_mib": 1695.62109375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 4,
+     "install_logloss": 0.27595525366415985,
+     "install_auc": 0.8951399922370911,
+     "click_logloss": 0.28736237740531434,
+     "click_auc": 0.8927131295204163,
+     "round_wall_seconds": 2036.8550095999963,
+     "peak_rss_mib": 1554.734375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 5,
+     "install_logloss": 0.2733214121641764,
+     "install_auc": 0.8976982235908508,
+     "click_logloss": 0.2844695663419729,
+     "click_auc": 0.8956278562545776,
+     "round_wall_seconds": 2058.0194916000037,
+     "peak_rss_mib": 1558.3359375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 6,
+     "install_logloss": 0.27007074991029145,
+     "install_auc": 0.9013163447380066,
+     "click_logloss": 0.2820081970153925,
+     "click_auc": 0.8986018300056458,
+     "round_wall_seconds": 2043.2658948999888,
+     "peak_rss_mib": 1544.05859375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 7,
+     "install_logloss": 0.2683289269575722,
+     "install_auc": 0.903318464756012,
+     "click_logloss": 0.27799652766410027,
+     "click_auc": 0.9020892381668091,
+     "round_wall_seconds": 2042.3655169999984,
+     "peak_rss_mib": 1534.078125,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 8,
+     "install_logloss": 0.26589024882751505,
+     "install_auc": 0.9049825072288513,
+     "click_logloss": 0.2751427329637892,
+     "click_auc": 0.9041666984558105,
+     "round_wall_seconds": 2047.1129952000047,
+     "peak_rss_mib": 1524.14453125,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 9,
+     "install_logloss": 0.2630389975212407,
+     "install_auc": 0.9070092439651489,
+     "click_logloss": 0.27149451099686717,
+     "click_auc": 0.9063180088996887,
+     "round_wall_seconds": 1994.4684304999973,
+     "peak_rss_mib": 1504.88671875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 10,
+     "install_logloss": 0.2620268215836922,
+     "install_auc": 0.9082087874412537,
+     "click_logloss": 0.2693122841266592,
+     "click_auc": 0.9076045155525208,
+     "round_wall_seconds": 2045.9347263999953,
+     "peak_rss_mib": 1536.5390625,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3966.0,
+     "total_client_samples": 3137266
+    }
+   ],
+   "best": {
+    "best_round": 10,
+    "install_logloss": 0.2620268215836922,
+    "install_auc": 0.9082087874412537,
+    "click_logloss": 0.2693122841266592,
+    "click_auc": 0.9076045155525208
+   },
+   "strictly_monotonic_install_logloss": true,
+   "install_logloss_improvements": 9,
+   "best_is_final_round": true,
+   "sum_round_walls": 20393.9,
+   "checkpoint_files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_best.pt",
+     "bytes": 10070443
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_final_round10.pt",
+     "bytes": 10070507
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_latest.pt",
+     "bytes": 10070443
+    }
+   }
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "stage": "Stage 12",
+   "result_json": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_result.json",
+   "output_dir": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42",
+   "partition_hash": "c382d47f5824f64a",
+   "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+   "total_elapsed_seconds": 41460.686460000004,
+   "peak_rss_mib_overall": 2210.671875,
+   "started_at": "2026-09-22T06:59:48.495637+00:00",
+   "completed_at": "2026-09-22T07:00:21.071079+00:00",
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "checkpoint_paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_latest.pt"
+   },
+   "rounds": [
+    {
+     "round": 1,
+     "install_logloss": 0.3403653021025459,
+     "install_auc": 0.8339340686798096,
+     "click_logloss": 0.42711182677059056,
+     "click_auc": 0.805413544178009,
+     "round_wall_seconds": 6531.8179767,
+     "peak_rss_mib": 2827.33203125,
+     "peak_gpu_allocated_mib": 7185.85791015625,
+     "peak_gpu_reserved_mib": 7738.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 2,
+     "install_logloss": 0.3025545016040819,
+     "install_auc": 0.8680973052978516,
+     "click_logloss": 0.3275967734567558,
+     "click_auc": 0.8676827549934387,
+     "round_wall_seconds": 3826.439979499999,
+     "peak_rss_mib": 3233.79296875,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 8648.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 3,
+     "install_logloss": 0.28939681043709303,
+     "install_auc": 0.8810822367668152,
+     "click_logloss": 0.3019303730599032,
+     "click_auc": 0.8819810748100281,
+     "round_wall_seconds": 3572.2719588,
+     "peak_rss_mib": 2781.359375,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 4,
+     "install_logloss": 0.2839442185124519,
+     "install_auc": 0.8866345286369324,
+     "click_logloss": 0.29528579936840865,
+     "click_auc": 0.8862892389297485,
+     "round_wall_seconds": 3574.738531500001,
+     "peak_rss_mib": 2782.55859375,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 5,
+     "install_logloss": 0.28197691886137194,
+     "install_auc": 0.8893831968307495,
+     "click_logloss": 0.29233524083470835,
+     "click_auc": 0.8885485529899597,
+     "round_wall_seconds": 3686.030051200003,
+     "peak_rss_mib": 2835.4453125,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 6,
+     "install_logloss": 0.27852705694249397,
+     "install_auc": 0.8928098678588867,
+     "click_logloss": 0.2902452326348324,
+     "click_auc": 0.8898402452468872,
+     "round_wall_seconds": 3683.3488039000003,
+     "peak_rss_mib": 2763.70703125,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 7,
+     "install_logloss": 0.2777015643188194,
+     "install_auc": 0.8938984870910645,
+     "click_logloss": 0.28858805788253233,
+     "click_auc": 0.8910948634147644,
+     "round_wall_seconds": 3685.6796178000004,
+     "peak_rss_mib": 2777.24609375,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 8,
+     "install_logloss": 0.27686037537793656,
+     "install_auc": 0.8951202630996704,
+     "click_logloss": 0.28799919087311343,
+     "click_auc": 0.8918055891990662,
+     "round_wall_seconds": 3689.361026999999,
+     "peak_rss_mib": 2768.9609375,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 9,
+     "install_logloss": 0.27510407642909496,
+     "install_auc": 0.8960363864898682,
+     "click_logloss": 0.2862598656909368,
+     "click_auc": 0.8925409317016602,
+     "round_wall_seconds": 4383.319161600004,
+     "peak_rss_mib": 2289.80859375,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 10,
+     "install_logloss": 0.27439303566673534,
+     "install_auc": 0.8970500826835632,
+     "click_logloss": 0.28571512554052625,
+     "click_auc": 0.8933445811271667,
+     "round_wall_seconds": 4826.259025299994,
+     "peak_rss_mib": 2210.671875,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    }
+   ],
+   "best": {
+    "best_round": 10,
+    "install_logloss": 0.27439303566673534,
+    "install_auc": 0.8970500826835632,
+    "click_logloss": 0.28571512554052625,
+    "click_auc": 0.8933445811271667
+   },
+   "strictly_monotonic_install_logloss": true,
+   "install_logloss_improvements": 9,
+   "best_is_final_round": true,
+   "sum_round_walls": 41459.3,
+   "checkpoint_files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_best.pt",
+     "bytes": 10173283
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_final_round10.pt",
+     "bytes": 10173283
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_latest.pt",
+     "bytes": 10173283
+    }
+   }
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "stage": "Stage 10B",
+   "result_json": "artifacts/federated/stage10/stage10b_result.json",
+   "output_dir": "artifacts/federated/stage10",
+   "partition_hash": "9603ddc9facc973d",
+   "partition_npz": "artifacts/federated/partition_alpha_0_5_seed42.npz",
+   "total_elapsed_seconds": 5226.764126500006,
+   "peak_rss_mib_overall": 2035.72265625,
+   "started_at": "2026-09-19T20:45:26.671247+00:00",
+   "completed_at": "2026-09-19T20:46:00.831316+00:00",
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "checkpoint_paths": {
+    "best": "artifacts/federated/stage10/stage10b_best.pt",
+    "final": "artifacts/federated/stage10/stage10b_final_round10.pt",
+    "latest": "artifacts/federated/stage10/stage10b_latest.pt"
+   },
+   "rounds": [
+    {
+     "round": 1,
+     "install_logloss": 0.5423033578075764,
+     "install_auc": 0.8326510190963745,
+     "click_logloss": 0.6361632836370261,
+     "click_auc": 0.7660733461380005,
+     "round_wall_seconds": 2596.6489132000006,
+     "peak_rss_mib": 2416.60546875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 2,
+     "install_logloss": 0.2897341979343487,
+     "install_auc": 0.8859612345695496,
+     "click_logloss": 0.2989584456116318,
+     "click_auc": 0.886354923248291,
+     "round_wall_seconds": 2629.0313618,
+     "peak_rss_mib": 2537.23046875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 3,
+     "install_logloss": 0.2805022224792874,
+     "install_auc": 0.8936946392059326,
+     "click_logloss": 0.29128565674075224,
+     "click_auc": 0.8915613293647766,
+     "round_wall_seconds": 2629.1666492000004,
+     "peak_rss_mib": 2481.84765625,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 4,
+     "install_logloss": 0.27977198869950737,
+     "install_auc": 0.8971990346908569,
+     "click_logloss": 0.29216950866769414,
+     "click_auc": 0.893086850643158,
+     "round_wall_seconds": 2638.9743688000017,
+     "peak_rss_mib": 2479.61328125,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 5,
+     "install_logloss": 0.2743961314323253,
+     "install_auc": 0.8999456763267517,
+     "click_logloss": 0.2860918493136353,
+     "click_auc": 0.8965034484863281,
+     "round_wall_seconds": 2573.0406559000003,
+     "peak_rss_mib": 2054.33984375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 6,
+     "install_logloss": 0.2755873987294815,
+     "install_auc": 0.9020417928695679,
+     "click_logloss": 0.28511504739339805,
+     "click_auc": 0.8985102772712708,
+     "round_wall_seconds": 2303.7000731000007,
+     "peak_rss_mib": 2057.10546875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 7,
+     "install_logloss": 0.2712636781213293,
+     "install_auc": 0.9051476120948792,
+     "click_logloss": 0.27805910835374564,
+     "click_auc": 0.9025135040283203,
+     "round_wall_seconds": 2627.560880099998,
+     "peak_rss_mib": 1980.06640625,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 5268.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 8,
+     "install_logloss": 0.26746814379841566,
+     "install_auc": 0.906978964805603,
+     "click_logloss": 0.2756187487019471,
+     "click_auc": 0.9052262306213379,
+     "round_wall_seconds": 2269.447101099995,
+     "peak_rss_mib": 2057.81640625,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 9,
+     "install_logloss": 0.26927270377776547,
+     "install_auc": 0.9078153371810913,
+     "click_logloss": 0.27430350284544874,
+     "click_auc": 0.9067431092262268,
+     "round_wall_seconds": 2577.9562716,
+     "peak_rss_mib": 2476.4296875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 10,
+     "install_logloss": 0.26553604847797624,
+     "install_auc": 0.9088817834854126,
+     "click_logloss": 0.27119421469311195,
+     "click_auc": 0.9076564908027649,
+     "round_wall_seconds": 2648.476440600003,
+     "peak_rss_mib": 2035.72265625,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    }
+   ],
+   "best": {
+    "best_round": 10,
+    "install_logloss": 0.26553604847797624,
+    "install_auc": 0.9088817834854126,
+    "click_logloss": 0.27119421469311195,
+    "click_auc": 0.9076564908027649
+   },
+   "strictly_monotonic_install_logloss": false,
+   "install_logloss_improvements": 7,
+   "best_is_final_round": true,
+   "sum_round_walls": 25494.0,
+   "checkpoint_files": {
+    "best": {
+     "path": "artifacts/federated/stage10/stage10b_best.pt",
+     "bytes": 10070891
+    },
+    "final": {
+     "path": "artifacts/federated/stage10/stage10b_final_round10.pt",
+     "bytes": 10070891
+    },
+    "latest": {
+     "path": "artifacts/federated/stage10/stage10b_latest.pt",
+     "bytes": 10070891
+    }
+   }
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "stage": "Stage 11",
+   "result_json": "artifacts/federated/stage11/stage11_result.json",
+   "output_dir": "artifacts/federated/stage11",
+   "partition_hash": "9603ddc9facc973d",
+   "partition_npz": "artifacts/federated/partition_alpha_0_5_seed42.npz",
+   "total_elapsed_seconds": 63523.833771800004,
+   "peak_rss_mib_overall": 2779.55859375,
+   "started_at": "2026-09-21T07:28:08.731442+00:00",
+   "completed_at": "2026-09-21T07:28:42.290083+00:00",
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "checkpoint_paths": {
+    "best": "artifacts/federated/stage11/stage11_best.pt",
+    "final": "artifacts/federated/stage11/stage11_final_round10.pt",
+    "latest": "artifacts/federated/stage11/stage11_latest.pt"
+   },
+   "rounds": [
+    {
+     "round": 1,
+     "install_logloss": 0.33966941586600524,
+     "install_auc": 0.8349900245666504,
+     "click_logloss": 0.4257842053940918,
+     "click_auc": 0.8113903999328613,
+     "round_wall_seconds": 12013.837427200004,
+     "peak_rss_mib": 3648.453125,
+     "peak_gpu_allocated_mib": 7188.1318359375,
+     "peak_gpu_reserved_mib": 8224.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 2,
+     "install_logloss": 0.29933057347174485,
+     "install_auc": 0.8719696402549744,
+     "click_logloss": 0.32567708672471507,
+     "click_auc": 0.8709589838981628,
+     "round_wall_seconds": 10609.136557700003,
+     "peak_rss_mib": 2717.3515625,
+     "peak_gpu_allocated_mib": 7188.1318359375,
+     "peak_gpu_reserved_mib": 7740.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 3,
+     "install_logloss": 0.2854564251089323,
+     "install_auc": 0.8856303691864014,
+     "click_logloss": 0.30036518049752536,
+     "click_auc": 0.8838387727737427,
+     "round_wall_seconds": 7103.3612675999975,
+     "peak_rss_mib": 2592.921875,
+     "peak_gpu_allocated_mib": 7188.1318359375,
+     "peak_gpu_reserved_mib": 7740.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 4,
+     "install_logloss": 0.2826309308931979,
+     "install_auc": 0.889992892742157,
+     "click_logloss": 0.2962414398559852,
+     "click_auc": 0.8873009085655212,
+     "round_wall_seconds": 6338.359720100001,
+     "peak_rss_mib": 2635.890625,
+     "peak_gpu_allocated_mib": 7188.1318359375,
+     "peak_gpu_reserved_mib": 7740.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 5,
+     "install_logloss": 0.27932154455687125,
+     "install_auc": 0.892598032951355,
+     "click_logloss": 0.29212252447603804,
+     "click_auc": 0.8895174264907837,
+     "round_wall_seconds": 4305.421191200003,
+     "peak_rss_mib": 2581.68359375,
+     "peak_gpu_allocated_mib": 7188.1318359375,
+     "peak_gpu_reserved_mib": 7740.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 6,
+     "install_logloss": 0.2790066674547903,
+     "install_auc": 0.8944588899612427,
+     "click_logloss": 0.2917248719487204,
+     "click_auc": 0.89065021276474,
+     "round_wall_seconds": 4298.719060700008,
+     "peak_rss_mib": 2658.6015625,
+     "peak_gpu_allocated_mib": 7188.1318359375,
+     "peak_gpu_reserved_mib": 7740.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 7,
+     "install_logloss": 0.27687496029386727,
+     "install_auc": 0.896441638469696,
+     "click_logloss": 0.28880137098084296,
+     "click_auc": 0.8920960426330566,
+     "round_wall_seconds": 4416.10443349999,
+     "peak_rss_mib": 4366.953125,
+     "peak_gpu_allocated_mib": 7189.53564453125,
+     "peak_gpu_reserved_mib": 10290.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 8,
+     "install_logloss": 0.27516456925260196,
+     "install_auc": 0.8973539471626282,
+     "click_logloss": 0.28769141937785964,
+     "click_auc": 0.8930537104606628,
+     "round_wall_seconds": 4286.561397099998,
+     "peak_rss_mib": 2576.87890625,
+     "peak_gpu_allocated_mib": 7189.53564453125,
+     "peak_gpu_reserved_mib": 7734.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 9,
+     "install_logloss": 0.27612325984380165,
+     "install_auc": 0.8981664180755615,
+     "click_logloss": 0.28829462275639234,
+     "click_auc": 0.8935515880584717,
+     "round_wall_seconds": 4034.8215801999904,
+     "peak_rss_mib": 2552.6015625,
+     "peak_gpu_allocated_mib": 7189.53564453125,
+     "peak_gpu_reserved_mib": 7734.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 10,
+     "install_logloss": 0.27390378597608317,
+     "install_auc": 0.899003267288208,
+     "click_logloss": 0.28633809680909117,
+     "click_auc": 0.8942021727561951,
+     "round_wall_seconds": 6116.2566506,
+     "peak_rss_mib": 2779.55859375,
+     "peak_gpu_allocated_mib": 7189.53564453125,
+     "peak_gpu_reserved_mib": 7734.0,
+     "total_client_samples": 3137266
+    }
+   ],
+   "best": {
+    "best_round": 10,
+    "install_logloss": 0.27390378597608317,
+    "install_auc": 0.899003267288208,
+    "click_logloss": 0.28633809680909117,
+    "click_auc": 0.8942021727561951
+   },
+   "strictly_monotonic_install_logloss": false,
+   "install_logloss_improvements": 8,
+   "best_is_final_round": true,
+   "sum_round_walls": 63522.6,
+   "checkpoint_files": {
+    "best": {
+     "path": "artifacts/federated/stage11/stage11_best.pt",
+     "bytes": 10173027
+    },
+    "final": {
+     "path": "artifacts/federated/stage11/stage11_final_round10.pt",
+     "bytes": 10173027
+    },
+    "latest": {
+     "path": "artifacts/federated/stage11/stage11_latest.pt",
+     "bytes": 10173027
+    }
+   }
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "stage": "Stage 12",
+   "result_json": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_result.json",
+   "output_dir": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42",
+   "partition_hash": "23146aebf184345b",
+   "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+   "total_elapsed_seconds": 33560.5047659,
+   "peak_rss_mib_overall": 2501.3359375,
+   "started_at": "2026-09-22T22:28:08.495091+00:00",
+   "completed_at": "2026-09-22T22:28:40.817050+00:00",
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "checkpoint_paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_latest.pt"
+   },
+   "rounds": [
+    {
+     "round": 1,
+     "install_logloss": 0.45485246883469493,
+     "install_auc": 0.8171190619468689,
+     "click_logloss": 0.6561603311937871,
+     "click_auc": 0.7247951030731201,
+     "round_wall_seconds": 3196.600525400001,
+     "peak_rss_mib": 2966.0546875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 2,
+     "install_logloss": 0.3071755204158312,
+     "install_auc": 0.8751615881919861,
+     "click_logloss": 0.33730220444182873,
+     "click_auc": 0.8650222420692444,
+     "round_wall_seconds": 3379.858065300001,
+     "peak_rss_mib": 3029.33203125,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 3,
+     "install_logloss": 0.3067141254506746,
+     "install_auc": 0.881205141544342,
+     "click_logloss": 0.3378940157836684,
+     "click_auc": 0.8854241967201233,
+     "round_wall_seconds": 3346.865484400001,
+     "peak_rss_mib": 2979.71875,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 4,
+     "install_logloss": 0.3083927163589453,
+     "install_auc": 0.8853007555007935,
+     "click_logloss": 0.33651937848459734,
+     "click_auc": 0.8908189535140991,
+     "round_wall_seconds": 3411.6616934000012,
+     "peak_rss_mib": 2519.6328125,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 4632.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 5,
+     "install_logloss": 0.29567772770595796,
+     "install_auc": 0.8920027613639832,
+     "click_logloss": 0.32903079888324954,
+     "click_auc": 0.89542156457901,
+     "round_wall_seconds": 3354.7758276000022,
+     "peak_rss_mib": 2505.46484375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 4050.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 6,
+     "install_logloss": 0.296794966237268,
+     "install_auc": 0.8954371809959412,
+     "click_logloss": 0.3353491233246469,
+     "click_auc": 0.8982303738594055,
+     "round_wall_seconds": 3360.1337944999977,
+     "peak_rss_mib": 2494.734375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 7,
+     "install_logloss": 0.287310071567868,
+     "install_auc": 0.8987398743629456,
+     "click_logloss": 0.30570936704173984,
+     "click_auc": 0.9009566307067871,
+     "round_wall_seconds": 3367.154583399999,
+     "peak_rss_mib": 2477.27734375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 8,
+     "install_logloss": 0.2916861691869381,
+     "install_auc": 0.8994027376174927,
+     "click_logloss": 0.3133799272700791,
+     "click_auc": 0.9032361507415771,
+     "round_wall_seconds": 3383.8256973000025,
+     "peak_rss_mib": 2522.3203125,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 5358.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 9,
+     "install_logloss": 0.29052332297584693,
+     "install_auc": 0.8998451828956604,
+     "click_logloss": 0.30570487644083877,
+     "click_auc": 0.9038118720054626,
+     "round_wall_seconds": 3399.3772583000027,
+     "peak_rss_mib": 2497.83984375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 10,
+     "install_logloss": 0.2907483709109982,
+     "install_auc": 0.9002980589866638,
+     "click_logloss": 0.3141113476404744,
+     "click_auc": 0.9040754437446594,
+     "round_wall_seconds": 3359.049545700007,
+     "peak_rss_mib": 2501.3359375,
+     "peak_gpu_allocated_mib": 3603.91162109375,
+     "peak_gpu_reserved_mib": 3928.0,
+     "total_client_samples": 3137266
+    }
+   ],
+   "best": {
+    "best_round": 7,
+    "install_logloss": 0.287310071567868,
+    "install_auc": 0.8987398743629456,
+    "click_logloss": 0.30570936704173984,
+    "click_auc": 0.9009566307067871
+   },
+   "strictly_monotonic_install_logloss": false,
+   "install_logloss_improvements": 5,
+   "best_is_final_round": false,
+   "sum_round_walls": 33559.3,
+   "checkpoint_files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_best.pt",
+     "bytes": 10066219
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_final_round10.pt",
+     "bytes": 10070379
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_latest.pt",
+     "bytes": 10070379
+    }
+   }
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "stage": "Stage 12",
+   "result_json": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_result.json",
+   "output_dir": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42",
+   "partition_hash": "23146aebf184345b",
+   "partition_npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+   "total_elapsed_seconds": 64510.007314200004,
+   "peak_rss_mib_overall": 3085.0546875,
+   "started_at": "2026-09-23T20:55:02.819266+00:00",
+   "completed_at": "2026-09-23T20:55:35.097726+00:00",
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "checkpoint_paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_latest.pt"
+   },
+   "rounds": [
+    {
+     "round": 1,
+     "install_logloss": 0.3896299370618227,
+     "install_auc": 0.813164234161377,
+     "click_logloss": 0.5399008383688292,
+     "click_auc": 0.7287682294845581,
+     "round_wall_seconds": 6508.587442999999,
+     "peak_rss_mib": 3665.33203125,
+     "peak_gpu_allocated_mib": 7185.85791015625,
+     "peak_gpu_reserved_mib": 7738.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 2,
+     "install_logloss": 0.30623138395333865,
+     "install_auc": 0.8670082092285156,
+     "click_logloss": 0.3832664180155411,
+     "click_auc": 0.8556698560714722,
+     "round_wall_seconds": 5716.679244400001,
+     "peak_rss_mib": 3674.8515625,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 3,
+     "install_logloss": 0.31788352253571195,
+     "install_auc": 0.8757956624031067,
+     "click_logloss": 0.35754469452886023,
+     "click_auc": 0.8761104345321655,
+     "round_wall_seconds": 6501.871447700001,
+     "peak_rss_mib": 3098.5859375,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 4,
+     "install_logloss": 0.3200172457251774,
+     "install_auc": 0.8783866167068481,
+     "click_logloss": 0.36082681837528974,
+     "click_auc": 0.8816577792167664,
+     "round_wall_seconds": 7010.368806999999,
+     "peak_rss_mib": 3231.515625,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 9120.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 5,
+     "install_logloss": 0.3125234839610746,
+     "install_auc": 0.8828960061073303,
+     "click_logloss": 0.3564606406143055,
+     "click_auc": 0.8848495483398438,
+     "round_wall_seconds": 5101.247731299998,
+     "peak_rss_mib": 3088.4765625,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 8090.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 6,
+     "install_logloss": 0.31336881536047717,
+     "install_auc": 0.8833458423614502,
+     "click_logloss": 0.35862814590807596,
+     "click_auc": 0.8863003253936768,
+     "round_wall_seconds": 4486.643029800001,
+     "peak_rss_mib": 2695.60546875,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 7,
+     "install_logloss": 0.30853686614090264,
+     "install_auc": 0.8858286738395691,
+     "click_logloss": 0.35438875372944145,
+     "click_auc": 0.8873353004455566,
+     "round_wall_seconds": 8800.685686600002,
+     "peak_rss_mib": 3161.8828125,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 8,
+     "install_logloss": 0.30564232096534694,
+     "install_auc": 0.8874363899230957,
+     "click_logloss": 0.3509968395710024,
+     "click_auc": 0.8893418908119202,
+     "round_wall_seconds": 8261.116565800003,
+     "peak_rss_mib": 4354.92578125,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 10482.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 9,
+     "install_logloss": 0.30396452078086456,
+     "install_auc": 0.8891589641571045,
+     "click_logloss": 0.34724628407156044,
+     "click_auc": 0.8902211785316467,
+     "round_wall_seconds": 6587.190180500002,
+     "peak_rss_mib": 3181.10546875,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    },
+    {
+     "round": 10,
+     "install_logloss": 0.3074881901105931,
+     "install_auc": 0.8892875909805298,
+     "click_logloss": 0.35131737688292036,
+     "click_auc": 0.8902915716171265,
+     "round_wall_seconds": 5533.910440399995,
+     "peak_rss_mib": 3085.0546875,
+     "peak_gpu_allocated_mib": 7184.57275390625,
+     "peak_gpu_reserved_mib": 7760.0,
+     "total_client_samples": 3137266
+    }
+   ],
+   "best": {
+    "best_round": 9,
+    "install_logloss": 0.30396452078086456,
+    "install_auc": 0.8891589641571045,
+    "click_logloss": 0.34724628407156044,
+    "click_auc": 0.8902211785316467
+   },
+   "strictly_monotonic_install_logloss": false,
+   "install_logloss_improvements": 5,
+   "best_is_final_round": false,
+   "sum_round_walls": 64508.3,
+   "checkpoint_files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_best.pt",
+     "bytes": 10171683
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_final_round10.pt",
+     "bytes": 10173219
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_latest.pt",
+     "bytes": 10173219
+    }
+   }
+  }
+ ],
+ "round_metrics": [
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 1,
+   "install_logloss": 0.45068423570840166,
+   "install_auc": 0.8372268676757812,
+   "click_logloss": 0.617073096962766,
+   "click_auc": 0.7294928431510925,
+   "round_wall_seconds": 2054.1757507,
+   "peak_rss_mib": 1963.31640625,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 2,
+   "install_logloss": 0.289534287270409,
+   "install_auc": 0.8808194398880005,
+   "click_logloss": 0.29833631421889445,
+   "click_auc": 0.8835058212280273,
+   "round_wall_seconds": 2035.3355810999929,
+   "peak_rss_mib": 2034.91796875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 4344.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 3,
+   "install_logloss": 0.28119652406116713,
+   "install_auc": 0.8909234404563904,
+   "click_logloss": 0.29230560329312344,
+   "click_auc": 0.889859676361084,
+   "round_wall_seconds": 2036.3492025000014,
+   "peak_rss_mib": 1695.62109375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 4,
+   "install_logloss": 0.27595525366415985,
+   "install_auc": 0.8951399922370911,
+   "click_logloss": 0.28736237740531434,
+   "click_auc": 0.8927131295204163,
+   "round_wall_seconds": 2036.8550095999963,
+   "peak_rss_mib": 1554.734375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 5,
+   "install_logloss": 0.2733214121641764,
+   "install_auc": 0.8976982235908508,
+   "click_logloss": 0.2844695663419729,
+   "click_auc": 0.8956278562545776,
+   "round_wall_seconds": 2058.0194916000037,
+   "peak_rss_mib": 1558.3359375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 6,
+   "install_logloss": 0.27007074991029145,
+   "install_auc": 0.9013163447380066,
+   "click_logloss": 0.2820081970153925,
+   "click_auc": 0.8986018300056458,
+   "round_wall_seconds": 2043.2658948999888,
+   "peak_rss_mib": 1544.05859375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 7,
+   "install_logloss": 0.2683289269575722,
+   "install_auc": 0.903318464756012,
+   "click_logloss": 0.27799652766410027,
+   "click_auc": 0.9020892381668091,
+   "round_wall_seconds": 2042.3655169999984,
+   "peak_rss_mib": 1534.078125,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 8,
+   "install_logloss": 0.26589024882751505,
+   "install_auc": 0.9049825072288513,
+   "click_logloss": 0.2751427329637892,
+   "click_auc": 0.9041666984558105,
+   "round_wall_seconds": 2047.1129952000047,
+   "peak_rss_mib": 1524.14453125,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 9,
+   "install_logloss": 0.2630389975212407,
+   "install_auc": 0.9070092439651489,
+   "click_logloss": 0.27149451099686717,
+   "click_auc": 0.9063180088996887,
+   "round_wall_seconds": 1994.4684304999973,
+   "peak_rss_mib": 1504.88671875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "A",
+   "ssl": false,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_nossl_alpha_1_0_seed42",
+   "round": 10,
+   "install_logloss": 0.2620268215836922,
+   "install_auc": 0.9082087874412537,
+   "click_logloss": 0.2693122841266592,
+   "click_auc": 0.9076045155525208,
+   "round_wall_seconds": 2045.9347263999953,
+   "peak_rss_mib": 1536.5390625,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3966.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 1,
+   "install_logloss": 0.3403653021025459,
+   "install_auc": 0.8339340686798096,
+   "click_logloss": 0.42711182677059056,
+   "click_auc": 0.805413544178009,
+   "round_wall_seconds": 6531.8179767,
+   "peak_rss_mib": 2827.33203125,
+   "peak_gpu_allocated_mib": 7185.85791015625,
+   "peak_gpu_reserved_mib": 7738.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 2,
+   "install_logloss": 0.3025545016040819,
+   "install_auc": 0.8680973052978516,
+   "click_logloss": 0.3275967734567558,
+   "click_auc": 0.8676827549934387,
+   "round_wall_seconds": 3826.439979499999,
+   "peak_rss_mib": 3233.79296875,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 8648.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 3,
+   "install_logloss": 0.28939681043709303,
+   "install_auc": 0.8810822367668152,
+   "click_logloss": 0.3019303730599032,
+   "click_auc": 0.8819810748100281,
+   "round_wall_seconds": 3572.2719588,
+   "peak_rss_mib": 2781.359375,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 4,
+   "install_logloss": 0.2839442185124519,
+   "install_auc": 0.8866345286369324,
+   "click_logloss": 0.29528579936840865,
+   "click_auc": 0.8862892389297485,
+   "round_wall_seconds": 3574.738531500001,
+   "peak_rss_mib": 2782.55859375,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 5,
+   "install_logloss": 0.28197691886137194,
+   "install_auc": 0.8893831968307495,
+   "click_logloss": 0.29233524083470835,
+   "click_auc": 0.8885485529899597,
+   "round_wall_seconds": 3686.030051200003,
+   "peak_rss_mib": 2835.4453125,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 6,
+   "install_logloss": 0.27852705694249397,
+   "install_auc": 0.8928098678588867,
+   "click_logloss": 0.2902452326348324,
+   "click_auc": 0.8898402452468872,
+   "round_wall_seconds": 3683.3488039000003,
+   "peak_rss_mib": 2763.70703125,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 7,
+   "install_logloss": 0.2777015643188194,
+   "install_auc": 0.8938984870910645,
+   "click_logloss": 0.28858805788253233,
+   "click_auc": 0.8910948634147644,
+   "round_wall_seconds": 3685.6796178000004,
+   "peak_rss_mib": 2777.24609375,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 8,
+   "install_logloss": 0.27686037537793656,
+   "install_auc": 0.8951202630996704,
+   "click_logloss": 0.28799919087311343,
+   "click_auc": 0.8918055891990662,
+   "round_wall_seconds": 3689.361026999999,
+   "peak_rss_mib": 2768.9609375,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 9,
+   "install_logloss": 0.27510407642909496,
+   "install_auc": 0.8960363864898682,
+   "click_logloss": 0.2862598656909368,
+   "click_auc": 0.8925409317016602,
+   "round_wall_seconds": 4383.319161600004,
+   "peak_rss_mib": 2289.80859375,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "B",
+   "ssl": true,
+   "alpha_D": 1.0,
+   "experiment": "stage12_fed_ssl_alpha_1_0_seed42",
+   "round": 10,
+   "install_logloss": 0.27439303566673534,
+   "install_auc": 0.8970500826835632,
+   "click_logloss": 0.28571512554052625,
+   "click_auc": 0.8933445811271667,
+   "round_wall_seconds": 4826.259025299994,
+   "peak_rss_mib": 2210.671875,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 1,
+   "install_logloss": 0.5423033578075764,
+   "install_auc": 0.8326510190963745,
+   "click_logloss": 0.6361632836370261,
+   "click_auc": 0.7660733461380005,
+   "round_wall_seconds": 2596.6489132000006,
+   "peak_rss_mib": 2416.60546875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 2,
+   "install_logloss": 0.2897341979343487,
+   "install_auc": 0.8859612345695496,
+   "click_logloss": 0.2989584456116318,
+   "click_auc": 0.886354923248291,
+   "round_wall_seconds": 2629.0313618,
+   "peak_rss_mib": 2537.23046875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 3,
+   "install_logloss": 0.2805022224792874,
+   "install_auc": 0.8936946392059326,
+   "click_logloss": 0.29128565674075224,
+   "click_auc": 0.8915613293647766,
+   "round_wall_seconds": 2629.1666492000004,
+   "peak_rss_mib": 2481.84765625,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 4,
+   "install_logloss": 0.27977198869950737,
+   "install_auc": 0.8971990346908569,
+   "click_logloss": 0.29216950866769414,
+   "click_auc": 0.893086850643158,
+   "round_wall_seconds": 2638.9743688000017,
+   "peak_rss_mib": 2479.61328125,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 5,
+   "install_logloss": 0.2743961314323253,
+   "install_auc": 0.8999456763267517,
+   "click_logloss": 0.2860918493136353,
+   "click_auc": 0.8965034484863281,
+   "round_wall_seconds": 2573.0406559000003,
+   "peak_rss_mib": 2054.33984375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 6,
+   "install_logloss": 0.2755873987294815,
+   "install_auc": 0.9020417928695679,
+   "click_logloss": 0.28511504739339805,
+   "click_auc": 0.8985102772712708,
+   "round_wall_seconds": 2303.7000731000007,
+   "peak_rss_mib": 2057.10546875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 7,
+   "install_logloss": 0.2712636781213293,
+   "install_auc": 0.9051476120948792,
+   "click_logloss": 0.27805910835374564,
+   "click_auc": 0.9025135040283203,
+   "round_wall_seconds": 2627.560880099998,
+   "peak_rss_mib": 1980.06640625,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 5268.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 8,
+   "install_logloss": 0.26746814379841566,
+   "install_auc": 0.906978964805603,
+   "click_logloss": 0.2756187487019471,
+   "click_auc": 0.9052262306213379,
+   "round_wall_seconds": 2269.447101099995,
+   "peak_rss_mib": 2057.81640625,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 9,
+   "install_logloss": 0.26927270377776547,
+   "install_auc": 0.9078153371810913,
+   "click_logloss": 0.27430350284544874,
+   "click_auc": 0.9067431092262268,
+   "round_wall_seconds": 2577.9562716,
+   "peak_rss_mib": 2476.4296875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "C",
+   "ssl": false,
+   "alpha_D": 0.5,
+   "experiment": "stage10b (canonical Stage 10B federated baseline)",
+   "round": 10,
+   "install_logloss": 0.26553604847797624,
+   "install_auc": 0.9088817834854126,
+   "click_logloss": 0.27119421469311195,
+   "click_auc": 0.9076564908027649,
+   "round_wall_seconds": 2648.476440600003,
+   "peak_rss_mib": 2035.72265625,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 1,
+   "install_logloss": 0.33966941586600524,
+   "install_auc": 0.8349900245666504,
+   "click_logloss": 0.4257842053940918,
+   "click_auc": 0.8113903999328613,
+   "round_wall_seconds": 12013.837427200004,
+   "peak_rss_mib": 3648.453125,
+   "peak_gpu_allocated_mib": 7188.1318359375,
+   "peak_gpu_reserved_mib": 8224.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 2,
+   "install_logloss": 0.29933057347174485,
+   "install_auc": 0.8719696402549744,
+   "click_logloss": 0.32567708672471507,
+   "click_auc": 0.8709589838981628,
+   "round_wall_seconds": 10609.136557700003,
+   "peak_rss_mib": 2717.3515625,
+   "peak_gpu_allocated_mib": 7188.1318359375,
+   "peak_gpu_reserved_mib": 7740.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 3,
+   "install_logloss": 0.2854564251089323,
+   "install_auc": 0.8856303691864014,
+   "click_logloss": 0.30036518049752536,
+   "click_auc": 0.8838387727737427,
+   "round_wall_seconds": 7103.3612675999975,
+   "peak_rss_mib": 2592.921875,
+   "peak_gpu_allocated_mib": 7188.1318359375,
+   "peak_gpu_reserved_mib": 7740.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 4,
+   "install_logloss": 0.2826309308931979,
+   "install_auc": 0.889992892742157,
+   "click_logloss": 0.2962414398559852,
+   "click_auc": 0.8873009085655212,
+   "round_wall_seconds": 6338.359720100001,
+   "peak_rss_mib": 2635.890625,
+   "peak_gpu_allocated_mib": 7188.1318359375,
+   "peak_gpu_reserved_mib": 7740.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 5,
+   "install_logloss": 0.27932154455687125,
+   "install_auc": 0.892598032951355,
+   "click_logloss": 0.29212252447603804,
+   "click_auc": 0.8895174264907837,
+   "round_wall_seconds": 4305.421191200003,
+   "peak_rss_mib": 2581.68359375,
+   "peak_gpu_allocated_mib": 7188.1318359375,
+   "peak_gpu_reserved_mib": 7740.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 6,
+   "install_logloss": 0.2790066674547903,
+   "install_auc": 0.8944588899612427,
+   "click_logloss": 0.2917248719487204,
+   "click_auc": 0.89065021276474,
+   "round_wall_seconds": 4298.719060700008,
+   "peak_rss_mib": 2658.6015625,
+   "peak_gpu_allocated_mib": 7188.1318359375,
+   "peak_gpu_reserved_mib": 7740.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 7,
+   "install_logloss": 0.27687496029386727,
+   "install_auc": 0.896441638469696,
+   "click_logloss": 0.28880137098084296,
+   "click_auc": 0.8920960426330566,
+   "round_wall_seconds": 4416.10443349999,
+   "peak_rss_mib": 4366.953125,
+   "peak_gpu_allocated_mib": 7189.53564453125,
+   "peak_gpu_reserved_mib": 10290.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 8,
+   "install_logloss": 0.27516456925260196,
+   "install_auc": 0.8973539471626282,
+   "click_logloss": 0.28769141937785964,
+   "click_auc": 0.8930537104606628,
+   "round_wall_seconds": 4286.561397099998,
+   "peak_rss_mib": 2576.87890625,
+   "peak_gpu_allocated_mib": 7189.53564453125,
+   "peak_gpu_reserved_mib": 7734.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 9,
+   "install_logloss": 0.27612325984380165,
+   "install_auc": 0.8981664180755615,
+   "click_logloss": 0.28829462275639234,
+   "click_auc": 0.8935515880584717,
+   "round_wall_seconds": 4034.8215801999904,
+   "peak_rss_mib": 2552.6015625,
+   "peak_gpu_allocated_mib": 7189.53564453125,
+   "peak_gpu_reserved_mib": 7734.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "D",
+   "ssl": true,
+   "alpha_D": 0.5,
+   "experiment": "stage11 (canonical Stage 11 federated SSL)",
+   "round": 10,
+   "install_logloss": 0.27390378597608317,
+   "install_auc": 0.899003267288208,
+   "click_logloss": 0.28633809680909117,
+   "click_auc": 0.8942021727561951,
+   "round_wall_seconds": 6116.2566506,
+   "peak_rss_mib": 2779.55859375,
+   "peak_gpu_allocated_mib": 7189.53564453125,
+   "peak_gpu_reserved_mib": 7734.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 1,
+   "install_logloss": 0.45485246883469493,
+   "install_auc": 0.8171190619468689,
+   "click_logloss": 0.6561603311937871,
+   "click_auc": 0.7247951030731201,
+   "round_wall_seconds": 3196.600525400001,
+   "peak_rss_mib": 2966.0546875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 2,
+   "install_logloss": 0.3071755204158312,
+   "install_auc": 0.8751615881919861,
+   "click_logloss": 0.33730220444182873,
+   "click_auc": 0.8650222420692444,
+   "round_wall_seconds": 3379.858065300001,
+   "peak_rss_mib": 3029.33203125,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 3,
+   "install_logloss": 0.3067141254506746,
+   "install_auc": 0.881205141544342,
+   "click_logloss": 0.3378940157836684,
+   "click_auc": 0.8854241967201233,
+   "round_wall_seconds": 3346.865484400001,
+   "peak_rss_mib": 2979.71875,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 4,
+   "install_logloss": 0.3083927163589453,
+   "install_auc": 0.8853007555007935,
+   "click_logloss": 0.33651937848459734,
+   "click_auc": 0.8908189535140991,
+   "round_wall_seconds": 3411.6616934000012,
+   "peak_rss_mib": 2519.6328125,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 4632.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 5,
+   "install_logloss": 0.29567772770595796,
+   "install_auc": 0.8920027613639832,
+   "click_logloss": 0.32903079888324954,
+   "click_auc": 0.89542156457901,
+   "round_wall_seconds": 3354.7758276000022,
+   "peak_rss_mib": 2505.46484375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 4050.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 6,
+   "install_logloss": 0.296794966237268,
+   "install_auc": 0.8954371809959412,
+   "click_logloss": 0.3353491233246469,
+   "click_auc": 0.8982303738594055,
+   "round_wall_seconds": 3360.1337944999977,
+   "peak_rss_mib": 2494.734375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 7,
+   "install_logloss": 0.287310071567868,
+   "install_auc": 0.8987398743629456,
+   "click_logloss": 0.30570936704173984,
+   "click_auc": 0.9009566307067871,
+   "round_wall_seconds": 3367.154583399999,
+   "peak_rss_mib": 2477.27734375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 8,
+   "install_logloss": 0.2916861691869381,
+   "install_auc": 0.8994027376174927,
+   "click_logloss": 0.3133799272700791,
+   "click_auc": 0.9032361507415771,
+   "round_wall_seconds": 3383.8256973000025,
+   "peak_rss_mib": 2522.3203125,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 5358.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 9,
+   "install_logloss": 0.29052332297584693,
+   "install_auc": 0.8998451828956604,
+   "click_logloss": 0.30570487644083877,
+   "click_auc": 0.9038118720054626,
+   "round_wall_seconds": 3399.3772583000027,
+   "peak_rss_mib": 2497.83984375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "E",
+   "ssl": false,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_nossl_alpha_0_1_seed42",
+   "round": 10,
+   "install_logloss": 0.2907483709109982,
+   "install_auc": 0.9002980589866638,
+   "click_logloss": 0.3141113476404744,
+   "click_auc": 0.9040754437446594,
+   "round_wall_seconds": 3359.049545700007,
+   "peak_rss_mib": 2501.3359375,
+   "peak_gpu_allocated_mib": 3603.91162109375,
+   "peak_gpu_reserved_mib": 3928.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 1,
+   "install_logloss": 0.3896299370618227,
+   "install_auc": 0.813164234161377,
+   "click_logloss": 0.5399008383688292,
+   "click_auc": 0.7287682294845581,
+   "round_wall_seconds": 6508.587442999999,
+   "peak_rss_mib": 3665.33203125,
+   "peak_gpu_allocated_mib": 7185.85791015625,
+   "peak_gpu_reserved_mib": 7738.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 2,
+   "install_logloss": 0.30623138395333865,
+   "install_auc": 0.8670082092285156,
+   "click_logloss": 0.3832664180155411,
+   "click_auc": 0.8556698560714722,
+   "round_wall_seconds": 5716.679244400001,
+   "peak_rss_mib": 3674.8515625,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 3,
+   "install_logloss": 0.31788352253571195,
+   "install_auc": 0.8757956624031067,
+   "click_logloss": 0.35754469452886023,
+   "click_auc": 0.8761104345321655,
+   "round_wall_seconds": 6501.871447700001,
+   "peak_rss_mib": 3098.5859375,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 4,
+   "install_logloss": 0.3200172457251774,
+   "install_auc": 0.8783866167068481,
+   "click_logloss": 0.36082681837528974,
+   "click_auc": 0.8816577792167664,
+   "round_wall_seconds": 7010.368806999999,
+   "peak_rss_mib": 3231.515625,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 9120.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 5,
+   "install_logloss": 0.3125234839610746,
+   "install_auc": 0.8828960061073303,
+   "click_logloss": 0.3564606406143055,
+   "click_auc": 0.8848495483398438,
+   "round_wall_seconds": 5101.247731299998,
+   "peak_rss_mib": 3088.4765625,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 8090.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 6,
+   "install_logloss": 0.31336881536047717,
+   "install_auc": 0.8833458423614502,
+   "click_logloss": 0.35862814590807596,
+   "click_auc": 0.8863003253936768,
+   "round_wall_seconds": 4486.643029800001,
+   "peak_rss_mib": 2695.60546875,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 7,
+   "install_logloss": 0.30853686614090264,
+   "install_auc": 0.8858286738395691,
+   "click_logloss": 0.35438875372944145,
+   "click_auc": 0.8873353004455566,
+   "round_wall_seconds": 8800.685686600002,
+   "peak_rss_mib": 3161.8828125,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 8,
+   "install_logloss": 0.30564232096534694,
+   "install_auc": 0.8874363899230957,
+   "click_logloss": 0.3509968395710024,
+   "click_auc": 0.8893418908119202,
+   "round_wall_seconds": 8261.116565800003,
+   "peak_rss_mib": 4354.92578125,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 10482.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 9,
+   "install_logloss": 0.30396452078086456,
+   "install_auc": 0.8891589641571045,
+   "click_logloss": 0.34724628407156044,
+   "click_auc": 0.8902211785316467,
+   "round_wall_seconds": 6587.190180500002,
+   "peak_rss_mib": 3181.10546875,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  },
+  {
+   "cell": "F",
+   "ssl": true,
+   "alpha_D": 0.1,
+   "experiment": "stage12_fed_ssl_alpha_0_1_seed42",
+   "round": 10,
+   "install_logloss": 0.3074881901105931,
+   "install_auc": 0.8892875909805298,
+   "click_logloss": 0.35131737688292036,
+   "click_auc": 0.8902915716171265,
+   "round_wall_seconds": 5533.910440399995,
+   "peak_rss_mib": 3085.0546875,
+   "peak_gpu_allocated_mib": 7184.57275390625,
+   "peak_gpu_reserved_mib": 7760.0,
+   "total_client_samples": 3137266
+  }
+ ],
+ "checkpoints": {
+  "A": {
+   "paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_latest.pt"
+   },
+   "files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_best.pt",
+     "bytes": 10070443
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_final_round10.pt",
+     "bytes": 10070507
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_latest.pt",
+     "bytes": 10070443
+    }
+   },
+   "best_round": 10,
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "selection_metric": "validation Install LogLoss"
+  },
+  "B": {
+   "paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_latest.pt"
+   },
+   "files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_best.pt",
+     "bytes": 10173283
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_final_round10.pt",
+     "bytes": 10173283
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_latest.pt",
+     "bytes": 10173283
+    }
+   },
+   "best_round": 10,
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "selection_metric": "validation Install LogLoss"
+  },
+  "C": {
+   "paths": {
+    "best": "artifacts/federated/stage10/stage10b_best.pt",
+    "final": "artifacts/federated/stage10/stage10b_final_round10.pt",
+    "latest": "artifacts/federated/stage10/stage10b_latest.pt"
+   },
+   "files": {
+    "best": {
+     "path": "artifacts/federated/stage10/stage10b_best.pt",
+     "bytes": 10070891
+    },
+    "final": {
+     "path": "artifacts/federated/stage10/stage10b_final_round10.pt",
+     "bytes": 10070891
+    },
+    "latest": {
+     "path": "artifacts/federated/stage10/stage10b_latest.pt",
+     "bytes": 10070891
+    }
+   },
+   "best_round": 10,
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "selection_metric": "validation Install LogLoss"
+  },
+  "D": {
+   "paths": {
+    "best": "artifacts/federated/stage11/stage11_best.pt",
+    "final": "artifacts/federated/stage11/stage11_final_round10.pt",
+    "latest": "artifacts/federated/stage11/stage11_latest.pt"
+   },
+   "files": {
+    "best": {
+     "path": "artifacts/federated/stage11/stage11_best.pt",
+     "bytes": 10173027
+    },
+    "final": {
+     "path": "artifacts/federated/stage11/stage11_final_round10.pt",
+     "bytes": 10173027
+    },
+    "latest": {
+     "path": "artifacts/federated/stage11/stage11_latest.pt",
+     "bytes": 10173027
+    }
+   },
+   "best_round": 10,
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "selection_metric": "validation Install LogLoss"
+  },
+  "E": {
+   "paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_latest.pt"
+   },
+   "files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_best.pt",
+     "bytes": 10066219
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_final_round10.pt",
+     "bytes": 10070379
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_latest.pt",
+     "bytes": 10070379
+    }
+   },
+   "best_round": 7,
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "selection_metric": "validation Install LogLoss"
+  },
+  "F": {
+   "paths": {
+    "best": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_best.pt",
+    "final": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_final_round10.pt",
+    "latest": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_latest.pt"
+   },
+   "files": {
+    "best": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_best.pt",
+     "bytes": 10171683
+    },
+    "final": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_final_round10.pt",
+     "bytes": 10173219
+    },
+    "latest": {
+     "path": "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_latest.pt",
+     "bytes": 10173219
+    }
+   },
+   "best_round": 9,
+   "reload_verified": true,
+   "reloaded_metrics_match": true,
+   "selection_metric": "validation Install LogLoss"
+  },
+  "stage6_canonical_B": {
+   "path": "artifacts/checkpoints/centralized_transformer_mmoe_best.pt",
+   "torch_reload_check": {
+    "keys": [
+     "best_validation_install_logloss",
+     "epoch",
+     "model_state_dict",
+     "optimizer_state_dict",
+     "seed",
+     "split_hash",
+     "stage",
+     "training_config"
+    ],
+    "best_validation_install_logloss": 0.2562108886731335,
+    "epoch": 3,
+    "parameter_count": null,
+    "n_state_entries": 138,
+    "sha256_prefix": "e86fa4da2060d408...(first 1 MiB)"
+   }
+  },
+  "stage8": {
+   "A": "artifacts/checkpoints/stage8/experiment_a_transformer_supervised_best.pt",
+   "B": "artifacts/checkpoints/centralized_transformer_mmoe_best.pt (canonical)",
+   "C": "artifacts/checkpoints/stage8/experiment_c_transformer_ssl_best.pt",
+   "D": "artifacts/checkpoints/stage8/experiment_d_transformer_mmoe_ssl_best.pt"
+  }
+ },
+ "partitions": {
+  "alpha_0.5_seed42": {
+   "manifest": "artifacts/federated/partition_alpha_0_5_seed42.json",
+   "partition_method": "dirichlet_joint_label_proportional_v1",
+   "alpha_D": 0.5,
+   "seed": 42,
+   "hash": "9603ddc9facc973d",
+   "npz": "artifacts/federated/partition_alpha_0_5_seed42.npz",
+   "total_rows": 3137266,
+   "client_rows": {
+    "client_00": 621801,
+    "client_01": 544574,
+    "client_02": 59999,
+    "client_03": 488090,
+    "client_04": 69790,
+    "client_05": 89988,
+    "client_06": 193852,
+    "client_07": 201902,
+    "client_08": 511603,
+    "client_09": 355667
+   },
+   "labels_hash": "800e2aa9d0bf7b79",
+   "split_hashes": {},
+   "manifest_path": "artifacts/federated/partition_alpha_0_5_seed42.json"
+  },
+  "alpha_1.0_seed42": {
+   "manifest": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.json",
+   "partition_method": "dirichlet_joint_label_proportional_v1",
+   "alpha_D": 1.0,
+   "seed": 42,
+   "hash": "c382d47f5824f64a",
+   "npz": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz",
+   "total_rows": 3137266,
+   "client_rows": {
+    "client_00": 452032,
+    "client_01": 460777,
+    "client_02": 585448,
+    "client_03": 151573,
+    "client_04": 137132,
+    "client_05": 272725,
+    "client_06": 253784,
+    "client_07": 488550,
+    "client_08": 104506,
+    "client_09": 230739
+   },
+   "labels_hash": "800e2aa9d0bf7b79",
+   "split_hashes": {},
+   "manifest_path": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.json"
+  },
+  "alpha_0.1_seed42": {
+   "manifest": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.json",
+   "partition_method": "dirichlet_joint_label_proportional_v1",
+   "alpha_D": 0.1,
+   "seed": 42,
+   "hash": "23146aebf184345b",
+   "npz": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.npz",
+   "total_rows": 3137266,
+   "client_rows": {
+    "client_00": 342065,
+    "client_01": 1200830,
+    "client_02": 251984,
+    "client_03": 266440,
+    "client_04": 30811,
+    "client_05": 11892,
+    "client_06": 366104,
+    "client_07": 44021,
+    "client_08": 11698,
+    "client_09": 611421
+   },
+   "labels_hash": "800e2aa9d0bf7b79",
+   "split_hashes": {},
+   "manifest_path": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.json"
+  }
+ },
+ "integrity_checks": [
+  {
+   "check": "six final cells complete",
+   "observed": "6/6 status=complete, rounds_completed=10/10",
+   "source": "six result JSONs",
+   "status": "PASS"
+  },
+  {
+   "check": "partition hash alpha_D=1.0",
+   "expected": "c382d47f5824f64a",
+   "observed": "c382d47f5824f64a",
+   "source": "artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.json + cells A/B result JSONs",
+   "status": "PASS"
+  },
+  {
+   "check": "partition hash alpha_D=0.5",
+   "expected": "9603ddc9facc973d",
+   "observed": "9603ddc9facc973d",
+   "source": "artifacts/federated/partition_alpha_0_5_seed42.json + cells C/D result JSONs",
+   "status": "PASS"
+  },
+  {
+   "check": "partition hash alpha_D=0.1",
+   "expected": "23146aebf184345b",
+   "observed": "23146aebf184345b",
+   "source": "artifacts/federated/partitions/stage12_partition_alpha_0_1_seed42.json + cells E/F result JSONs",
+   "status": "PASS"
+  },
+  {
+   "check": "partition rows total = 3,137,266 (all three partitions)",
+   "observed": [
+    3137266,
+    3137266,
+    3137266
+   ],
+   "source": "partition manifests",
+   "status": "PASS"
+  },
+  {
+   "check": "same partition for SSL/No-SSL at matched alpha",
+   "observed": "matched hashes per alpha in cell records",
+   "source": "result JSONs partition_hash fields",
+   "status": "PASS"
+  },
+  {
+   "check": "seed 42 everywhere",
+   "observed": "seed=42 in all 6 cell JSONs, smoke, Stage 11, 10B",
+   "source": "result JSONs",
+   "status": "PASS"
+  },
+  {
+   "check": "validation overlap = 0",
+   "observed": "0 (Stage 9 report independent post-run audit; frozen audit script ALL CHECKS PASSED)",
+   "source": "reports/stage9_partition_report.md + audit_stage12_matrix.py output",
+   "status": "PASS"
+  },
+  {
+   "check": "official test never loaded/evaluated",
+   "observed": "no test hash in any result JSON; reports state never loaded; runner has no test path",
+   "source": "result JSONs + stage reports",
+   "status": "PASS"
+  },
+  {
+   "check": "reload verification",
+   "observed": "reload_verified=true, reloaded_metrics_match=true for all 6 cells + Stage 8 A/C/D + smoke",
+   "source": "result JSONs",
+   "status": "PASS"
+  },
+  {
+   "check": "SSL identity equal across B/D/F (torch payload check in prior audit)",
+   "observed": "2,527,698 params / 142 state entries; sup 0.6, NT-Xent 0.4, T=0.2, corruption 0.15, proj 64",
+   "source": "prior programmatic checkpoint-payload verification + ssl dicts in result JSONs",
+   "status": "PASS"
+  },
+  {
+   "check": "canonical Stage 6 metric (torch reload, this audit)",
+   "observed": 0.2562108886731335,
+   "source": "artifacts/checkpoints/centralized_transformer_mmoe_best.pt",
+   "status": "PASS"
+  },
+  {
+   "check": "bit-for-bit reproducibility",
+   "observed": "NOT claimable: PyTorch does not guarantee identical results across releases/platforms/CPU-vs-GPU; runs on RTX 4060 Ti; deterministic CUDA algorithms DISABLED (recorded as deterministic_cuda_algorithms=false in checkpoints, per reports/centralized_training_report.md section on determinism)",
+   "status": "LIMITATION"
+  }
+ ],
+ "anomalies": [
+  {
+   "id": "AN-1",
+   "severity": "medium",
+   "title": "Stage 10B runtime metadata inconsistency",
+   "detail": "total_elapsed_seconds=5,226.764 (result JSON) vs sum of round_wall_seconds=25,494.0 (same JSON) vs log line 'total runtime: 5260.9 s (1.46 h)' (stage10b_resume_log.txt family). Two sources agree (~5.2e3 s) but the per-round walls sum to 25,494 s. All other five cells are self-consistent (deltas < 4 s).",
+   "resolution": "report all three values; treat 25,494 s (per-round sum) as the plausible compute total; artifact NOT modified"
+  },
+  {
+   "id": "AN-2",
+   "severity": "low",
+   "title": "protocol.use_ssl / protocol.alpha hold runner defaults",
+   "detail": "In ALL runner-written result JSONs (incl. Stage 11) protocol.use_ssl=False and protocol.alpha=0.5 regardless of the actual cell.",
+   "effective_identity_source": "top-level ssl dict (SSL cells), stage12.use_ssl / stage12.alpha (Stage 12 cells), partition_hash, checkpoint payload identity",
+   "resolution": "raw values reported verbatim; effective identity from the listed fields; artifact NOT modified"
+  },
+  {
+   "id": "AN-3",
+   "severity": "low",
+   "title": "SSL weight key named 'alpha' (0.6) collides with alpha_D symbol",
+   "detail": "ssl.alpha=0.6 in Stage 11/12 JSONs is the supervised loss weight (joint-loss coefficient), NOT the Dirichlet alpha_D.",
+   "resolution": "keep the two concepts separate in the thesis (alpha_D vs joint-loss weight)"
+  },
+  {
+   "id": "AN-4",
+   "severity": "medium",
+   "title": "canonical B sampler nuance",
+   "detail": "Stage 6 (canonical Experiment B) trained with a silent set_epoch no-op (no per-epoch reshuffle); Stage 8 A/C/D and all Stage 10-12 runs use the corrected per-epoch reshuffle. Diagnostic proved C(epoch1)==H(epoch1); divergence starts epoch 2.",
+   "resolution": "documented decision (2026-09-17): B not retrained; flagged wherever B is compared"
+  },
+  {
+   "id": "AN-5",
+   "severity": "low",
+   "title": "centralized run batch-mean logloss note",
+   "detail": "all 3 centralized epochs evaluated with previous batch-mean logloss aggregation; difference <1e-5 on 348,586 samples (report section 8)."
+  },
+  {
+   "id": "AN-6",
+   "severity": "low",
+   "title": "Stage 8 C epoch-3 wall time includes ~10 h OS standby (no compute)."
+  },
+  {
+   "id": "AN-7",
+   "severity": "info",
+   "title": "alpha_D=0.5 cells are Stage 10B/11 artifacts reused as Cells C/D",
+   "detail": "No separate Stage 12 alpha_0_5 runs exist; the six-cell matrix lettering retrofits C=Stage 10B, D=Stage 11. Protocol identical (same frozen config)."
+  },
+  {
+   "id": "AN-8",
+   "severity": "info",
+   "title": "Stage 10B round-1 metrics identical to stage10_smoke_round1 metrics (same integration path, seed, data order)."
+  },
+  {
+   "id": "AN-9",
+   "severity": "info",
+   "title": "runtime scale heterogeneity across cells",
+   "detail": "mean round wall: A ~2,039 s; C ~2,549 s; E ~3,356 s; B ~4,146 s; D ~6,352 s; F ~6,451 s. SSL runs ~2x No-SSL; alpha_D=0.1 slower than 1.0 (data-order locality). Operational, not algorithmic."
+  },
+  {
+   "id": "AN-10",
+   "severity": "low",
+   "title": "Stage 11 required 10 launcher attempts after a round-1 CUDA diagnostic; final result complete and reload-verified."
+  }
+ ],
+ "comparisons": {
+  "ssl_vs_nossl": [
+   {
+    "alpha_D": 1.0,
+    "install_logloss_abs_diff_ssl_minus_nossl": 0.012366214,
+    "install_logloss_pct_diff": 4.719,
+    "install_auc_abs_diff_ssl_minus_nossl": -0.011158705,
+    "click_logloss_abs_diff_ssl_minus_nossl": 0.016402841,
+    "click_auc_abs_diff_ssl_minus_nossl": -0.014259934
+   },
+   {
+    "alpha_D": 0.5,
+    "install_logloss_abs_diff_ssl_minus_nossl": 0.008367737,
+    "install_logloss_pct_diff": 3.151,
+    "install_auc_abs_diff_ssl_minus_nossl": -0.009878516,
+    "click_logloss_abs_diff_ssl_minus_nossl": 0.015143882,
+    "click_auc_abs_diff_ssl_minus_nossl": -0.013454318
+   },
+   {
+    "alpha_D": 0.1,
+    "install_logloss_abs_diff_ssl_minus_nossl": 0.016654449,
+    "install_logloss_pct_diff": 5.797,
+    "install_auc_abs_diff_ssl_minus_nossl": -0.00958091,
+    "click_logloss_abs_diff_ssl_minus_nossl": 0.041536917,
+    "click_auc_abs_diff_ssl_minus_nossl": -0.010735452
+   }
+  ],
+  "alpha_within_family": [
+   {
+    "family": "No-SSL",
+    "by_alpha": [
+     {
+      "alpha_D": 1.0,
+      "best_round": 10,
+      "install_logloss": 0.2620268215836922,
+      "install_auc": 0.9082087874412537,
+      "click_logloss": 0.2693122841266592,
+      "click_auc": 0.9076045155525208
+     },
+     {
+      "alpha_D": 0.5,
+      "best_round": 10,
+      "install_logloss": 0.26553604847797624,
+      "install_auc": 0.9088817834854126,
+      "click_logloss": 0.27119421469311195,
+      "click_auc": 0.9076564908027649
+     },
+     {
+      "alpha_D": 0.1,
+      "best_round": 7,
+      "install_logloss": 0.287310071567868,
+      "install_auc": 0.8987398743629456,
+      "click_logloss": 0.30570936704173984,
+      "click_auc": 0.9009566307067871
+     }
+    ],
+    "delta_1.0_to_0.5_install_logloss": 0.003509227,
+    "delta_0.5_to_0.1_install_logloss": 0.021774023,
+    "delta_1.0_to_0.5_install_auc": 0.000672996,
+    "delta_0.5_to_0.1_install_auc": -0.010141909
+   },
+   {
+    "family": "SSL",
+    "by_alpha": [
+     {
+      "alpha_D": 1.0,
+      "best_round": 10,
+      "install_logloss": 0.27439303566673534,
+      "install_auc": 0.8970500826835632,
+      "click_logloss": 0.28571512554052625,
+      "click_auc": 0.8933445811271667
+     },
+     {
+      "alpha_D": 0.5,
+      "best_round": 10,
+      "install_logloss": 0.27390378597608317,
+      "install_auc": 0.899003267288208,
+      "click_logloss": 0.28633809680909117,
+      "click_auc": 0.8942021727561951
+     },
+     {
+      "alpha_D": 0.1,
+      "best_round": 9,
+      "install_logloss": 0.30396452078086456,
+      "install_auc": 0.8891589641571045,
+      "click_logloss": 0.34724628407156044,
+      "click_auc": 0.8902211785316467
+     }
+    ],
+    "delta_1.0_to_0.5_install_logloss": -0.00048925,
+    "delta_0.5_to_0.1_install_logloss": 0.030060735,
+    "delta_1.0_to_0.5_install_auc": 0.001953185,
+    "delta_0.5_to_0.1_install_auc": -0.009844303
+   }
+  ]
+ },
+ "matrix_source_verification": {
+  "file": "reports/stage12/final_federated_matrix.json",
+  "check": "all six best-round values in this audit equal the frozen matrix JSON (exact float equality)",
+  "result": "PASS (verified programmatically in prior stage; re-derived here from primary result JSONs)"
+ },
+ "thesis_tables": {
+  "A": [
+   [
+    "Cell",
+    "SSL",
+    "alpha_D",
+    "Best Round",
+    "Install LogLoss",
+    "Install AUC",
+    "Click LogLoss",
+    "Click AUC"
+   ],
+   [
+    "A",
+    "No-SSL",
+    "1.0",
+    10,
+    "0.2620268215836922",
+    "0.9082087874412537",
+    "0.2693122841266592",
+    "0.9076045155525208"
+   ],
+   [
+    "B",
+    "SSL",
+    "1.0",
+    10,
+    "0.27439303566673534",
+    "0.8970500826835632",
+    "0.28571512554052625",
+    "0.8933445811271667"
+   ],
+   [
+    "C",
+    "No-SSL",
+    "0.5",
+    10,
+    "0.26553604847797624",
+    "0.9088817834854126",
+    "0.27119421469311195",
+    "0.9076564908027649"
+   ],
+   [
+    "D",
+    "SSL",
+    "0.5",
+    10,
+    "0.27390378597608317",
+    "0.899003267288208",
+    "0.28633809680909117",
+    "0.8942021727561951"
+   ],
+   [
+    "E",
+    "No-SSL",
+    "0.1",
+    7,
+    "0.287310071567868",
+    "0.8987398743629456",
+    "0.30570936704173984",
+    "0.9009566307067871"
+   ],
+   [
+    "F",
+    "SSL",
+    "0.1",
+    9,
+    "0.30396452078086456",
+    "0.8891589641571045",
+    "0.34724628407156044",
+    "0.8902211785316467"
+   ]
+  ],
+  "B": [
+   [
+    "Cell",
+    "Round",
+    "Click LogLoss",
+    "Click AUC",
+    "Install LogLoss",
+    "Install AUC"
+   ],
+   [
+    "A",
+    1,
+    "0.617073096962766",
+    "0.7294928431510925",
+    "0.45068423570840166",
+    "0.8372268676757812"
+   ],
+   [
+    "A",
+    2,
+    "0.29833631421889445",
+    "0.8835058212280273",
+    "0.289534287270409",
+    "0.8808194398880005"
+   ],
+   [
+    "A",
+    3,
+    "0.29230560329312344",
+    "0.889859676361084",
+    "0.28119652406116713",
+    "0.8909234404563904"
+   ],
+   [
+    "A",
+    4,
+    "0.28736237740531434",
+    "0.8927131295204163",
+    "0.27595525366415985",
+    "0.8951399922370911"
+   ],
+   [
+    "A",
+    5,
+    "0.2844695663419729",
+    "0.8956278562545776",
+    "0.2733214121641764",
+    "0.8976982235908508"
+   ],
+   [
+    "A",
+    6,
+    "0.2820081970153925",
+    "0.8986018300056458",
+    "0.27007074991029145",
+    "0.9013163447380066"
+   ],
+   [
+    "A",
+    7,
+    "0.27799652766410027",
+    "0.9020892381668091",
+    "0.2683289269575722",
+    "0.903318464756012"
+   ],
+   [
+    "A",
+    8,
+    "0.2751427329637892",
+    "0.9041666984558105",
+    "0.26589024882751505",
+    "0.9049825072288513"
+   ],
+   [
+    "A",
+    9,
+    "0.27149451099686717",
+    "0.9063180088996887",
+    "0.2630389975212407",
+    "0.9070092439651489"
+   ],
+   [
+    "A",
+    10,
+    "0.2693122841266592",
+    "0.9076045155525208",
+    "0.2620268215836922",
+    "0.9082087874412537"
+   ],
+   [
+    "B",
+    1,
+    "0.42711182677059056",
+    "0.805413544178009",
+    "0.3403653021025459",
+    "0.8339340686798096"
+   ],
+   [
+    "B",
+    2,
+    "0.3275967734567558",
+    "0.8676827549934387",
+    "0.3025545016040819",
+    "0.8680973052978516"
+   ],
+   [
+    "B",
+    3,
+    "0.3019303730599032",
+    "0.8819810748100281",
+    "0.28939681043709303",
+    "0.8810822367668152"
+   ],
+   [
+    "B",
+    4,
+    "0.29528579936840865",
+    "0.8862892389297485",
+    "0.2839442185124519",
+    "0.8866345286369324"
+   ],
+   [
+    "B",
+    5,
+    "0.29233524083470835",
+    "0.8885485529899597",
+    "0.28197691886137194",
+    "0.8893831968307495"
+   ],
+   [
+    "B",
+    6,
+    "0.2902452326348324",
+    "0.8898402452468872",
+    "0.27852705694249397",
+    "0.8928098678588867"
+   ],
+   [
+    "B",
+    7,
+    "0.28858805788253233",
+    "0.8910948634147644",
+    "0.2777015643188194",
+    "0.8938984870910645"
+   ],
+   [
+    "B",
+    8,
+    "0.28799919087311343",
+    "0.8918055891990662",
+    "0.27686037537793656",
+    "0.8951202630996704"
+   ],
+   [
+    "B",
+    9,
+    "0.2862598656909368",
+    "0.8925409317016602",
+    "0.27510407642909496",
+    "0.8960363864898682"
+   ],
+   [
+    "B",
+    10,
+    "0.28571512554052625",
+    "0.8933445811271667",
+    "0.27439303566673534",
+    "0.8970500826835632"
+   ],
+   [
+    "C",
+    1,
+    "0.6361632836370261",
+    "0.7660733461380005",
+    "0.5423033578075764",
+    "0.8326510190963745"
+   ],
+   [
+    "C",
+    2,
+    "0.2989584456116318",
+    "0.886354923248291",
+    "0.2897341979343487",
+    "0.8859612345695496"
+   ],
+   [
+    "C",
+    3,
+    "0.29128565674075224",
+    "0.8915613293647766",
+    "0.2805022224792874",
+    "0.8936946392059326"
+   ],
+   [
+    "C",
+    4,
+    "0.29216950866769414",
+    "0.893086850643158",
+    "0.27977198869950737",
+    "0.8971990346908569"
+   ],
+   [
+    "C",
+    5,
+    "0.2860918493136353",
+    "0.8965034484863281",
+    "0.2743961314323253",
+    "0.8999456763267517"
+   ],
+   [
+    "C",
+    6,
+    "0.28511504739339805",
+    "0.8985102772712708",
+    "0.2755873987294815",
+    "0.9020417928695679"
+   ],
+   [
+    "C",
+    7,
+    "0.27805910835374564",
+    "0.9025135040283203",
+    "0.2712636781213293",
+    "0.9051476120948792"
+   ],
+   [
+    "C",
+    8,
+    "0.2756187487019471",
+    "0.9052262306213379",
+    "0.26746814379841566",
+    "0.906978964805603"
+   ],
+   [
+    "C",
+    9,
+    "0.27430350284544874",
+    "0.9067431092262268",
+    "0.26927270377776547",
+    "0.9078153371810913"
+   ],
+   [
+    "C",
+    10,
+    "0.27119421469311195",
+    "0.9076564908027649",
+    "0.26553604847797624",
+    "0.9088817834854126"
+   ],
+   [
+    "D",
+    1,
+    "0.4257842053940918",
+    "0.8113903999328613",
+    "0.33966941586600524",
+    "0.8349900245666504"
+   ],
+   [
+    "D",
+    2,
+    "0.32567708672471507",
+    "0.8709589838981628",
+    "0.29933057347174485",
+    "0.8719696402549744"
+   ],
+   [
+    "D",
+    3,
+    "0.30036518049752536",
+    "0.8838387727737427",
+    "0.2854564251089323",
+    "0.8856303691864014"
+   ],
+   [
+    "D",
+    4,
+    "0.2962414398559852",
+    "0.8873009085655212",
+    "0.2826309308931979",
+    "0.889992892742157"
+   ],
+   [
+    "D",
+    5,
+    "0.29212252447603804",
+    "0.8895174264907837",
+    "0.27932154455687125",
+    "0.892598032951355"
+   ],
+   [
+    "D",
+    6,
+    "0.2917248719487204",
+    "0.89065021276474",
+    "0.2790066674547903",
+    "0.8944588899612427"
+   ],
+   [
+    "D",
+    7,
+    "0.28880137098084296",
+    "0.8920960426330566",
+    "0.27687496029386727",
+    "0.896441638469696"
+   ],
+   [
+    "D",
+    8,
+    "0.28769141937785964",
+    "0.8930537104606628",
+    "0.27516456925260196",
+    "0.8973539471626282"
+   ],
+   [
+    "D",
+    9,
+    "0.28829462275639234",
+    "0.8935515880584717",
+    "0.27612325984380165",
+    "0.8981664180755615"
+   ],
+   [
+    "D",
+    10,
+    "0.28633809680909117",
+    "0.8942021727561951",
+    "0.27390378597608317",
+    "0.899003267288208"
+   ],
+   [
+    "E",
+    1,
+    "0.6561603311937871",
+    "0.7247951030731201",
+    "0.45485246883469493",
+    "0.8171190619468689"
+   ],
+   [
+    "E",
+    2,
+    "0.33730220444182873",
+    "0.8650222420692444",
+    "0.3071755204158312",
+    "0.8751615881919861"
+   ],
+   [
+    "E",
+    3,
+    "0.3378940157836684",
+    "0.8854241967201233",
+    "0.3067141254506746",
+    "0.881205141544342"
+   ],
+   [
+    "E",
+    4,
+    "0.33651937848459734",
+    "0.8908189535140991",
+    "0.3083927163589453",
+    "0.8853007555007935"
+   ],
+   [
+    "E",
+    5,
+    "0.32903079888324954",
+    "0.89542156457901",
+    "0.29567772770595796",
+    "0.8920027613639832"
+   ],
+   [
+    "E",
+    6,
+    "0.3353491233246469",
+    "0.8982303738594055",
+    "0.296794966237268",
+    "0.8954371809959412"
+   ],
+   [
+    "E",
+    7,
+    "0.30570936704173984",
+    "0.9009566307067871",
+    "0.287310071567868",
+    "0.8987398743629456"
+   ],
+   [
+    "E",
+    8,
+    "0.3133799272700791",
+    "0.9032361507415771",
+    "0.2916861691869381",
+    "0.8994027376174927"
+   ],
+   [
+    "E",
+    9,
+    "0.30570487644083877",
+    "0.9038118720054626",
+    "0.29052332297584693",
+    "0.8998451828956604"
+   ],
+   [
+    "E",
+    10,
+    "0.3141113476404744",
+    "0.9040754437446594",
+    "0.2907483709109982",
+    "0.9002980589866638"
+   ],
+   [
+    "F",
+    1,
+    "0.5399008383688292",
+    "0.7287682294845581",
+    "0.3896299370618227",
+    "0.813164234161377"
+   ],
+   [
+    "F",
+    2,
+    "0.3832664180155411",
+    "0.8556698560714722",
+    "0.30623138395333865",
+    "0.8670082092285156"
+   ],
+   [
+    "F",
+    3,
+    "0.35754469452886023",
+    "0.8761104345321655",
+    "0.31788352253571195",
+    "0.8757956624031067"
+   ],
+   [
+    "F",
+    4,
+    "0.36082681837528974",
+    "0.8816577792167664",
+    "0.3200172457251774",
+    "0.8783866167068481"
+   ],
+   [
+    "F",
+    5,
+    "0.3564606406143055",
+    "0.8848495483398438",
+    "0.3125234839610746",
+    "0.8828960061073303"
+   ],
+   [
+    "F",
+    6,
+    "0.35862814590807596",
+    "0.8863003253936768",
+    "0.31336881536047717",
+    "0.8833458423614502"
+   ],
+   [
+    "F",
+    7,
+    "0.35438875372944145",
+    "0.8873353004455566",
+    "0.30853686614090264",
+    "0.8858286738395691"
+   ],
+   [
+    "F",
+    8,
+    "0.3509968395710024",
+    "0.8893418908119202",
+    "0.30564232096534694",
+    "0.8874363899230957"
+   ],
+   [
+    "F",
+    9,
+    "0.34724628407156044",
+    "0.8902211785316467",
+    "0.30396452078086456",
+    "0.8891589641571045"
+   ],
+   [
+    "F",
+    10,
+    "0.35131737688292036",
+    "0.8902915716171265",
+    "0.3074881901105931",
+    "0.8892875909805298"
+   ]
+  ],
+  "C": [
+   [
+    "alpha_D",
+    "No-SSL Install LL",
+    "SSL Install LL",
+    "d(LL) SSL-NoSSL",
+    "d(LL) %",
+    "No-SSL Install AUC",
+    "SSL Install AUC",
+    "d(AUC)",
+    "No-SSL Click LL",
+    "SSL Click LL",
+    "No-SSL Click AUC",
+    "SSL Click AUC"
+   ],
+   [
+    "1.0",
+    "0.2620268215836922",
+    "0.27439303566673534",
+    "0.012366214",
+    "4.719",
+    "0.9082087874412537",
+    "0.8970500826835632",
+    "-0.011158705",
+    "0.2693122841266592",
+    "0.28571512554052625",
+    "0.9076045155525208",
+    "0.8933445811271667"
+   ],
+   [
+    "0.5",
+    "0.26553604847797624",
+    "0.27390378597608317",
+    "0.008367737",
+    "3.151",
+    "0.9088817834854126",
+    "0.899003267288208",
+    "-0.009878516",
+    "0.27119421469311195",
+    "0.28633809680909117",
+    "0.9076564908027649",
+    "0.8942021727561951"
+   ],
+   [
+    "0.1",
+    "0.287310071567868",
+    "0.30396452078086456",
+    "0.016654449",
+    "5.797",
+    "0.8987398743629456",
+    "0.8891589641571045",
+    "-0.00958091",
+    "0.30570936704173984",
+    "0.34724628407156044",
+    "0.9009566307067871",
+    "0.8902211785316467"
+   ]
+  ],
+  "D": [
+   [
+    "Cell",
+    "alpha_D",
+    "Best Round",
+    "Install LogLoss",
+    "Install AUC"
+   ],
+   [
+    "A",
+    "1.0",
+    10,
+    "0.2620268215836922",
+    "0.9082087874412537"
+   ],
+   [
+    "B",
+    "1.0",
+    10,
+    "0.27439303566673534",
+    "0.8970500826835632"
+   ],
+   [
+    "C",
+    "0.5",
+    10,
+    "0.26553604847797624",
+    "0.9088817834854126"
+   ],
+   [
+    "D",
+    "0.5",
+    10,
+    "0.27390378597608317",
+    "0.899003267288208"
+   ],
+   [
+    "E",
+    "0.1",
+    7,
+    "0.287310071567868",
+    "0.8987398743629456"
+   ],
+   [
+    "F",
+    "0.1",
+    9,
+    "0.30396452078086456",
+    "0.8891589641571045"
+   ]
+  ],
+  "E": [
+   [
+    "Cell",
+    "alpha_D",
+    "Click LogLoss",
+    "Click AUC"
+   ],
+   [
+    "A",
+    "1.0",
+    "0.2693122841266592",
+    "0.9076045155525208"
+   ],
+   [
+    "B",
+    "1.0",
+    "0.28571512554052625",
+    "0.8933445811271667"
+   ],
+   [
+    "C",
+    "0.5",
+    "0.27119421469311195",
+    "0.9076564908027649"
+   ],
+   [
+    "D",
+    "0.5",
+    "0.28633809680909117",
+    "0.8942021727561951"
+   ],
+   [
+    "E",
+    "0.1",
+    "0.30570936704173984",
+    "0.9009566307067871"
+   ],
+   [
+    "F",
+    "0.1",
+    "0.34724628407156044",
+    "0.8902211785316467"
+   ]
+  ],
+  "F": [
+   [
+    "Stage/Run",
+    "Category",
+    "In final matrix?",
+    "Why"
+   ],
+   [
+    "Stages 1-3 (preprocessing/splits/loaders)",
+    "B (pre-final infrastructure)",
+    "No (frozen inputs)",
+    "frozen data foundation; hashes verified"
+   ],
+   [
+    "Stage 4/5 (Transformer / +MMoE)",
+    "B (architecture)",
+    "No (components)",
+    "architecture of every final cell"
+   ],
+   [
+    "Stage 6 centralized (canonical B)",
+    "D (historical, reused)",
+    "No (centralized reference)",
+    "canonical supervised baseline; sampler nuance documented"
+   ],
+   [
+    "Stage 7 SSL mechanism + smoke",
+    "B (component validation)",
+    "No (component)",
+    "SSL implementation frozen and reused"
+   ],
+   [
+    "Stage 8 A",
+    "B (pre-final controlled)",
+    "No",
+    "centralized Transformer-only comparison"
+   ],
+   [
+    "Stage 8 B (canonical)",
+    "D (historical)",
+    "No",
+    "same run as Stage 6 row"
+   ],
+   [
+    "Stage 8 C",
+    "B (pre-final controlled)",
+    "No",
+    "centralized Transformer+SSL comparison"
+   ],
+   [
+    "Stage 8 D",
+    "B (pre-final controlled)",
+    "No",
+    "centralized Transformer+MMoE+SSL comparison"
+   ],
+   [
+    "Stage 9 partitioning (alpha 0.5) + loader verification",
+    "B (data preparation)",
+    "No (inputs)",
+    "created Cell C/D partition; verified"
+   ],
+   [
+    "Stage 10A protocol design",
+    "B (design)",
+    "No",
+    "frozen FL protocol + aggregation utility"
+   ],
+   [
+    "Stage 10 smoke round-1",
+    "C (smoke)",
+    "No",
+    "integration validation only"
+   ],
+   [
+    "Stage 10B",
+    "A (FINAL)",
+    "YES - Cell C",
+    "federated No-SSL alpha_D=0.5 final result"
+   ],
+   [
+    "Stage 10B/11 diagnostics",
+    "C (diagnostic)",
+    "No",
+    "r9 c08 / r1 c00 CUDA and stability checks"
+   ],
+   [
+    "Stage 11",
+    "A (FINAL) + integration validation",
+    "YES - Cell D",
+    "federated SSL alpha_D=0.5 final result"
+   ],
+   [
+    "Stage 12 A/B/E/F",
+    "A (FINAL)",
+    "YES - Cells A/B/E/F",
+    "four matrix cells run under frozen Stage 12 runner"
+   ],
+   [
+    "Stage 12 in-log preflights",
+    "C (smoke/verification)",
+    "No",
+    "per-cell pre-training verification"
+   ]
+  ],
+  "G": [
+   [
+    "Test",
+    "Kind",
+    "What it validated",
+    "Result",
+    "Source"
+   ],
+   [
+    "stage10_smoke_round1",
+    "smoke",
+    "partition loaders + local train + FedAvg + global eval + checkpoint reload",
+    "PASS",
+    "artifacts/federated/smoke/stage10_smoke_round1_result.json"
+   ],
+   [
+    "run_ssl_smoke (Stage 7)",
+    "smoke",
+    "SSL augmentations + NT-Xent CPU/CUDA parity + 142 params trained",
+    "PASS",
+    "reports/ssl_report.md"
+   ],
+   [
+    "Stage 12 preflights (x4)",
+    "smoke/preflight",
+    "partition hash/rows/overlap, model identity, no-test guarantee",
+    "PASS",
+    "root stage12 logs"
+   ],
+   [
+    "sampler diagnostic (Stage 8)",
+    "diagnostic",
+    "batch-order fingerprints H vs C protocols",
+    "complete; decision recorded",
+    "reports/stage8_experiments_report.md #4"
+   ],
+   [
+    "diag_stage10b_r9_c08",
+    "diagnostic",
+    "round-9 client_08 stability re-run",
+    "PASS",
+    "artifacts/federated/stage10/diagnostic_r9_c08/diagnostic_report.json"
+   ],
+   [
+    "diagnose_stage11_cuda",
+    "diagnostic",
+    "round-1 client_00 CUDA failure",
+    "diagnosed; run completed via retries",
+    "artifacts/federated/stage11/diagnostic_r1_c00/diagnostic_report.json"
+   ],
+   [
+    "audit_stage12_matrix.py",
+    "regression/integrity",
+    "matrix structure, protocol, SSL equality, partition re-derivation, no-test",
+    "ALL CHECKS PASSED",
+    "scripts/audit_stage12_matrix.py (read-only)"
+   ],
+   [
+    "unit/regression suite",
+    "regression",
+    "281 tests at Stage 9 close (244+24+13)",
+    "PASS",
+    "reports/stage9_partition_report.md"
+   ]
+  ],
+  "H": [
+   [
+    "Cell",
+    "best ckpt",
+    "final ckpt",
+    "bytes(best)",
+    "reload",
+    "metrics match",
+    "selection"
+   ],
+   [
+    "A",
+    "stage12_fed_nossl_alpha_1_0_seed42_best.pt",
+    "stage12_fed_nossl_alpha_1_0_seed42_final_round10.pt",
+    "10070443",
+    true,
+    true,
+    "min val Install LogLoss"
+   ],
+   [
+    "B",
+    "stage12_fed_ssl_alpha_1_0_seed42_best.pt",
+    "stage12_fed_ssl_alpha_1_0_seed42_final_round10.pt",
+    "10173283",
+    true,
+    true,
+    "min val Install LogLoss"
+   ],
+   [
+    "C",
+    "stage10b_best.pt",
+    "stage10b_final_round10.pt",
+    "10070891",
+    true,
+    true,
+    "min val Install LogLoss"
+   ],
+   [
+    "D",
+    "stage11_best.pt",
+    "stage11_final_round10.pt",
+    "10173027",
+    true,
+    true,
+    "min val Install LogLoss"
+   ],
+   [
+    "E",
+    "stage12_fed_nossl_alpha_0_1_seed42_best.pt",
+    "stage12_fed_nossl_alpha_0_1_seed42_final_round10.pt",
+    "10066219",
+    true,
+    true,
+    "min val Install LogLoss"
+   ],
+   [
+    "F",
+    "stage12_fed_ssl_alpha_0_1_seed42_best.pt",
+    "stage12_fed_ssl_alpha_0_1_seed42_final_round10.pt",
+    "10171683",
+    true,
+    true,
+    "min val Install LogLoss"
+   ],
+   [
+    "Stage 6 (canonical B)",
+    "centralized_transformer_mmoe_best.pt",
+    "-",
+    "138 state entries",
+    "torch-reloaded",
+    "metric match",
+    "min val Install LogLoss"
+   ]
+  ]
+ },
+ "thesis_mapping": {
+  "4-5 No-SSL results": {
+   "numbers": "Cells A, C, E best-round + trajectories",
+   "tables": [
+    "A",
+    "B",
+    "D"
+   ],
+   "figures": "reports/stage12/figures/fig_4_1..4_3",
+   "sources": [
+    "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_result.json",
+    "artifacts/federated/stage10/stage10b_result.json",
+    "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_result.json"
+   ]
+  },
+  "4-5 SSL results": {
+   "numbers": "Cells B, D, F best-round + trajectories",
+   "tables": [
+    "A",
+    "B",
+    "E"
+   ],
+   "figures": "fig_4_4",
+   "sources": [
+    "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_result.json",
+    "artifacts/federated/stage11/stage11_result.json",
+    "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_result.json"
+   ]
+  },
+  "4-6 alpha_D comparison": {
+   "numbers": "TABLE_C-derived alpha deltas per family",
+   "tables": [
+    "C"
+   ],
+   "figures": "fig_4_1, fig_4_2, fig_4_6",
+   "safe": "direction+magnitude statements only"
+  },
+  "4-6 SSL vs No-SSL": {
+   "numbers": "TABLE_C absolute diffs",
+   "tables": [
+    "C"
+   ],
+   "figures": "fig_4_5",
+   "safe": "matched-alpha differences under frozen SSL hyperparameters; no global ranking"
+  },
+  "4-7 Install results": {
+   "numbers": "TABLE_D + centralized/Stage-8 references",
+   "tables": [
+    "A",
+    "D"
+   ],
+   "sources": [
+    "artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_result.json",
+    "artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_result.json",
+    "artifacts/federated/stage10/stage10b_result.json",
+    "artifacts/federated/stage11/stage11_result.json",
+    "artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_result.json",
+    "artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_result.json",
+    "reports/centralized_training_report.md"
+   ]
+  },
+  "4-7 Click results": {
+   "numbers": "TABLE_E + 60-row Click columns",
+   "tables": [
+    "A",
+    "E"
+   ],
+   "safe": "descriptive; Click is auxiliary (lambda=1.0 in loss, no selection role)"
+  },
+  "4-8 trajectories": {
+   "numbers": "TABLE_B 60 rows",
+   "tables": [
+    "B"
+   ],
+   "figures": "fig_4_3, fig_4_4",
+   "safe": "observed 10-round behavior only"
+  },
+  "4-8 six-cell summary": {
+   "numbers": "TABLE_A",
+   "tables": [
+    "A",
+    "C"
+   ]
+  },
+  "do_not_claim": [
+   "universal superiority of SSL",
+   "statistical significance (single seed)",
+   "causal Click->Install effect",
+   "real-organization generalization",
+   "fully bit-for-bit reproducible"
+  ]
+ }
+}
