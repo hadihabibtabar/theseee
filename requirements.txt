@@ -1,0 +1,16 @@
+# Pinned environment for reproduction (Python 3.13.3, Windows 11, CUDA 11.8 GPU).
+#
+# torch==2.7.0+cu118 is a local-version wheel hosted only on the PyTorch index
+# below, so pip must consult it in addition to PyPI:
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+torch==2.7.0+cu118
+numpy==2.2.6
+pandas==2.2.3
+pyarrow==20.0.0
+scikit-learn==1.6.1
+matplotlib==3.10.0
+psutil==7.0.0
+arabic-reshaper==3.0.1
+python-bidi==0.6.11
+pytest==9.1.1

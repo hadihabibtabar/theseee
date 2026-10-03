@@ -8,6 +8,14 @@ The primary prediction task is **Install**, while **Click** is used as an auxili
 
 ---
 
+## 0. Where to Start
+
+If you only want to inspect the completed research, start with `reports/stage12/final_federated_matrix.md`; no GPU or raw dataset is required.
+For a full repository verification, install the pinned dependencies with `pip install -r requirements.txt`, then run the preprocessing verification and final matrix audit.
+For a fresh reproduction, follow the data, partition, and federated-training sections in order; final training requires an NVIDIA GPU.
+The six final experiment cells are already completed and frozen, so reproduction is optional and should not be confused with inspection.
+Checkpoints are under `artifacts/federated/`, and final metrics are under `reports/stage12/`.
+
 ## 1. Overview
 
 This project investigates whether contrastive self-supervised learning changes the performance of a multi-task Transformer model when training is performed in a **federated and non-IID setting**.
@@ -77,6 +85,18 @@ The repository can therefore be used in two different ways:
 ## 3.1 Dataset
 
 The experiments use the ShareChat Ads RecSys Challenge 2023 dataset.
+
+### Dataset access
+
+The official challenge page is the primary reference for dataset access and challenge documentation:
+
+https://www.recsyschallenge.com/2023/
+
+A commonly mirrored direct download URL for the original challenge archive is:
+
+https://cdn.sharechat.com/2a161f8e_1679936280892_sc.zip
+
+The repository expects the extracted dataset in the project root as `train/` and `test/`, with the original tab-separated `.csv` shards. The final experiments use the frozen processed artifacts already stored under `artifacts/`; downloading the raw dataset is therefore only necessary for a fresh reproduction.
 
 | Property               |     Value |
 | ---------------------- | --------: |
@@ -154,6 +174,8 @@ Total:
 | Feed-forward dimension |   128 |
 | Activation             |  GELU |
 | Dropout                |   0.1 |
+
+The implemented Transformer encoder has **6 layers/blocks**. Any thesis text, figure, or table that describes this final architecture as having 1 Transformer block is inconsistent with the implemented model and must be corrected to 6 blocks.
 
 ### MMoE
 
@@ -401,34 +423,24 @@ reports/final_experiment_audit.json
 
 # 10. Figures
 
-Figures generated from the verified result matrix are stored in:
+Figures generated from the verified final result matrix are stored in:
 
 ```text
 reports/stage12/figures/
 ```
 
-The figure set includes:
+The currently verified six-figure set is:
 
-* Install LogLoss vs α_D
-* Install AUC vs α_D
-* No-SSL convergence
-* SSL convergence
-* SSL vs No-SSL comparison
-* Click LogLoss vs α_D
-* six-cell convergence curves
-* Click vs Install comparison
-* client sample distribution
-* architecture overview
+| Figure | Description |
+| ------ | ----------- |
+| 4-1 | Install LogLoss vs α_D |
+| 4-2 | Install AUC vs α_D |
+| 4-3 | No-SSL convergence |
+| 4-4 | SSL convergence |
+| 4-5 | SSL vs No-SSL Install LogLoss |
+| 4-6 | Click LogLoss vs α_D |
 
-Both PNG and PDF versions are provided.
-
-See:
-
-```text
-reports/stage12/figures/README.md
-```
-
-for the complete figure inventory.
+Each verified figure is available in both PNG and PDF form. Additional generators for later Chapter 4 material may exist in the repository, but a generator script is not treated as evidence that its output file already exists.
 
 ---
 
@@ -446,19 +458,19 @@ Final cells A, B, E and F:
 artifacts/federated/stage12/<experiment_id>/
 ```
 
-Cell C:
+Cell C (the α_D = 0.5 No-SSL cell):
 
 ```text
 artifacts/federated/stage10/
 ```
 
-Cell D:
+Cell D (the α_D = 0.5 SSL cell):
 
 ```text
 artifacts/federated/stage11/
 ```
 
-Each final experiment contains:
+The `.pt` files are PyTorch checkpoints and are kept as binary research artifacts; they are not intended to be edited manually. Typical files are:
 
 ```text
 *_best.pt
@@ -471,7 +483,7 @@ Each final experiment contains:
 
 `*_best.pt`
 
-> Model with the lowest global validation Install LogLoss.
+> Model state selected using the lowest global validation Install LogLoss.
 
 `*_final_round10.pt`
 
@@ -479,13 +491,35 @@ Each final experiment contains:
 
 `*_latest.pt`
 
-> Resume state maintained during training.
+> Latest/resume state maintained during training.
+
+To inspect checkpoint files from PowerShell without changing them:
+
+```powershell
+Get-ChildItem .\artifacts\federated -Recurse -Filter *.pt |
+    Select-Object FullName, Length, LastWriteTime
+```
+
+A checkpoint can be opened with PyTorch for inspection using `torch.load(..., map_location="cpu")`; loading it for inference or continued training must use the corresponding model architecture and checkpoint format implemented by the repository. The accompanying `*_result.json` files should be used for the recorded metrics and experiment metadata.
 
 All six best checkpoints passed reload verification.
 
 ---
 
 # 12. Quick Start
+
+## 12.1 Install the environment
+
+Use the repository requirements file so the software environment is defined explicitly rather than installing packages one by one:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+The final experiments were produced with Python 3.13.3 and PyTorch 2.7.0+cu118. The repository should keep `requirements.txt` at the root so the command above is reproducible.
 
 ## Inspect the completed research
 
@@ -547,6 +581,8 @@ The audit checks the frozen protocol, partitions, SSL configuration, artifact in
 # 13. Reproducing the Experiments
 
 > **Warning: expensive.**
+
+The terminology is intentionally separated here: **Cell** refers to one configuration in the final six-cell experiment matrix; **Stage** refers to the historical implementation/execution stage in which that cell was completed. Therefore Cells C and D are part of the same final matrix as A, B, E and F, even though C was executed by `run_stage10b.py` and D by `run_stage11.py`. These dedicated scripts are preserved because those two cells were completed earlier and are frozen research artifacts; they are not different experimental conditions.
 
 The final experiments require an NVIDIA GPU with approximately 8 GiB or more of VRAM.
 
@@ -812,6 +848,22 @@ The implementation is based on established methods and the ShareChat RecSys Chal
 
 ---
 
+# 23. Repository Hygiene Before Submission
+
+The README itself does not claim that the repository root is clean unless the working tree has been checked directly. Before submitting the repository, verify that generated logs, PID/error files, and Python `__pycache__` directories are not unintentionally tracked or left at the repository root.
+
+From PowerShell, a read-only check is:
+
+```powershell
+git status --short
+Get-ChildItem -Force -Recurse -Directory -Filter __pycache__ | Select-Object FullName
+Get-ChildItem -Force -File -Include *.log,*.txt,*.pid,*.err -Recurse | Select-Object FullName
+```
+
+Only after this check should the root-cleanliness status be reported. The commands above do not delete anything.
+
+---
+
 ## Final Note
 
 This repository is primarily a **research artifact**.
@@ -833,15 +885,6 @@ For verifying the research record:
 reports/final_experiment_audit.md
 ```
 
-For reproducing the experiments:
+For reproducing the experiments, follow the **Reproducing the Experiments** section above.
 
-```text
-Reproducing the Experiments
-```
-
-For writing Chapter 4 of the thesis:
-
-```text
-reports/stage12/
-reports/stage12/figures/
-```
+For thesis reporting, use the verified result reports and figures under `reports/stage12/`.
