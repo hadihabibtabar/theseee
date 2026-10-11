@@ -472,7 +472,7 @@ Checkpoint tracking in Git and storage location:
 
 * The checkpoint files listed above **are committed to this Git repository** as regular (non-LFS) Git blobs.
 * **Git LFS is not used** for checkpoints; the repository has no `.gitattributes` LFS configuration.
-* Tracked federated `.pt` files are approximately 9.6–9.7 MB each; the complete set of tracked `.pt` files (federated cells plus the centralized Stage 6 / Stage 8 baseline checkpoints) is 24 files totaling ≈ 315 MB.
+* Tracked federated `.pt` files are approximately 9.6–9.7 MB each; the complete set of tracked `.pt` files (federated cells plus the centralized Stage 6 / Stage 8 baseline checkpoints, excluding smoke-test outputs) is 23 files measured at 309,998,417 bytes (≈ 296 MB).
 * Because checkpoints are tracked in ordinary Git, cloning this repository retrieves them; no external checkpoint download is required.
 
 The `.pt` files are PyTorch checkpoints and are kept as binary research artifacts; they are not intended to be edited manually. Typical files are:
@@ -607,6 +607,21 @@ The terminology is intentionally separated:
 * The distinct script names do **not** indicate different evaluation criteria or additional final experimental conditions; all six cells share the identical frozen protocol of Section 7.
 
 (The script paths above were verified to exist in the repository.)
+
+### Cell-to-runner mapping (verified from runner code and frozen result metadata)
+
+The mapping below was verified from the runner implementations and the `runner`/`stage12.experiment_id`/`protocol.*` fields recorded inside each frozen result JSON, not inferred from filenames:
+
+| Cell | Configuration | Runner script | Frozen result artifact |
+| ---- | ------------- | ------------- | ---------------------- |
+| A | No-SSL, α_D = 1.0 | `scripts/run_stage12_federated.py` (`stage12.use_ssl=False`, `stage12.alpha=1.0`, `stage12.runner` recorded in the result) | `artifacts/federated/stage12/stage12_fed_nossl_alpha_1_0_seed42/stage12_fed_nossl_alpha_1_0_seed42_result.json` |
+| B | SSL, α_D = 1.0 | `scripts/run_stage12_federated.py` (`stage12.use_ssl=True`, `stage12.alpha=1.0`) | `artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42/stage12_fed_ssl_alpha_1_0_seed42_result.json` |
+| C | No-SSL, α_D = 0.5 | `scripts/run_stage10b.py` (result `stage = stage10b-federated-baseline`, `protocol.use_ssl=False`, `protocol.alpha=0.5`) | `artifacts/federated/stage10/stage10b_result.json` |
+| D | SSL, α_D = 0.5 | `scripts/run_stage11.py` (result `stage = stage11-federated-ssl`; SSLTransformerMMoE model, SSL joint loss; partition α_D = 0.5) | `artifacts/federated/stage11/stage11_result.json` |
+| E | No-SSL, α_D = 0.1 | `scripts/run_stage12_federated.py` (`stage12.use_ssl=False`, `stage12.alpha=0.1`) | `artifacts/federated/stage12/stage12_fed_nossl_alpha_0_1_seed42/stage12_fed_nossl_alpha_0_1_seed42_result.json` |
+| F | SSL, α_D = 0.1 | `scripts/run_stage12_federated.py` (`stage12.use_ssl=True`, `stage12.alpha=0.1`) | `artifacts/federated/stage12/stage12_fed_ssl_alpha_0_1_seed42/stage12_fed_ssl_alpha_0_1_seed42_result.json` |
+
+Documented metadata quirk: in the Stage 10B/11 result JSONs, `protocol.alpha` holds the effective Dirichlet parameter (0.5); the Stage 12 result JSONs record the effective settings in `stage12.alpha`/`stage12.use_ssl` (the `stage12.ssl.alpha` field shown there is the SSL supervised-loss weight α_SSL = 0.6, not α_D). All six cells share the same federated protocol and evaluation criteria.
 
 The final experiments require an NVIDIA GPU with approximately 8 GiB or more of VRAM.
 
@@ -868,11 +883,11 @@ The main thesis components correspond to the following repository modules:
 
 The implementation is based on established methods and the ShareChat RecSys Challenge 2023 literature:
 
-* ShareChat Ads — RecSys Challenge 2023
-* Ma et al. — Multi-gate Mixture-of-Experts (MMoE), KDD 2018
-* Chen et al. — SimCLR, 2020
-* Oord et al. — InfoNCE, 2018
-* McMahan et al. — Federated Averaging (FedAvg), 2017
+* Rahul Agrawal, Sarang Brahme, Sourav Maitra, Abhishek Srivastava, Athirai A. Irissappane, Yong Liu, and Saikishore Kalloori. "RecSys Challenge 2023 Dataset: Ads Recommendations in Online Advertising." *Proceedings of the Recommender Systems Challenge 2023 (RecSysChallenge '23)*, 2023, pp. 1–3. https://doi.org/10.1145/3626221.3627283
+* Jiaqi Ma, Zhe Zhao, Xinyang Yi, Jilin Chen, and Lichan Hong. "Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts." *Proceedings of the 24th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining (KDD '18)*, 2018, pp. 1930–1939. https://doi.org/10.1145/3219819.3220007
+* Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. "A Simple Framework for Contrastive Learning of Visual Representations." *Proceedings of the 37th International Conference on Machine Learning (ICML 2020)*, PMLR 119:1597–1607. https://proceedings.mlr.press/v119/chen20j.html (arXiv:2002.05709)
+* Aaron van den Oord, Yazhe Li, and Oriol Vinyals. "Representation Learning with Contrastive Predictive Coding." *arXiv preprint* arXiv:1807.03748, 2018. https://arxiv.org/abs/1807.03748
+* Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, and Blaise Agüera y Arcas. "Communication-Efficient Learning of Deep Networks from Decentralized Data." *Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS 2017)*, PMLR 54:1273–1282. https://proceedings.mlr.press/v54/mcmahan17a.html (arXiv:1602.05629)
 
 ---
 
