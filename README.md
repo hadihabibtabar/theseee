@@ -173,7 +173,6 @@ Total:
 | Activation             |  GELU |
 | Dropout                |   0.1 |
 
-The implemented Transformer encoder has **6 layers/blocks**. Any thesis text, figure, or table that describes this final architecture as having 1 Transformer block is inconsistent with the implemented model and must be corrected to 6 blocks.
 
 ### MMoE
 
