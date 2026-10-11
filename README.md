@@ -88,15 +88,13 @@ The experiments use the ShareChat Ads RecSys Challenge 2023 dataset.
 
 ### Dataset access
 
-The official challenge page is the primary reference for dataset access and challenge documentation:
+The dataset is obtained through the challenge's documented access route. The official challenge page is the primary reference for dataset access and challenge documentation:
 
 https://www.recsyschallenge.com/2023/
 
-A commonly mirrored direct download URL for the original challenge archive is:
+ShareChat's challenge page (https://sharechat.com/recsys2023) documents the registration and data-access procedure. Data access requires registration through the official challenge route; no direct downloadable archive link is reproduced here because no such link could be independently verified as official and persistently available.
 
-https://cdn.sharechat.com/2a161f8e_1679936280892_sc.zip
-
-The repository expects the extracted dataset in the project root as `train/` and `test/`, with the original tab-separated `.csv` shards. The final experiments use the frozen processed artifacts already stored under `artifacts/`; downloading the raw dataset is therefore only necessary for a fresh reproduction.
+For a fresh reproduction, obtain the dataset through that documented access route and extract it into the project root as `train/` and `test/`, with the original tab-separated `.csv` shards. The raw dataset is **not** contained in this Git repository (tracked contents of `train/` and `test/` are raw data blobs, not LFS pointers; see Section 16 for the layout). The final experiments use the frozen processed artifacts already stored under `artifacts/`; downloading the raw dataset is therefore only necessary for a fresh reproduction. Where frozen processed artifacts are available locally they can be used directly for inspection.
 
 | Property               |     Value |
 | ---------------------- | --------: |
@@ -470,6 +468,13 @@ Cell D (the α_D = 0.5 SSL cell):
 artifacts/federated/stage11/
 ```
 
+Checkpoint tracking in Git and storage location:
+
+* The checkpoint files listed above **are committed to this Git repository** as regular (non-LFS) Git blobs.
+* **Git LFS is not used** for checkpoints; the repository has no `.gitattributes` LFS configuration.
+* Tracked federated `.pt` files are approximately 9.6–9.7 MB each; the complete set of tracked `.pt` files (federated cells plus the centralized Stage 6 / Stage 8 baseline checkpoints) is 24 files totaling ≈ 315 MB.
+* Because checkpoints are tracked in ordinary Git, cloning this repository retrieves them; no external checkpoint download is required.
+
 The `.pt` files are PyTorch checkpoints and are kept as binary research artifacts; they are not intended to be edited manually. Typical files are:
 
 ```text
@@ -512,6 +517,7 @@ All six best checkpoints passed reload verification.
 
 Use the repository requirements file so the software environment is defined explicitly rather than installing packages one by one:
 
+
 ```bash
 python -m venv .venv
 .venv\Scripts\activate
@@ -519,7 +525,15 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-The final experiments were produced with Python 3.13.3 and PyTorch 2.7.0+cu118. The repository should keep `requirements.txt` at the root so the command above is reproducible.
+The final experiments were produced with Python 3.13.3 and PyTorch 2.7.0+cu118. `requirements.txt` uses version-pinned requirements (plus an `--extra-index-url` line so that the CUDA wheel `torch==2.7.0+cu118` resolves); note that a pinned requirements file is **not** a complete environment lockfile — transitive dependency versions are not frozen, so environments resolved at different times may differ slightly in transitive dependencies.
+
+The `+cu118` wheel is hosted only on PyTorch's own wheel index (not PyPI); `requirements.txt` therefore contains
+
+```text
+--extra-index-url https://download.pytorch.org/whl/cu118
+```
+
+so that `pip install -r requirements.txt` resolves `torch==2.7.0+cu118` from the PyTorch CUDA-11.8 wheel index. A clean install from this file was not separately tested; the pins mirror the environment actually used to produce the final experiments.
 
 ## Inspect the completed research
 
@@ -582,7 +596,17 @@ The audit checks the frozen protocol, partitions, SSL configuration, artifact in
 
 > **Warning: expensive.**
 
-The terminology is intentionally separated here: **Cell** refers to one configuration in the final six-cell experiment matrix; **Stage** refers to the historical implementation/execution stage in which that cell was completed. Therefore Cells C and D are part of the same final matrix as A, B, E and F, even though C was executed by `run_stage10b.py` and D by `run_stage11.py`. These dedicated scripts are preserved because those two cells were completed earlier and are frozen research artifacts; they are not different experimental conditions.
+### Cell versus Stage
+
+The terminology is intentionally separated:
+
+* A **Cell** is one configuration in the final six-cell experimental matrix (Section 8).
+* A **Stage** is a historical implementation/execution stage (Section 18).
+* Cells C and D belong to the **same final matrix** as the other cells; they are not separate studies.
+* Cell C was executed by `scripts/run_stage10b.py`, and Cell D by `scripts/run_stage11.py`, because those two configurations were completed and frozen earlier than the Stage 12 runner.
+* The distinct script names do **not** indicate different evaluation criteria or additional final experimental conditions; all six cells share the identical frozen protocol of Section 7.
+
+(The script paths above were verified to exist in the repository.)
 
 The final experiments require an NVIDIA GPU with approximately 8 GiB or more of VRAM.
 
@@ -708,6 +732,7 @@ theseee/
 │       └── experiments/           # Experiment integrity
 │
 ├── scripts/                       # Training, audit and verification scripts
+│   └── ops/                       # PowerShell maintenance launchers/monitor (launch_*.ps1, check_*.ps1)
 │
 ├── artifacts/
 │   ├── preprocessing/
@@ -720,7 +745,10 @@ theseee/
 │   ├── stage12/
 │   │   ├── figures/
 │   │   └── final experiment reports
+│   ├── logs/
 │   └── final_experiment_audit.*
+│
+├── "logs and results"/            # Preserved experiment evidence logs (log.txt files tracked)
 │
 ├── tests/
 │
@@ -845,22 +873,6 @@ The implementation is based on established methods and the ShareChat RecSys Chal
 * Chen et al. — SimCLR, 2020
 * Oord et al. — InfoNCE, 2018
 * McMahan et al. — Federated Averaging (FedAvg), 2017
-
----
-
-# 23. Repository Hygiene Before Submission
-
-The README itself does not claim that the repository root is clean unless the working tree has been checked directly. Before submitting the repository, verify that generated logs, PID/error files, and Python `__pycache__` directories are not unintentionally tracked or left at the repository root.
-
-From PowerShell, a read-only check is:
-
-```powershell
-git status --short
-Get-ChildItem -Force -Recurse -Directory -Filter __pycache__ | Select-Object FullName
-Get-ChildItem -Force -File -Include *.log,*.txt,*.pid,*.err -Recurse | Select-Object FullName
-```
-
-Only after this check should the root-cleanliness status be reported. The commands above do not delete anything.
 
 ---
 

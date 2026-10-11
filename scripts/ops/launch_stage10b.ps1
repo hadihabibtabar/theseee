@@ -2,6 +2,7 @@
 # The process survives the launching shell/session ending.
 
 $ErrorActionPreference = "Stop"
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)   # repository root (script lives in scripts/ops)
 
 # Double-launch guard: refuse if a Stage 10B runner is already running.
 $existing = Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
@@ -14,10 +15,10 @@ if ($existing) {
 
 $p = Start-Process -FilePath "python" `
     -ArgumentList "scripts/run_stage10b.py" `
-    -WorkingDirectory $PSScriptRoot `
+    -WorkingDirectory $root `
     -WindowStyle Hidden `
-    -RedirectStandardOutput "$PSScriptRoot\stage10b_log.txt" `
-    -RedirectStandardError "$PSScriptRoot\stage10b_err.txt" `
+    -RedirectStandardOutput "$root\stage10b_log.txt" `
+    -RedirectStandardError "$root\stage10b_err.txt" `
     -PassThru
 
 Start-Sleep -Seconds 3
@@ -27,8 +28,8 @@ if ($p.HasExited) {
     exit 1
 }
 
-Set-Content -Path "$PSScriptRoot\stage10b_pid.txt" -Value $p.Id
+Set-Content -Path "$root\stage10b_pid.txt" -Value $p.Id
 Write-Output "STARTED: PID=$($p.Id)"
-Write-Output "LOG:     $PSScriptRoot\stage10b_log.txt"
-Write-Output "ERRLOG:  $PSScriptRoot\stage10b_err.txt"
-Write-Output "PIDFILE: $PSScriptRoot\stage10b_pid.txt"
+Write-Output "LOG:     $root\stage10b_log.txt"
+Write-Output "ERRLOG:  $root\stage10b_err.txt"
+Write-Output "PIDFILE: $root\stage10b_pid.txt"

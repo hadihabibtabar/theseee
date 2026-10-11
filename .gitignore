@@ -1,4 +1,19 @@
+# Python caches
 __pycache__/
 *.pyc
+*.pyo
 .pytest_cache/
+
+# Local agent state
 .freebuff
+
+# Transient operational files written next to the repository root by
+# scripts/ops launchers (launch_*.ps1 / check_*.ps1). Scientific logs are
+# preserved under "logs and results/" and reports/logs/.
+*_pid.txt
+*_err.txt
+
+# Smoke-test preprocessing output (regenerable via
+#   python scripts/preprocess_dataset.py --smoke ... --output_dir artifacts_smoke)
+.artifacts_smoke/
+artifacts_smoke/

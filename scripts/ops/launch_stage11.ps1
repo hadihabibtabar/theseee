@@ -2,6 +2,7 @@
 # The process survives the launching shell/session ending.
 
 $ErrorActionPreference = "Stop"
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)   # repository root (script lives in scripts/ops)
 
 # Double-launch guard: refuse if a Stage 11 runner is already running.
 $existing = Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
@@ -14,10 +15,10 @@ if ($existing) {
 
 $p = Start-Process -FilePath "python" `
     -ArgumentList "scripts/run_stage11.py" `
-    -WorkingDirectory $PSScriptRoot `
+    -WorkingDirectory $root `
     -WindowStyle Hidden `
-    -RedirectStandardOutput "$PSScriptRoot\stage11_log.txt" `
-    -RedirectStandardError "$PSScriptRoot\stage11_err.txt" `
+    -RedirectStandardOutput "$root\stage11_log.txt" `
+    -RedirectStandardError "$root\stage11_err.txt" `
     -PassThru
 
 # Give Python + CUDA/torch import (~90 s on this machine) time to initialize
@@ -30,8 +31,8 @@ if ($p.HasExited) {
     exit 1
 }
 
-Set-Content -Path "$PSScriptRoot\stage11_pid.txt" -Value $p.Id
+Set-Content -Path "$root\stage11_pid.txt" -Value $p.Id
 Write-Output "STARTED: PID=$($p.Id)"
-Write-Output "LOG:     $PSScriptRoot\stage11_log.txt"
-Write-Output "ERRLOG:  $PSScriptRoot\stage11_err.txt"
-Write-Output "PIDFILE: $PSScriptRoot\stage11_pid.txt"
+Write-Output "LOG:     $root\stage11_log.txt"
+Write-Output "ERRLOG:  $root\stage11_err.txt"
+Write-Output "PIDFILE: $root\stage11_pid.txt"

@@ -1,5 +1,5 @@
 # Detached launcher for the Stage 8 Experiment D run (Windows PowerShell).
-$root = $PSScriptRoot
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)   # repository root (script lives in scripts/ops)
 Set-Location $root
 $stdout = Join-Path $root "stage8_experiment_d_log.txt"
 $stderr = Join-Path $root "stage8_experiment_d_err.txt"

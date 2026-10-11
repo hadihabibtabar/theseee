@@ -36,7 +36,7 @@
 #   * sleeps -RetryDelaySeconds between attempts (driver/process cleanup).
 #
 # USAGE (this script blocks until Stage 11 completes or gives up):
-#   powershell -NoProfile -ExecutionPolicy Bypass -File .\launch_stage11_resilient.ps1
+#   powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\ops\launch_stage11_resilient.ps1
 #   optional: -MaxAttempts 10 -RetryDelaySeconds 90
 
 param(
@@ -45,7 +45,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$root = $PSScriptRoot
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)   # repository root (script lives in scripts/ops)
 $stageDir = Join-Path $root "artifacts\federated\stage11"
 $latest = Join-Path $stageDir "stage11_latest.pt"
 $best   = Join-Path $stageDir "stage11_best.pt"

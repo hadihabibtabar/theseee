@@ -23,7 +23,7 @@
 #   * sleeps -RetryDelaySeconds between attempts (driver/process cleanup).
 #
 # USAGE (blocks until the cell completes or gives up; start THIS SCRIPT detached):
-#   powershell -NoProfile -ExecutionPolicy Bypass -File .\launch_stage12_resilient.ps1 `
+#   powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\ops\launch_stage12_resilient.ps1 `
 #       -Experiment stage12_fed_nossl_alpha_1_0_seed42
 
 param(
@@ -33,7 +33,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$root = $PSScriptRoot
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)   # repository root (script lives in scripts/ops)
 $stageDir = Join-Path $root ("artifacts\federated\stage12\" + $Experiment)
 $latest = Join-Path $stageDir ($Experiment + "_latest.pt")
 $best   = Join-Path $stageDir ($Experiment + "_best.pt")
