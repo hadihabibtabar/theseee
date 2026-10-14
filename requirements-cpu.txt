@@ -1,0 +1,25 @@
+# CPU-only pinned environment (Python 3.13.3, Windows 11, no NVIDIA GPU).
+#
+# Same pinned versions as requirements.txt, except that torch is the CPU
+# build (torch==2.7.0 without the +cu118 local version), installed from
+# PyTorch's official CPU wheel index instead of the CUDA-11.8 index.
+#
+# Install into a FRESH virtual environment: this file cannot downgrade an
+# environment that already installed torch==2.7.0+cu118 (equal version
+# numbers, and the CUDA local version is ordered newer, so pip keeps the
+# CUDA wheel).
+#
+# The GPU route in requirements.txt remains the authoritative environment
+# for reproducing the final experiments of the thesis.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+torch==2.7.0
+numpy==2.2.6
+pandas==2.2.3
+pyarrow==20.0.0
+scikit-learn==1.6.1
+matplotlib==3.10.0
+psutil==7.0.0
+arabic-reshaper==3.0.1
+python-bidi==0.6.11
+pytest==9.1.1

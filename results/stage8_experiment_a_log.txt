@@ -1,0 +1,79 @@
+=== Stage 8 experiment A (experiment_a_transformer_supervised) ===
+start: 2026-09-17T11:29:23
+protocol: seed 42, batch 1024, epochs 3, AdamW lr 0.0003 wd 0.01, patience 2, alpha 0.6, corruption 0.15, tau 0.2
+protocol notes: corrected per-epoch reshuffle (Stage 8 sampler); canonical B = frozen Stage 6 result (historical sampler); no class weighting/focal/oversampling/scheduler/search
+=== pre-run integrity verification ===
+  Stage 2 artifact hash:      c3a62caf13326617 (expected c3a62caf13326617) OK
+  split train hash:           dd37605169615442 (expected dd37605169615442) OK
+  split validation hash:      3cd8370ebdecb305 (expected 3cd8370ebdecb305) OK
+  Stage 6 checkpoint sha256:  25f3267eba...e1d8617 OK
+  Stage 6 checkpoint mtime:   2026-09-16T16:32:34
+  raw train/test bytes:       1,919,412,753 / 88,684,100 OK
+=== environment verification ===
+  CUDA: NVIDIA GeForce RTX 4060 Ti
+  torch: 2.7.0+cu118
+  dataset opens: 3,485,852 rows, 90 parts
+  official test data: NOT loaded (never constructed in this script)
+  split verified: 3,137,266 train / 348,586 val; train dd37605169615442 val 3cd8370ebdecb305
+=== preflight (1 train batch + 1 validation batch, real data) ===
+  train pass: total 0.6960 install 0.6960 ()
+  parameters changed by optimizer step: 114/114
+  validation pass: install logloss 0.6717 AUC 0.4936
+  full-run model initializes identically to preflight model: True
+  preflight PASSED
+
+=== full experiment run ===
+batches per epoch: train 3064, validation 341
+  epoch 1 progress: batch 500 | running total 0.3462
+  epoch 1 progress: batch 1000 | running total 0.3173
+  epoch 1 progress: batch 1500 | running total 0.3046
+  epoch 1 progress: batch 2000 | running total 0.2979
+  epoch 1 progress: batch 2500 | running total 0.2931
+  epoch 1 progress: batch 3000 | running total 0.2894
+epoch 01 |  4244.4s | lr 3.00e-04 | train total 0.2890 (sup 0.2890 | install 0.2890 | ) | | val logloss install 0.2680 AUC 0.9029
+  -> new best validation install logloss; checkpoint saved
+  epoch 2 progress: batch 500 | running total 0.2682
+  epoch 2 progress: batch 1000 | running total 0.2676
+  epoch 2 progress: batch 1500 | running total 0.2675
+  epoch 2 progress: batch 2000 | running total 0.2668
+  epoch 2 progress: batch 2500 | running total 0.2658
+  epoch 2 progress: batch 3000 | running total 0.2652
+epoch 02 |  3181.0s | lr 3.00e-04 | train total 0.2651 (sup 0.2651 | install 0.2651 | ) | | val logloss install 0.2604 AUC 0.9097
+  -> new best validation install logloss; checkpoint saved
+  epoch 3 progress: batch 500 | running total 0.2588
+  epoch 3 progress: batch 1000 | running total 0.2591
+  epoch 3 progress: batch 1500 | running total 0.2590
+  epoch 3 progress: batch 2000 | running total 0.2590
+  epoch 3 progress: batch 2500 | running total 0.2587
+  epoch 3 progress: batch 3000 | running total 0.2589
+epoch 03 |  3803.3s | lr 3.00e-04 | train total 0.2589 (sup 0.2589 | install 0.2589 | ) | | val logloss install 0.2589 AUC 0.9120
+  -> new best validation install logloss; checkpoint saved
+result written: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\checkpoints\stage8\experiment_a_transformer_supervised_result.json
+
+=== checkpoint verification ===
+  checkpoint: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\checkpoints\stage8\experiment_a_transformer_supervised_best.pt
+  payload: stage=8-controlled-experiments experiment=A epoch=3 seed=42 params=2,352,129 split_train=dd37605169615442 split_val=3cd8370ebdecb305 prep=c3a62caf13326617
+  sampler protocol: stage8-corrected-per-epoch-reshuffle: set_epoch on PartShuffledBatchSampler (epoch e uses seed + e - 1)
+  written: 2026-09-17T11:06:32.231304+00:00
+  reload verified by runner (fresh model, one val batch, atol 1e-5): True
+
+=== experiment summary ===
+epoch |   seconds | train total | train install |   val LL |  val AUC
+    1 |    4244.4 |      0.2890 |        0.2890 |   0.2680 |   0.9029
+    2 |    3181.0 |      0.2651 |        0.2651 |   0.2604 |   0.9097
+    3 |    3803.3 |      0.2589 |        0.2589 |   0.2589 |   0.9120
+rows: train 3,137,266 / val 348,586 (batches 3064 / 341)
+best epoch: 3
+best val install LogLoss: 0.2589328218594451
+best val install AUC:     0.9120
+total runtime: 11229.0s (3.12 h)
+peak RSS: 3167 MiB
+peak GPU allocated/reserved: 3639 / 4160 MiB
+result JSON: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\checkpoints\stage8\experiment_a_transformer_supervised_result.json
+official test set: NOT evaluated (never loaded)
+
+=== post-run integrity verification ===
+  protected artifacts unchanged: Stage 2 hash, split hashes, Stage 6 checkpoint sha256+mtime, raw train/test bytes all OK
+
+RESULT: STAGE 8 EXPERIMENT A COMPLETE
+No other Stage 8 experiment was launched by this process.

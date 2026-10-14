@@ -1,0 +1,38 @@
+device: cuda (NVIDIA GeForce RTX 4060 Ti)
+config: {"seed": 42, "batch_size": 1024, "epochs": 3, "learning_rate": 0.0003, "weight_decay": 0.01, "optimizer": "adamw", "lambda_click": 1.0, "lambda_install": 1.0, "early_stopping_patience": 2, "device": "auto"}
+seed policy: {"seed": 42, "deterministic_cuda_algorithms": false, "cudnn_benchmark": false}
+processed train rows: 3,485,852 (90 parts)
+split: loaded existing (hash-verified)
+split: 3,137,266 train / 348,586 validation (seed 42, ratio 0.1); hashes train=dd37605169615442 val=3cd8370ebdecb305
+batches per epoch: train 3064, validation 341
+model parameters: 2,502,930
+epoch 01 | 22711.6s | lr 3.00e-04 | train total 0.5951 (click 0.3065, install 0.2886) | val logloss click 0.2736 install 0.2643 | val AUC click 0.9041 install 0.9059
+  -> new best validation install logloss; checkpoint saved
+epoch 02 | 58431.1s | lr 3.00e-04 | train total 0.5337 (click 0.2711, install 0.2626) | val logloss click 0.2664 install 0.2586 | val AUC click 0.9098 install 0.9112
+  -> new best validation install logloss; checkpoint saved
+epoch 03 |  3209.9s | lr 3.00e-04 | train total 0.5243 (click 0.2663, install 0.2580) | val logloss click 0.2640 install 0.2562 | val AUC click 0.9114 install 0.9132
+  -> new best validation install logloss; checkpoint saved
+
+=== summary ===
+epochs completed:        3
+best epoch:              3
+best val install logloss: 0.2562
+best val install AUC:     0.9132
+  click logloss:          0.2640
+  click AUC:              0.9114
+total training time:     84352.8s
+RSS start/peak:          644 / 845 MiB
+peak GPU allocated:      3594 MiB
+
+=== checkpoint reload verification ===
+  click_logit: finite=True, matches_saved=True
+  install_logit: finite=True, matches_saved=True
+checkpoint payload: epoch=3, seed=42, split_hash=dd37605169615442, best_val_install_logloss=0.2562
+RELOAD PASSED
+
+=== official test set: schema/inference compatibility only ===
+test dataset length: 160,973 (labels absent, features only)
+one inference-only forward on 64 test rows: click (64,), install (64,), finite=True
+NOT used for training, validation, model selection, or early stopping.
+
+RESULT: STAGE 6 CENTRALIZED TRAINING COMPLETE

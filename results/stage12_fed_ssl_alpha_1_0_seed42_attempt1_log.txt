@@ -1,0 +1,290 @@
+=== STAGE 12: stage12_fed_ssl_alpha_1_0_seed42 ===
+start: 2026-09-21T19:28:47+00:00
+cell: SSL | alpha 1.0 | partition artifacts/federated/partitions/stage12_partition_alpha_1_0_seed42.npz | output artifacts/federated/stage12/stage12_fed_ssl_alpha_1_0_seed42
+protocol: 10 clients, seed 42, 10 rounds, 1 local epoch, batch 1024, AdamW lr 0.0003 wd 0.01, sample_weighted_fedavg, cold seed-42 init
+
+=== pre-run integrity verification ===
+  Stage 2 / split / Stage 6 / raw bytes: all frozen values OK
+  fingerprint recorded over 14 guarded files (Stage 1-9, Stage 10B, Stage 11, Stage 9 alpha=0.5 partition, this cell's partition)
+  device: cuda (NVIDIA GeForce RTX 4060 Ti)
+  [OK] partition hash c382d47f5824f64a | alpha 1.0 | 10 clients | rows 3,137,266 | validation overlap 0
+  official test data: NOT loaded (never constructed in this script)
+
+=== 1. cold seed-42 global initialization (SSL) ===
+  parameter count 2,527,698; state entries 142
+  cold init: no checkpoint loaded (Stage 6/8/10B/11 outputs untouched)
+
+=== ROUND 1/10 | sampler epoch 0 per client ===
+    r1 client_00 batch 200 | running joint 2.1481 (contrastive 4.2356)
+    r1 client_00 batch 400 | running joint 2.0006 (contrastive 4.0118)
+  r1 client_00 done: 452,032 rows | loss 1.9784 | 1692.0s (contrastive 3.9753)
+    r1 client_01 batch 200 | running joint 2.2153 (contrastive 4.2321)
+    r1 client_01 batch 400 | running joint 2.0617 (contrastive 3.9946)
+  r1 client_01 done: 460,777 rows | loss 2.0365 | 871.0s (contrastive 3.9524)
+    r1 client_02 batch 200 | running joint 2.2748 (contrastive 4.2218)
+    r1 client_02 batch 400 | running joint 2.1203 (contrastive 3.9827)
+  r1 client_02 done: 585,448 rows | loss 2.0442 | 1662.2s (contrastive 3.8598)
+  r1 client_03 done: 151,573 rows | loss 2.3721 | 397.0s (contrastive 4.3241)
+  r1 client_04 done: 137,132 rows | loss 2.3998 | 366.7s (contrastive 4.3880)
+    r1 client_05 batch 200 | running joint 2.2030 (contrastive 4.2379)
+  r1 client_05 done: 272,725 rows | loss 2.1438 | 324.2s (contrastive 4.1492)
+    r1 client_06 batch 200 | running joint 2.1513 (contrastive 4.2343)
+  r1 client_06 done: 253,784 rows | loss 2.1059 | 288.4s (contrastive 4.1692)
+    r1 client_07 batch 200 | running joint 1.9988 (contrastive 4.2435)
+    r1 client_07 batch 400 | running joint 1.8512 (contrastive 4.0253)
+  r1 client_07 done: 488,550 rows | loss 1.8140 | 556.9s (contrastive 3.9593)
+  r1 client_08 done: 104,506 rows | loss 2.4404 | 112.0s (contrastive 4.4818)
+    r1 client_09 batch 200 | running joint 2.2462 (contrastive 4.2242)
+  r1 client_09 done: 230,739 rows | loss 2.2198 | 227.6s (contrastive 4.1845)
+  >> round 1 SUMMARY: 6531.8s | val Install LogLoss 0.340365 (AUC 0.8339) | Click LogLoss 0.427112 (AUC 0.8054) | NEW BEST -> checkpoint saved | peak RSS 2827 MiB | peak GPU alloc/res 7186/7738 MiB
+  >> rounds completed: 1/10 | elapsed 1.81 h
+
+=== ROUND 2/10 | sampler epoch 1 per client ===
+    r2 client_00 batch 200 | running joint 1.7392 (contrastive 3.5647)
+    r2 client_00 batch 400 | running joint 1.6986 (contrastive 3.5026)
+  r2 client_00 done: 452,032 rows | loss 1.6925 | 482.5s (contrastive 3.4929)
+    r2 client_01 batch 200 | running joint 1.8150 (contrastive 3.5703)
+    r2 client_01 batch 400 | running joint 1.7758 (contrastive 3.5111)
+  r2 client_01 done: 460,777 rows | loss 1.7684 | 584.2s (contrastive 3.4997)
+    r2 client_02 batch 200 | running joint 1.8782 (contrastive 3.5731)
+    r2 client_02 batch 400 | running joint 1.8397 (contrastive 3.5120)
+  r2 client_02 done: 585,448 rows | loss 1.8159 | 732.9s (contrastive 3.4760)
+  r2 client_03 done: 151,573 rows | loss 1.9642 | 174.9s (contrastive 3.6264)
+  r2 client_04 done: 137,132 rows | loss 2.0063 | 165.8s (contrastive 3.6727)
+    r2 client_05 batch 200 | running joint 1.8033 (contrastive 3.5690)
+  r2 client_05 done: 272,725 rows | loss 1.7892 | 326.4s (contrastive 3.5452)
+    r2 client_06 batch 200 | running joint 1.7474 (contrastive 3.5651)
+  r2 client_06 done: 253,784 rows | loss 1.7377 | 278.2s (contrastive 3.5474)
+    r2 client_07 batch 200 | running joint 1.5952 (contrastive 3.5655)
+    r2 client_07 batch 400 | running joint 1.5621 (contrastive 3.5015)
+  r2 client_07 done: 488,550 rows | loss 1.5532 | 559.9s (contrastive 3.4829)
+  r2 client_08 done: 104,506 rows | loss 1.9809 | 112.2s (contrastive 3.7098)
+    r2 client_09 batch 200 | running joint 1.8470 (contrastive 3.5674)
+  r2 client_09 done: 230,739 rows | loss 1.8408 | 375.2s (contrastive 3.5575)
+  >> round 2 SUMMARY: 3826.4s | val Install LogLoss 0.302555 (AUC 0.8681) | Click LogLoss 0.327597 (AUC 0.8677) | NEW BEST -> checkpoint saved | peak RSS 3234 MiB | peak GPU alloc/res 7185/8648 MiB
+  >> rounds completed: 2/10 | elapsed 2.88 h
+
+=== ROUND 3/10 | sampler epoch 2 per client ===
+    r3 client_00 batch 200 | running joint 1.6269 (contrastive 3.3880)
+    r3 client_00 batch 400 | running joint 1.6090 (contrastive 3.3590)
+  r3 client_00 done: 452,032 rows | loss 1.6064 | 480.8s (contrastive 3.3540)
+    r3 client_01 batch 200 | running joint 1.7025 (contrastive 3.3912)
+    r3 client_01 batch 400 | running joint 1.6848 (contrastive 3.3655)
+  r3 client_01 done: 460,777 rows | loss 1.6812 | 563.5s (contrastive 3.3600)
+    r3 client_02 batch 200 | running joint 1.7679 (contrastive 3.3921)
+    r3 client_02 batch 400 | running joint 1.7514 (contrastive 3.3668)
+  r3 client_02 done: 585,448 rows | loss 1.7399 | 706.1s (contrastive 3.3480)
+  r3 client_03 done: 151,573 rows | loss 1.8432 | 167.9s (contrastive 3.4174)
+  r3 client_04 done: 137,132 rows | loss 1.8936 | 160.1s (contrastive 3.4612)
+    r3 client_05 batch 200 | running joint 1.6880 (contrastive 3.3887)
+  r3 client_05 done: 272,725 rows | loss 1.6820 | 314.5s (contrastive 3.3778)
+    r3 client_06 batch 200 | running joint 1.6352 (contrastive 3.3854)
+  r3 client_06 done: 253,784 rows | loss 1.6311 | 277.0s (contrastive 3.3784)
+    r3 client_07 batch 200 | running joint 1.4985 (contrastive 3.3851)
+    r3 client_07 batch 400 | running joint 1.4833 (contrastive 3.3552)
+  r3 client_07 done: 488,550 rows | loss 1.4784 | 539.9s (contrastive 3.3455)
+  r3 client_08 done: 104,506 rows | loss 1.8593 | 108.1s (contrastive 3.4765)
+    r3 client_09 batch 200 | running joint 1.7332 (contrastive 3.3857)
+  r3 client_09 done: 230,739 rows | loss 1.7314 | 220.0s (contrastive 3.3821)
+  >> round 3 SUMMARY: 3572.3s | val Install LogLoss 0.289397 (AUC 0.8811) | Click LogLoss 0.301930 (AUC 0.8820) | NEW BEST -> checkpoint saved | peak RSS 2781 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 3/10 | elapsed 3.87 h
+
+=== ROUND 4/10 | sampler epoch 3 per client ===
+    r4 client_00 batch 200 | running joint 1.5764 (contrastive 3.2963)
+    r4 client_00 batch 400 | running joint 1.5661 (contrastive 3.2774)
+  r4 client_00 done: 452,032 rows | loss 1.5642 | 481.7s (contrastive 3.2738)
+    r4 client_01 batch 200 | running joint 1.6479 (contrastive 3.2996)
+    r4 client_01 batch 400 | running joint 1.6372 (contrastive 3.2812)
+  r4 client_01 done: 460,777 rows | loss 1.6353 | 564.8s (contrastive 3.2773)
+    r4 client_02 batch 200 | running joint 1.7151 (contrastive 3.3022)
+    r4 client_02 batch 400 | running joint 1.7046 (contrastive 3.2832)
+  r4 client_02 done: 585,448 rows | loss 1.6974 | 706.8s (contrastive 3.2701)
+  r4 client_03 done: 151,573 rows | loss 1.7921 | 168.1s (contrastive 3.3272)
+  r4 client_04 done: 137,132 rows | loss 1.8422 | 160.2s (contrastive 3.3634)
+    r4 client_05 batch 200 | running joint 1.6366 (contrastive 3.2973)
+  r4 client_05 done: 272,725 rows | loss 1.6331 | 315.0s (contrastive 3.2909)
+    r4 client_06 batch 200 | running joint 1.5864 (contrastive 3.2975)
+  r4 client_06 done: 253,784 rows | loss 1.5834 | 277.6s (contrastive 3.2915)
+    r4 client_07 batch 200 | running joint 1.4533 (contrastive 3.2957)
+    r4 client_07 batch 400 | running joint 1.4427 (contrastive 3.2733)
+  r4 client_07 done: 488,550 rows | loss 1.4391 | 538.8s (contrastive 3.2662)
+  r4 client_08 done: 104,506 rows | loss 1.8031 | 107.9s (contrastive 3.3756)
+    r4 client_09 batch 200 | running joint 1.6832 (contrastive 3.2976)
+  r4 client_09 done: 230,739 rows | loss 1.6824 | 219.0s (contrastive 3.2953)
+  >> round 4 SUMMARY: 3574.7s | val Install LogLoss 0.283944 (AUC 0.8866) | Click LogLoss 0.295286 (AUC 0.8863) | NEW BEST -> checkpoint saved | peak RSS 2783 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 4/10 | elapsed 4.86 h
+
+=== ROUND 5/10 | sampler epoch 4 per client ===
+    r5 client_00 batch 200 | running joint 1.5463 (contrastive 3.2341)
+    r5 client_00 batch 400 | running joint 1.5389 (contrastive 3.2206)
+  r5 client_00 done: 452,032 rows | loss 1.5379 | 482.0s (contrastive 3.2182)
+    r5 client_01 batch 200 | running joint 1.6164 (contrastive 3.2371)
+    r5 client_01 batch 400 | running joint 1.6091 (contrastive 3.2245)
+  r5 client_01 done: 460,777 rows | loss 1.6072 | 583.6s (contrastive 3.2223)
+    r5 client_02 batch 200 | running joint 1.6844 (contrastive 3.2389)
+    r5 client_02 batch 400 | running joint 1.6762 (contrastive 3.2260)
+  r5 client_02 done: 585,448 rows | loss 1.6708 | 732.2s (contrastive 3.2174)
+  r5 client_03 done: 151,573 rows | loss 1.7584 | 174.5s (contrastive 3.2623)
+  r5 client_04 done: 137,132 rows | loss 1.8094 | 165.9s (contrastive 3.2988)
+    r5 client_05 batch 200 | running joint 1.6038 (contrastive 3.2342)
+  r5 client_05 done: 272,725 rows | loss 1.6024 | 326.3s (contrastive 3.2286)
+    r5 client_06 batch 200 | running joint 1.5553 (contrastive 3.2331)
+  r5 client_06 done: 253,784 rows | loss 1.5536 | 288.3s (contrastive 3.2293)
+    r5 client_07 batch 200 | running joint 1.4229 (contrastive 3.2327)
+    r5 client_07 batch 400 | running joint 1.4162 (contrastive 3.2175)
+  r5 client_07 done: 488,550 rows | loss 1.4147 | 559.2s (contrastive 3.2130)
+  r5 client_08 done: 104,506 rows | loss 1.7708 | 112.3s (contrastive 3.3062)
+    r5 client_09 batch 200 | running joint 1.6513 (contrastive 3.2343)
+  r5 client_09 done: 230,739 rows | loss 1.6511 | 227.8s (contrastive 3.2330)
+  >> round 5 SUMMARY: 3686.0s | val Install LogLoss 0.281977 (AUC 0.8894) | Click LogLoss 0.292335 (AUC 0.8885) | NEW BEST -> checkpoint saved | peak RSS 2835 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 5/10 | elapsed 5.89 h
+
+=== ROUND 6/10 | sampler epoch 5 per client ===
+    r6 client_00 batch 200 | running joint 1.5265 (contrastive 3.1946)
+    r6 client_00 batch 400 | running joint 1.5218 (contrastive 3.1844)
+  r6 client_00 done: 452,032 rows | loss 1.5209 | 481.4s (contrastive 3.1829)
+    r6 client_01 batch 200 | running joint 1.5922 (contrastive 3.1946)
+    r6 client_01 batch 400 | running joint 1.5904 (contrastive 3.1885)
+  r6 client_01 done: 460,777 rows | loss 1.5895 | 582.8s (contrastive 3.1870)
+    r6 client_02 batch 200 | running joint 1.6630 (contrastive 3.1991)
+    r6 client_02 batch 400 | running joint 1.6582 (contrastive 3.1909)
+  r6 client_02 done: 585,448 rows | loss 1.6548 | 731.4s (contrastive 3.1851)
+  r6 client_03 done: 151,573 rows | loss 1.7380 | 174.4s (contrastive 3.2188)
+  r6 client_04 done: 137,132 rows | loss 1.7859 | 166.2s (contrastive 3.2535)
+    r6 client_05 batch 200 | running joint 1.5850 (contrastive 3.1929)
+  r6 client_05 done: 272,725 rows | loss 1.5830 | 326.5s (contrastive 3.1896)
+    r6 client_06 batch 200 | running joint 1.5354 (contrastive 3.1927)
+  r6 client_06 done: 253,784 rows | loss 1.5347 | 288.1s (contrastive 3.1907)
+    r6 client_07 batch 200 | running joint 1.4042 (contrastive 3.1915)
+    r6 client_07 batch 400 | running joint 1.4017 (contrastive 3.1827)
+  r6 client_07 done: 488,550 rows | loss 1.3999 | 557.2s (contrastive 3.1801)
+  r6 client_08 done: 104,506 rows | loss 1.7497 | 112.4s (contrastive 3.2604)
+    r6 client_09 batch 200 | running joint 1.6312 (contrastive 3.1942)
+  r6 client_09 done: 230,739 rows | loss 1.6315 | 228.3s (contrastive 3.1931)
+  >> round 6 SUMMARY: 3683.3s | val Install LogLoss 0.278527 (AUC 0.8928) | Click LogLoss 0.290245 (AUC 0.8898) | NEW BEST -> checkpoint saved | peak RSS 2764 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 6/10 | elapsed 6.91 h
+
+=== ROUND 7/10 | sampler epoch 6 per client ===
+    r7 client_00 batch 200 | running joint 1.5139 (contrastive 3.1672)
+    r7 client_00 batch 400 | running joint 1.5112 (contrastive 3.1612)
+  r7 client_00 done: 452,032 rows | loss 1.5103 | 481.7s (contrastive 3.1603)
+    r7 client_01 batch 200 | running joint 1.5822 (contrastive 3.1711)
+    r7 client_01 batch 400 | running joint 1.5783 (contrastive 3.1651)
+  r7 client_01 done: 460,777 rows | loss 1.5780 | 581.6s (contrastive 3.1639)
+    r7 client_02 batch 200 | running joint 1.6502 (contrastive 3.1737)
+    r7 client_02 batch 400 | running joint 1.6461 (contrastive 3.1679)
+  r7 client_02 done: 585,448 rows | loss 1.6439 | 730.9s (contrastive 3.1637)
+  r7 client_03 done: 151,573 rows | loss 1.7212 | 174.9s (contrastive 3.1899)
+  r7 client_04 done: 137,132 rows | loss 1.7718 | 166.3s (contrastive 3.2267)
+    r7 client_05 batch 200 | running joint 1.5710 (contrastive 3.1679)
+  r7 client_05 done: 272,725 rows | loss 1.5700 | 326.8s (contrastive 3.1645)
+    r7 client_06 batch 200 | running joint 1.5238 (contrastive 3.1677)
+  r7 client_06 done: 253,784 rows | loss 1.5233 | 288.9s (contrastive 3.1662)
+    r7 client_07 batch 200 | running joint 1.3940 (contrastive 3.1666)
+    r7 client_07 batch 400 | running joint 1.3908 (contrastive 3.1598)
+  r7 client_07 done: 488,550 rows | loss 1.3899 | 558.7s (contrastive 3.1580)
+  r7 client_08 done: 104,506 rows | loss 1.7313 | 112.4s (contrastive 3.2298)
+    r7 client_09 batch 200 | running joint 1.6186 (contrastive 3.1676)
+  r7 client_09 done: 230,739 rows | loss 1.6182 | 228.4s (contrastive 3.1673)
+  >> round 7 SUMMARY: 3685.7s | val Install LogLoss 0.277702 (AUC 0.8939) | Click LogLoss 0.288588 (AUC 0.8911) | NEW BEST -> checkpoint saved | peak RSS 2777 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 7/10 | elapsed 7.93 h
+
+=== ROUND 8/10 | sampler epoch 7 per client ===
+    r8 client_00 batch 200 | running joint 1.5052 (contrastive 3.1500)
+    r8 client_00 batch 400 | running joint 1.5026 (contrastive 3.1448)
+  r8 client_00 done: 452,032 rows | loss 1.5024 | 482.2s (contrastive 3.1439)
+    r8 client_01 batch 200 | running joint 1.5725 (contrastive 3.1516)
+    r8 client_01 batch 400 | running joint 1.5696 (contrastive 3.1478)
+  r8 client_01 done: 460,777 rows | loss 1.5688 | 583.7s (contrastive 3.1469)
+    r8 client_02 batch 200 | running joint 1.6400 (contrastive 3.1545)
+    r8 client_02 batch 400 | running joint 1.6373 (contrastive 3.1500)
+  r8 client_02 done: 585,448 rows | loss 1.6354 | 732.1s (contrastive 3.1469)
+  r8 client_03 done: 151,573 rows | loss 1.7129 | 174.2s (contrastive 3.1721)
+  r8 client_04 done: 137,132 rows | loss 1.7608 | 165.7s (contrastive 3.2053)
+    r8 client_05 batch 200 | running joint 1.5617 (contrastive 3.1481)
+  r8 client_05 done: 272,725 rows | loss 1.5616 | 327.3s (contrastive 3.1478)
+    r8 client_06 batch 200 | running joint 1.5148 (contrastive 3.1493)
+  r8 client_06 done: 253,784 rows | loss 1.5148 | 289.2s (contrastive 3.1481)
+    r8 client_07 batch 200 | running joint 1.3854 (contrastive 3.1500)
+    r8 client_07 batch 400 | running joint 1.3839 (contrastive 3.1448)
+  r8 client_07 done: 488,550 rows | loss 1.3828 | 559.6s (contrastive 3.1432)
+  r8 client_08 done: 104,506 rows | loss 1.7214 | 112.3s (contrastive 3.2098)
+    r8 client_09 batch 200 | running joint 1.6085 (contrastive 3.1481)
+  r8 client_09 done: 230,739 rows | loss 1.6089 | 228.2s (contrastive 3.1482)
+  >> round 8 SUMMARY: 3689.4s | val Install LogLoss 0.276860 (AUC 0.8951) | Click LogLoss 0.287999 (AUC 0.8918) | NEW BEST -> checkpoint saved | peak RSS 2769 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 8/10 | elapsed 8.96 h
+
+=== ROUND 9/10 | sampler epoch 8 per client ===
+    r9 client_00 batch 200 | running joint 1.4990 (contrastive 3.1382)
+    r9 client_00 batch 400 | running joint 1.4974 (contrastive 3.1336)
+  r9 client_00 done: 452,032 rows | loss 1.4971 | 1171.8s (contrastive 3.1329)
+    r9 client_01 batch 200 | running joint 1.5621 (contrastive 3.1385)
+    r9 client_01 batch 400 | running joint 1.5625 (contrastive 3.1352)
+  r9 client_01 done: 460,777 rows | loss 1.5623 | 584.8s (contrastive 3.1347)
+    r9 client_02 batch 200 | running joint 1.6307 (contrastive 3.1405)
+    r9 client_02 batch 400 | running joint 1.6302 (contrastive 3.1373)
+  r9 client_02 done: 585,448 rows | loss 1.6291 | 734.3s (contrastive 3.1353)
+  r9 client_03 done: 151,573 rows | loss 1.7051 | 175.2s (contrastive 3.1568)
+  r9 client_04 done: 137,132 rows | loss 1.7531 | 166.7s (contrastive 3.1908)
+    r9 client_05 batch 200 | running joint 1.5551 (contrastive 3.1348)
+  r9 client_05 done: 272,725 rows | loss 1.5548 | 326.3s (contrastive 3.1345)
+    r9 client_06 batch 200 | running joint 1.5075 (contrastive 3.1356)
+  r9 client_06 done: 253,784 rows | loss 1.5077 | 288.4s (contrastive 3.1344)
+    r9 client_07 batch 200 | running joint 1.3803 (contrastive 3.1361)
+    r9 client_07 batch 400 | running joint 1.3782 (contrastive 3.1324)
+  r9 client_07 done: 488,550 rows | loss 1.3771 | 559.9s (contrastive 3.1308)
+  r9 client_08 done: 104,506 rows | loss 1.7150 | 112.3s (contrastive 3.1956)
+    r9 client_09 batch 200 | running joint 1.6025 (contrastive 3.1349)
+  r9 client_09 done: 230,739 rows | loss 1.6026 | 228.4s (contrastive 3.1350)
+  >> round 9 SUMMARY: 4383.3s | val Install LogLoss 0.275104 (AUC 0.8960) | Click LogLoss 0.286260 (AUC 0.8925) | NEW BEST -> checkpoint saved | peak RSS 2290 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 9/10 | elapsed 10.18 h
+
+=== ROUND 10/10 | sampler epoch 9 per client ===
+    r10 client_00 batch 200 | running joint 1.4939 (contrastive 3.1249)
+    r10 client_00 batch 400 | running joint 1.4914 (contrastive 3.1224)
+  r10 client_00 done: 452,032 rows | loss 1.4913 | 1175.8s (contrastive 3.1221)
+    r10 client_01 batch 200 | running joint 1.5581 (contrastive 3.1269)
+    r10 client_01 batch 400 | running joint 1.5569 (contrastive 3.1246)
+  r10 client_01 done: 460,777 rows | loss 1.5568 | 583.8s (contrastive 3.1241)
+    r10 client_02 batch 200 | running joint 1.6276 (contrastive 3.1297)
+    r10 client_02 batch 400 | running joint 1.6250 (contrastive 3.1268)
+  r10 client_02 done: 585,448 rows | loss 1.6235 | 735.8s (contrastive 3.1248)
+  r10 client_03 done: 151,573 rows | loss 1.6990 | 176.1s (contrastive 3.1451)
+  r10 client_04 done: 137,132 rows | loss 1.7475 | 167.5s (contrastive 3.1805)
+    r10 client_05 batch 200 | running joint 1.5489 (contrastive 3.1233)
+  r10 client_05 done: 272,725 rows | loss 1.5488 | 722.1s (contrastive 3.1231)
+    r10 client_06 batch 200 | running joint 1.5034 (contrastive 3.1254)
+  r10 client_06 done: 253,784 rows | loss 1.5023 | 288.3s (contrastive 3.1241)
+    r10 client_07 batch 200 | running joint 1.3751 (contrastive 3.1261)
+    r10 client_07 batch 400 | running joint 1.3743 (contrastive 3.1229)
+  r10 client_07 done: 488,550 rows | loss 1.3733 | 597.7s (contrastive 3.1219)
+  r10 client_08 done: 104,506 rows | loss 1.7064 | 112.9s (contrastive 3.1821)
+    r10 client_09 batch 200 | running joint 1.5967 (contrastive 3.1251)
+  r10 client_09 done: 230,739 rows | loss 1.5970 | 231.0s (contrastive 3.1252)
+  >> round 10 SUMMARY: 4826.3s | val Install LogLoss 0.274393 (AUC 0.8971) | Click LogLoss 0.285715 (AUC 0.8933) | NEW BEST -> checkpoint saved | peak RSS 2211 MiB | peak GPU alloc/res 7185/7760 MiB
+  >> rounds completed: 10/10 | elapsed 11.52 h
+
+=== post-run verification ===
+  best checkpoint (round 10): reload bit-identical: True
+  reloaded-best val_install_logloss: 0.274393036 (|d|=0.00e+00)
+  reloaded-best val_install_auc: 0.897050083 (|d|=0.00e+00)
+  reloaded-best val_click_logloss: 0.285715126 (|d|=0.00e+00)
+  reloaded-best val_click_auc: 0.893344581 (|d|=0.00e+00)
+  protected artifacts unchanged: all 14 guarded files byte-identical (sha256+size+mtime)
+
+=== STAGE 12 CELL COMPLETE: stage12_fed_ssl_alpha_1_0_seed42 ===
+round |  seconds | install LL | install AUC |  click LL | click AUC | best
+    1 |   6531.8 |   0.340365 |      0.8339 |  0.427112 |    0.8054 |
+    2 |   3826.4 |   0.302555 |      0.8681 |  0.327597 |    0.8677 |
+    3 |   3572.3 |   0.289397 |      0.8811 |  0.301930 |    0.8820 |
+    4 |   3574.7 |   0.283944 |      0.8866 |  0.295286 |    0.8863 |
+    5 |   3686.0 |   0.281977 |      0.8894 |  0.292335 |    0.8885 |
+    6 |   3683.3 |   0.278527 |      0.8928 |  0.290245 |    0.8898 |
+    7 |   3685.7 |   0.277702 |      0.8939 |  0.288588 |    0.8911 |
+    8 |   3689.4 |   0.276860 |      0.8951 |  0.287999 |    0.8918 |
+    9 |   4383.3 |   0.275104 |      0.8960 |  0.286260 |    0.8925 |
+   10 |   4826.3 |   0.274393 |      0.8971 |  0.285715 |    0.8933 |  <== best
+best round: 10 | best validation Install LogLoss: 0.274393
+total runtime: 41493.3s (11.53 h) | peak RSS 2211 MiB
+outputs: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\federated\stage12\stage12_fed_ssl_alpha_1_0_seed42
+official test set: NOT loaded, NOT evaluated (entire run)

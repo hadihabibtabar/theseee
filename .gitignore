@@ -9,9 +9,17 @@ __pycache__/
 
 # Transient operational files written next to the repository root by
 # scripts/ops launchers (launch_*.ps1 / check_*.ps1). Scientific logs are
-# preserved under "logs and results/" and reports/logs/.
+# preserved under results/ and reports/logs/.
 *_pid.txt
 *_err.txt
+
+# Raw ShareChat RecSys Challenge 2023 dataset, obtained through the official
+# challenge access route and placed locally under train/ and test/.
+# NOT tracked: the repository ships frozen processed artifacts instead
+# (artifacts/) and the tests/ directory holds the software test suite,
+# which these root-anchored rules deliberately do not affect.
+/train/
+/test/
 
 # Smoke-test preprocessing output (regenerable via
 #   python scripts/preprocess_dataset.py --smoke ... --output_dir artifacts_smoke)

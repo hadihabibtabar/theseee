@@ -1,0 +1,86 @@
+=== Stage 8 experiment C (experiment_c_transformer_ssl) ===
+start: 2026-09-17T14:55:12
+protocol: seed 42, batch 1024, epochs 3, AdamW lr 0.0003 wd 0.01, patience 2, alpha 0.6, corruption 0.15, tau 0.2
+protocol notes: corrected per-epoch reshuffle (Stage 8 sampler); canonical B = frozen Stage 6 result (historical sampler); no class weighting/focal/oversampling/scheduler/search
+
+NOTE: this invocation targets experiment C; make sure the intended experiment order is being followed.
+=== pre-run integrity verification ===
+  Stage 2 artifact hash:      c3a62caf13326617 (expected c3a62caf13326617) OK
+  split train hash:           dd37605169615442 (expected dd37605169615442) OK
+  split validation hash:      3cd8370ebdecb305 (expected 3cd8370ebdecb305) OK
+  Stage 6 checkpoint sha256:  25f3267eba...e1d8617 OK
+  Stage 6 checkpoint mtime:   2026-09-16T16:32:34
+  raw train/test bytes:       1,919,412,753 / 88,684,100 OK
+=== environment verification ===
+  CUDA: NVIDIA GeForce RTX 4060 Ti
+  torch: 2.7.0+cu118
+  dataset opens: 3,485,852 rows, 90 parts
+  official test data: NOT loaded (never constructed in this script)
+  Experiment A checkpoint present: sha256 dcc42aee28... (guarded: never overwritten)
+  split verified: 3,137,266 train / 348,586 val; train dd37605169615442 val 3cd8370ebdecb305
+=== preflight (1 train batch + 1 validation batch, real data) ===
+  train pass: total 3.1158 install 0.6954 (contrastive 6.7463)
+  parameters changed by optimizer step: 118/118
+  validation pass: install logloss 0.6886 AUC 0.5239
+  ssl preflight: dual-view / label-preservation / projection-norm checks
+    views differ (entry fraction): categorical 0.2595, numerical 0.2495
+    labels unchanged: True; projection norms 1.0000 for z1/z2 (atol 1e-5)
+  full-run model initializes identically to preflight model: True
+  preflight PASSED
+
+=== full experiment run ===
+batches per epoch: train 3064, validation 341
+  epoch 1 progress: batch 500 | running total 1.7944
+  epoch 1 progress: batch 1000 | running total 1.6796
+  epoch 1 progress: batch 1500 | running total 1.6220
+  epoch 1 progress: batch 2000 | running total 1.5849
+  epoch 1 progress: batch 2500 | running total 1.5577
+  epoch 1 progress: batch 3000 | running total 1.5372
+epoch 01 | 18779.3s | lr 3.00e-04 | train total 1.5349 (sup 0.3091 | install 0.3091 | contrastive 3.3737 | ) | | val logloss install 0.2777 AUC 0.8930
+  -> new best validation install logloss; checkpoint saved
+  epoch 2 progress: batch 500 | running total 1.4246
+  epoch 2 progress: batch 1000 | running total 1.4216
+  epoch 2 progress: batch 1500 | running total 1.4192
+  epoch 2 progress: batch 2000 | running total 1.4167
+  epoch 2 progress: batch 2500 | running total 1.4141
+  epoch 2 progress: batch 3000 | running total 1.4117
+epoch 02 | 16818.2s | lr 3.00e-04 | train total 1.4115 (sup 0.2815 | install 0.2815 | contrastive 3.1064 | ) | | val logloss install 0.2724 AUC 0.8985
+  -> new best validation install logloss; checkpoint saved
+  epoch 3 progress: batch 500 | running total 1.3951
+  epoch 3 progress: batch 1000 | running total 1.3945
+  epoch 3 progress: batch 1500 | running total 1.3934
+  epoch 3 progress: batch 2000 | running total 1.3923
+  epoch 3 progress: batch 2500 | running total 1.3912
+  epoch 3 progress: batch 3000 | running total 1.3904
+epoch 03 | 53098.1s | lr 3.00e-04 | train total 1.3903 (sup 0.2769 | install 0.2769 | contrastive 3.0604 | ) | | val logloss install 0.2698 AUC 0.9017
+  -> new best validation install logloss; checkpoint saved
+result written: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\checkpoints\stage8\experiment_c_transformer_ssl_result.json
+
+=== checkpoint verification ===
+  checkpoint: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\checkpoints\stage8\experiment_c_transformer_ssl_best.pt
+  payload: stage=8-controlled-experiments experiment=C epoch=3 seed=42 params=2,376,897 split_train=dd37605169615442 split_val=3cd8370ebdecb305 prep=c3a62caf13326617
+  sampler protocol: stage8-corrected-per-epoch-reshuffle: set_epoch on PartShuffledBatchSampler (epoch e uses seed + e - 1)
+  written: 2026-09-18T12:03:31.379032+00:00
+  reload verified by runner (fresh model, one val batch, atol 1e-5): True
+  checkpoint sha256: dacb4c3407823ffef2b76c549950cc58a7ceecb333976a85065df668a054e499
+
+=== experiment summary ===
+epoch |   seconds | train total | train install |   val LL |  val AUC
+    1 |   18779.3 |      1.5349 |        0.3091 |   0.2777 |   0.8930
+    2 |   16818.2 |      1.4115 |        0.2815 |   0.2724 |   0.8985
+    3 |   53098.1 |      1.3903 |        0.2769 |   0.2698 |   0.9017
+rows: train 3,137,266 / val 348,586 (batches 3064 / 341)
+best epoch: 3
+best val install LogLoss: 0.2697706961950431
+best val install AUC:     0.9017
+total runtime: 88700.9s (24.64 h)
+peak RSS: 8645 MiB
+peak GPU allocated/reserved: 7175 / 7698 MiB
+result JSON: C:\Users\Hadi\OneDrive\Desktop\theseee\artifacts\checkpoints\stage8\experiment_c_transformer_ssl_result.json
+official test set: NOT evaluated (never loaded)
+
+=== post-run integrity verification ===
+  protected artifacts unchanged: Stage 2 hash, split hashes, Stage 6 checkpoint sha256+mtime, raw train/test bytes all OK
+
+RESULT: STAGE 8 EXPERIMENT C COMPLETE
+No other Stage 8 experiment was launched by this process.

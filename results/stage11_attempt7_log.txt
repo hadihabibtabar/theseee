@@ -1,0 +1,38 @@
+=== STAGE 11: FEDERATED TRANSFORMER + MMOE + SSL (real data) ===
+start: 2026-09-21T07:38:30+00:00
+protocol: 10 clients, alpha 0.5, seed 42, 10 rounds, 1 local epoch, batch 1024, AdamW lr 0.0003 wd 0.01, sample_weighted_fedavg, cold seed-42 SSL init; joint objective 0.6*(BCE click + BCE install) + 0.4*NT-Xent(T=0.2) over two corrupted views (rate 0.15)
+  device: cuda (NVIDIA GeForce RTX 4060 Ti)
+  dataset opens: 3,485,852 rows; split 3,137,266 train / 348,586 val
+=== pre-run integrity verification ===
+  Stage 2 artifact hash:     c3a62caf13326617 OK
+  split train hash:          dd37605169615442 OK
+  split validation hash:     3cd8370ebdecb305 OK
+  Stage 6 checkpoint sha256: 25f3267eba572bf9... OK
+  protected files sha256+size+mtime recorded: 12 (Stage 1-9 guards + 4 Stage 10B baseline outputs)
+
+=== data layer verification ===
+  [OK] partition hash 9603ddc9facc973d (stored == manifest == recomputed)
+  [OK] 10 client sizes match the audited partition; total 3,137,266
+  [OK] composed client rows vs frozen validation overlap: 0 (all 10 clients)
+  official test data: NOT loaded (never constructed in this script)
+  [OK] client rows mutually disjoint (10 clients, 45 pairs, 0 shared rows)
+
+=== SSL integration smoke (real data, one CUDA batch) ===
+  [OK] cold seed-42 SSL init deterministic across two creations: True
+  [OK] parameter count: 2,527,698 total (mmoe.* frozen backbone+MMoE 2,502,930)
+  [OK] state entries: 142 total (138 mmoe.* + 4 projection.*)
+  [OK] all model parameters finite
+  [OK] cold init: all 138/138 mmoe.* entries differ from the Stage 6 checkpoint (not loaded); the 4 projection.* entries have no counterpart there
+  [OK] cold init: all 138/138 mmoe.* entries differ from the Stage 10B best checkpoint (not loaded); the 4 projection.* entries have no counterpart there
+  [OK] sampler epoch: round 1 -> 0, later rounds set correctly (epoch 5 arrangement differs from epoch 0)
+  [OK] two-view augmentation (rate 0.15): labels and missing indicators preserved; the two views differ; no in-place mutation (fresh tensors from torch.where)
+  [OK] dual-view forward: z1/z2 [1024,64] with unit L2 norm; click/install logits [1024]
+  [OK] joint loss = 0.6 * supervised + 0.4 * contrastive: 3.465371 = 0.6*1.385669 + 0.4*6.584925 (finite)
+  [OK] one local AdamW step updated 114/142 state entries
+  [OK] gradient paths: joint objective -> all 142 parameters; supervised-only -> task heads + backbone (projection head untouched); contrastive-only -> projection + backbone ONLY (task heads untouched: projection is a pure add-on)
+  [OK] sample-weighted FedAvg accepts SSL state dicts: 142 entries, weights sum 1.0, weighted mean verified exactly on a probe entry
+  [OK] checkpoint save/reload bit-identical (142 entries, strict reload into a fresh cold model); temp file removed
+  official test data: NOT loaded, NOT evaluated (no test code path in this script)
+  [OK] protected artifacts unchanged through the preflight: all 12 guarded files byte-identical (sha256+size+mtime)
+
+STAGE 11 FAILED: resume state says all rounds are already complete

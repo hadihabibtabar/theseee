@@ -94,7 +94,20 @@ https://www.recsyschallenge.com/2023/
 
 ShareChat's challenge page (https://sharechat.com/recsys2023) documents the registration and data-access procedure. Data access requires registration through the official challenge route; no direct downloadable archive link is reproduced here because no such link could be independently verified as official and persistently available.
 
-For a fresh reproduction, obtain the dataset through that documented access route and extract it into the project root as `train/` and `test/`, with the original tab-separated `.csv` shards. The raw dataset is **not** contained in this Git repository (tracked contents of `train/` and `test/` are raw data blobs, not LFS pointers; see Section 16 for the layout). The final experiments use the frozen processed artifacts already stored under `artifacts/`; downloading the raw dataset is therefore only necessary for a fresh reproduction. Where frozen processed artifacts are available locally they can be used directly for inspection.
+For a fresh reproduction, obtain the dataset through that documented access route and extract it into the project root as `train/` and `test/`, with the original tab-separated `.csv` shards (30 training shards and 1 test shard, ≈ 1.87 GB total).
+
+### Dataset is not included in this repository
+
+The raw ShareChat dataset is **not included** in the published repository version. From the current version onward, `train/` and `test/` are not tracked by Git; researchers must obtain the data themselves through the official access procedure above.
+
+Two filesystem names are deliberately distinct:
+
+* `train/` and `test/` — **raw data directories** that the pipeline expects locally after you obtain the dataset (see the structure table and Section 16). They are ignored by Git.
+* `tests/` — the **software test suite** (`python -m pytest`), unrelated to the raw data.
+
+No direct downloadable archive link is reproduced here beyond the official access references above, because no such link could be independently verified as official and persistently available. Redistribution of the raw dataset is not covered here either; follow the access requirements stated on the official challenge pages.
+
+The final experiments use the frozen processed artifacts already stored under `artifacts/`; downloading the raw dataset is therefore only necessary for a fresh reproduction. Where frozen processed artifacts are available locally they can be used directly for inspection.
 
 | Property               |     Value |
 | ---------------------- | --------: |
@@ -524,7 +537,7 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-The final experiments were produced with Python 3.13.3 and PyTorch 2.7.0+cu118. `requirements.txt` uses version-pinned requirements (plus an `--extra-index-url` line so that the CUDA wheel `torch==2.7.0+cu118` resolves); note that a pinned requirements file is **not** a complete environment lockfile — transitive dependency versions are not frozen, so environments resolved at different times may differ slightly in transitive dependencies.
+The final experiments were produced with Python 3.13.3 and PyTorch 2.7.0+cu118. `requirements.txt` uses version-pinned requirements (plus an `--extra-index-url` line so that the CUDA wheel `torch==2.7.0+cu118` resolves); note that a pinned requirements file is **not** a complete environment lockfile — transitive dependency versions are not frozen, so environments resolved at different times may differ slightly in transitive dependencies. The pins match the environment used to produce the final experiments; no bit-for-bit or cross-platform reproducibility is promised.
 
 The `+cu118` wheel is hosted only on PyTorch's own wheel index (not PyPI); `requirements.txt` therefore contains
 
@@ -532,7 +545,26 @@ The `+cu118` wheel is hosted only on PyTorch's own wheel index (not PyPI); `requ
 --extra-index-url https://download.pytorch.org/whl/cu118
 ```
 
-so that `pip install -r requirements.txt` resolves `torch==2.7.0+cu118` from the PyTorch CUDA-11.8 wheel index. A clean install from this file was not separately tested; the pins mirror the environment actually used to produce the final experiments.
+so that `pip install -r requirements.txt` resolves `torch==2.7.0+cu118` from the PyTorch CUDA-11.8 wheel index.
+
+### Clean-install verification
+
+A fresh installation of `requirements.txt` was verified in a temporary Python 3.13.3 virtual environment outside the repository (pip upgraded first, pinned versions unchanged). The command above completed successfully with exit code 0 and the import/repository smoke checks below also passed in that environment. This verifies the pinned install route itself; it is not a promise that every future downstream pip resolution will behave identically, since transitive dependency versions are not frozen.
+
+### CPU-only installation (no NVIDIA GPU)
+
+For machines without a supported NVIDIA GPU, install the CPU build of the same pinned PyTorch version **instead of** the CUDA wheel. Use the separate pinned file `requirements-cpu.txt`:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements-cpu.txt
+```
+
+`requirements-cpu.txt` pins `torch==2.7.0` (the CPU build) from PyTorch's official CPU wheel index (`https://download.pytorch.org/whl/cpu`) and contains the same pinned non-PyTorch dependencies as `requirements.txt`. Important: install it into a fresh virtual environment — installing `requirements-cpu.txt` **after** `requirements.txt` in the same environment would not replace the CUDA-specific `torch==2.7.0+cu118` wheel, because the version numbers are equal (`2.7.0 == 2.7.0+cu118` and the local version ordering keeps CUDA-local versions newer, so pip will keep the already-installed CUDA wheel).
+
+The GPU requirements in `requirements.txt` remain the authoritative pinned environment for reproducing the final experiments; `requirements-cpu.txt` exists only for inspection-and-development use on CPU-only machines and the CPU route was not used to produce any experiment in this repository.
 
 ## Inspect the completed research
 
@@ -732,8 +764,8 @@ Bit-exact GPU reproduction across different hardware, drivers, or software envir
 ```text
 theseee/
 │
-├── train/                         # Raw ShareChat training data
-├── test/                          # Official test data
+├── train/                         # RAW ShareChat training data — NOT tracked by Git; expected locally after obtaining the dataset
+├── test/                          # RAW official test data — NOT tracked by Git; expected locally via the official access route
 │
 ├── src/
 │   └── recsys23_fedrec/
@@ -759,15 +791,28 @@ theseee/
 │   ├── stage12/
 │   │   ├── figures/
 │   │   └── final experiment reports
-│   ├── logs/
+│   ├── logs/                      # Appendix-style operational logs and diagnostics (see below)
 │   └── final_experiment_audit.*
 │
-├── "logs and results"/            # Preserved experiment evidence logs (log.txt files tracked)
+├── results/                       # Preserved scientific run logs of Stages 6–12 (see below)
 │
-├── tests/
+├── tests/                         # Software test suite (pytest) — NOT the raw data
 │
+├── requirements.txt               # Pinned GPU (CUDA 11.8) environment
+├── requirements-cpu.txt           # Pinned CPU-only environment
 └── README.md
 ```
+
+### `train/` / `test/` versus `tests/`
+
+`train/` and `test/` are the **raw dataset directories** the pipeline expects locally (obtained through the official access route; ignored by Git, see Dataset Access). `tests/` is the **software test suite** run with `python -m pytest`. They are unrelated.
+
+### `results/` (run logs) versus `reports/logs/`
+
+These two directories serve different purposes, verified from their contents:
+
+* `results/` — the preserved **scientific run logs** of Stages 6 through 12: the actual training-run output of the centralized baseline, the Stage 8 experiments, Stage 10B/11 federality cells, and all Stage 12 matrix cells (e.g. `stage10b_log.txt`, `stage11_log.txt`, `stage12_fed_ssl_alpha_0_1_seed42_log.txt`). These are thesis evidence and are tracked in Git.
+* `reports/logs/` — operation-level **appendix logs**: a dataset-inspection pipeline log (`inspect_20260913_154923.log`) and saved stderr transcripts of failed smoke/baseline attempts (`stage10_smoke_err.txt`, `stage10b_err.txt`). They document diagnostics and failure forensics rather than training progress, and are kept separate from the run logs.
 
 ---
 
